@@ -1,0 +1,24 @@
+SET_T optlstDebugging_000 = {11, 0x01, 0, 0, 1, 0x1, (void *)&symFullPath};
+SET_T optlstDebugging_001 = {11, 0x01, 0, (PARAM_T *)&optlstDebugging_000, 1, 0x1, (void *)&pCmdLine.debugInfo};
+Option optlstDebugging_002 = {"g", 0x145, (PARAM_T *)&optlstDebugging_001, 0, 0, "generate debugging information; same as '~~sym full'"};
+SET_T optlstDebugging_003 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pCmdLine.debugInfo};
+Option optlstDebugging_004 = {"off", 0x141, (PARAM_T *)&optlstDebugging_003, 0, 0, "do not generate debugging information"};
+SET_T optlstDebugging_005 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLine.debugInfo};
+Option optlstDebugging_006 = {"on", 0x2141, (PARAM_T *)&optlstDebugging_005, 0, 0, "turn on debugging information"};
+SET_T optlstDebugging_007 = {11, 0x01, 0, 0, 1, 0x1, (void *)&symFullPath};
+SET_T optlstDebugging_008 = {11, 0x01, 0, (PARAM_T *)&optlstDebugging_007, 1, 0x1, (void *)&pCmdLine.debugInfo};
+Option optlstDebugging_009 = {"full|fullpath", 0x2141, (PARAM_T *)&optlstDebugging_008, 0, 0, "store full paths to source files"};
+Option *optlstDebugging_010[] = {
+    &optlstDebugging_004,
+    &optlstDebugging_006,
+    &optlstDebugging_009,
+    0
+};
+OptionList optlstDebugging_011 = {0, 0x302, optlstDebugging_010};
+Option optlstDebugging_012 = {"sym", 0xA141, 0, &optlstDebugging_011, 0, "specify debugging options"};
+Option *optlstDebugging_013[] = {
+    &optlstDebugging_002,
+    &optlstDebugging_012,
+    0
+};
+OptionList optlstDebugging = {"Debugging Control Options\n", 0x300, optlstDebugging_013};

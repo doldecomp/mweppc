@@ -1,0 +1,4 @@
+{
+  "derived_from": "GC_2_0",
+  "description": "BFBB's compiler: 2.0 with floating-point literals not const, the memory rules BFBB's code shows and two 2.5 alias changes; no original, built from the sources alone"
+}

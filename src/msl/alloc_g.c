@@ -1,0 +1,19 @@
+#include <stddef.h>
+#define Block_construct alloc_g_Block_construct
+#define Block_link alloc_g_Block_link
+#define Block_subBlock alloc_g_Block_subBlock
+#define Block_unlink alloc_g_Block_unlink
+#define FixBlock_construct alloc_g_FixBlock_construct
+#define SubBlock_construct alloc_g_SubBlock_construct
+#define SubBlock_merge_next alloc_g_SubBlock_merge_next
+#define SubBlock_merge_prev alloc_g_SubBlock_merge_prev
+#define SubBlock_split alloc_g_SubBlock_split
+#define allocate_from_fixed_pools alloc_g_allocate_from_fixed_pools
+#define allocate_from_var_pools alloc_g_allocate_from_var_pools
+#define deallocate_from_fixed_pools alloc_g_deallocate_from_fixed_pools
+#define deallocate_from_var_pools alloc_g_deallocate_from_var_pools
+#define link alloc_g_link
+#define link_new_block alloc_g_link_new_block
+#define unlink alloc_g_unlink
+#include "ansi_prefix.Win32.h"
+#include <alloc.c>

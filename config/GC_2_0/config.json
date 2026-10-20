@@ -1,0 +1,92 @@
+{
+  "compilers": {
+    "pro53": "pro6"
+  },
+  "compiler_overrides": {
+    "src/driver/CLStaticMain.c": "pro53",
+    "src/driver/CmdLineBuildDate.c": "pro53",
+    "src/msl/abort_exit.c": "pro53",
+    "src/msl/alloc_g.c": "pro53",
+    "src/msl/ansi_files.c": "pro53",
+    "src/msl/arith.c": "pro53",
+    "src/msl/buffer_io_g.c": "pro53",
+    "src/msl/char_io.c": "pro53",
+    "src/msl/critical_regions_win32.c": "pro53",
+    "src/msl/ctype.c": "pro53",
+    "src/msl/direct_io_g.c": "pro53",
+    "src/msl/extras.c": "pro53",
+    "src/msl/fcntl_win32_g.c": "pro53",
+    "src/msl/file_io.c": "pro53",
+    "src/msl/file_io_win32_g.c": "pro53",
+    "src/msl/file_pos_g.c": "pro53",
+    "src/msl/float.c": "pro53",
+    "src/msl/locale.c": "pro53",
+    "src/msl/mbstring.c": "pro53",
+    "src/msl/mem.c": "pro53",
+    "src/msl/misc_io.c": "pro53",
+    "src/msl/pool_alloc_win32_g.c": "pro53",
+    "src/msl/printf_g.c": "pro53",
+    "src/msl/qsort_g.c": "pro53",
+    "src/msl/scanf.c": "pro53",
+    "src/msl/setjmp_x86.c": "pro53",
+    "src/msl/signal.c": "pro53",
+    "src/msl/startup_win32.c": "pro53",
+    "src/msl/string.c": "pro53",
+    "src/msl/string_io.c": "pro53",
+    "src/msl/strtold.c": "pro53",
+    "src/msl/strtoul.c": "pro53",
+    "src/msl/sysenv_win32.c": "pro53",
+    "src/msl/time_g.c": "pro53",
+    "src/msl/time_win32.c": "pro53",
+    "src/msl/unistd_win32.c": "pro53",
+    "src/msl/wchar_io.c": "pro53",
+    "src/msl/wcstold.c": "pro53",
+    "src/msl/wcstoul.c": "pro53",
+    "src/msl/wctype.c": "pro53",
+    "src/msl/wscanf.c": "pro53",
+    "src/runtime/ExceptionX86.cpp": "pro53",
+    "src/runtime/LongLongx86.c": "pro53",
+    "src/runtime/NMWException.cpp": "pro53",
+    "src/runtime/NewHand.cpp": "pro53",
+    "src/runtime/arrcondes.cpp": "pro53",
+    "src/runtime/delarrop.cpp": "pro53",
+    "src/runtime/delop.cpp": "pro53",
+    "src/runtime/exchand.cpp": "pro53",
+    "src/runtime/globdest.c": "pro53",
+    "src/runtime/maincrt.c": "pro53",
+    "src/runtime/newop.cpp": "pro53",
+    "src/runtime/runinit.c": "pro53",
+    "src/runtime/setupargs.c": "pro53",
+    "src/runtime/stackall.c": "pro53",
+    "src/runtime/throwsbad.cpp": "pro53"
+  },
+  "original": "build/compilers/GC/2.0/mwcceppc.exe",
+  "sha1": "ef148743ee72be15f64926ac18c3aadc9cca2b47",
+  "data_at": {
+    "src/msl/file_io.c": {
+      ".data": "0x00596c10"
+    },
+    "src/msl/string_io.c": {
+      ".data": "0x00596c08"
+    },
+    "src/driver/Memory.c": {
+      ".data": "0x005a05d8"
+    },
+    "src/msl/locale.c": {
+      ".data": "0x005bf240",
+      ".bss": "0x005e20a8"
+    },
+    "src/msl/float.c": {
+      ".data": "0x005bf280"
+    },
+    "src/runtime/throwsbad.cpp": {
+      ".data": "0x005a7fe8"
+    }
+  },
+  "data_units": {
+    "src/msl/locale.c": "src/frontend/Unmangle.c",
+    "src/msl/float.c": "src/msl/locale.c",
+    "src/runtime/throwsbad.cpp": "src/runtime/NewHand.cpp",
+    "src/backend/OpcodeInfo.c": "src/frontend/CDecl.c"
+  }
+}

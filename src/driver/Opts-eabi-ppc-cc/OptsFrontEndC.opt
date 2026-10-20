@@ -1,0 +1,199 @@
+extern OptionList optlstFrontEndC_014;
+extern OptionList optlstFrontEndC_026;
+extern OptionList optlstFrontEndC_041;
+extern OptionList optlstFrontEndC_049;
+extern OptionList optlstFrontEndC_091;
+SET_T optlstFrontEndC_000 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.ansistrict};
+SET_T optlstFrontEndC_001 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_000, 1, 0x0, (void *)&pFrontEndC.enumsalwaysint};
+SET_T optlstFrontEndC_002 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_001, 1, 0x0, (void *)&pFrontEndC.onlystdkeywords};
+Option optlstFrontEndC_003 = {"off", 0x40100, (PARAM_T *)&optlstFrontEndC_002, 0, &optlstFrontEndC_014, "same as '~~stdkeywords off', '~~enum min', and '~~strict off'"};
+SET_T optlstFrontEndC_004 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.ansistrict};
+SET_T optlstFrontEndC_005 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_004, 1, 0x0, (void *)&pFrontEndC.enumsalwaysint};
+SET_T optlstFrontEndC_006 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_005, 1, 0x1, (void *)&pFrontEndC.onlystdkeywords};
+Option optlstFrontEndC_007 = {"on|relaxed", 0x40100, (PARAM_T *)&optlstFrontEndC_006, 0, &optlstFrontEndC_014, "same as '~~stdkeywords on', '~~enum min', and '~~strict on'"};
+SET_T optlstFrontEndC_008 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.ansistrict};
+SET_T optlstFrontEndC_009 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_008, 1, 0x1, (void *)&pFrontEndC.enumsalwaysint};
+SET_T optlstFrontEndC_010 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_009, 1, 0x1, (void *)&pFrontEndC.onlystdkeywords};
+Option optlstFrontEndC_011 = {"strict", 0x40100, (PARAM_T *)&optlstFrontEndC_010, 0, &optlstFrontEndC_014, "same as '~~stdkeywords on', '~~enum int', and '~~strict on'"};
+Option *optlstFrontEndC_012[] = {
+    &optlstFrontEndC_003,
+    &optlstFrontEndC_007,
+    &optlstFrontEndC_011,
+    0
+};
+OptionList optlstFrontEndC_013 = {0, 0x101, optlstFrontEndC_012};
+OptionList optlstFrontEndC_014 = {0, 0x101, optlstFrontEndC_012};
+Option optlstFrontEndC_015 = {"ansi", 0x8100, 0, &optlstFrontEndC_013, 0, "specify ANSI conformance options, overriding the given settings"};
+ONOFF_T optlstFrontEndC_016 = {7, 0x00, 0, 0, (void *)&pFrontEndC.arm};
+Option optlstFrontEndC_017 = {"ARM", 0x100, (PARAM_T *)&optlstFrontEndC_016, 0, 0, "check code for ARM (Annotated C++ Reference Manual) conformance"};
+ONOFF_T optlstFrontEndC_018 = {7, 0x00, 0, 0, (void *)&pFrontEndC.booltruefalse};
+Option optlstFrontEndC_019 = {"bool", 0x100, (PARAM_T *)&optlstFrontEndC_018, 0, 0, "enable C++ 'bool' type, 'true' and 'false' constants"};
+SET_T optlstFrontEndC_020 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.unsignedchars};
+Option optlstFrontEndC_021 = {"signed", 0x40100, (PARAM_T *)&optlstFrontEndC_020, 0, &optlstFrontEndC_026, "chars are signed"};
+SET_T optlstFrontEndC_022 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.unsignedchars};
+Option optlstFrontEndC_023 = {"unsigned", 0x40100, (PARAM_T *)&optlstFrontEndC_022, 0, &optlstFrontEndC_026, "chars are unsigned"};
+Option *optlstFrontEndC_024[] = {
+    &optlstFrontEndC_021,
+    &optlstFrontEndC_023,
+    0
+};
+OptionList optlstFrontEndC_025 = {0, 0x101, optlstFrontEndC_024};
+OptionList optlstFrontEndC_026 = {0, 0x101, optlstFrontEndC_024};
+Option optlstFrontEndC_027 = {"char", 0x8100, 0, &optlstFrontEndC_025, 0, "set sign of 'char'"};
+ONOFF_T optlstFrontEndC_028 = {7, 0x00, 0, 0, (void *)&pFrontEndC.enableexceptions};
+Option optlstFrontEndC_029 = {"Cpp_exceptions", 0x100, (PARAM_T *)&optlstFrontEndC_028, 0, 0, "enable or disable C++ exceptions"};
+GENERIC_T optlstFrontEndC_030 = {13, 0x01, 0, 0, (void *)Opt_AddStringToDefines, (void *)"#pragma cplusplus off\n", 0};
+SET_T optlstFrontEndC_031 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_030, 1, 0x0, (void *)&pFrontEndC.cplusplus};
+Option optlstFrontEndC_032 = {"c", 0x40100, (PARAM_T *)&optlstFrontEndC_031, 0, &optlstFrontEndC_041, "treat source as C always"};
+SET_T optlstFrontEndC_033 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.cplusplus};
+Option optlstFrontEndC_034 = {"c++", 0x40100, (PARAM_T *)&optlstFrontEndC_033, 0, &optlstFrontEndC_041, "treat source as C++ always"};
+SET_T optlstFrontEndC_035 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.cplusplus};
+SET_T optlstFrontEndC_036 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_035, 1, 0x1, (void *)&pFrontEndC.ecplusplus};
+Option optlstFrontEndC_037 = {"ec++", 0x40100, (PARAM_T *)&optlstFrontEndC_036, 0, &optlstFrontEndC_041, "generate warnings for use of C++ features outside Embedded C++ subset (implies 'dialect cplus')"};
+Option optlstFrontEndC_038 = {"objc", 0x42900, 0, 0, &optlstFrontEndC_041, "Objective C no longer supported on this target"};
+Option *optlstFrontEndC_039[] = {
+    &optlstFrontEndC_032,
+    &optlstFrontEndC_034,
+    &optlstFrontEndC_037,
+    &optlstFrontEndC_038,
+    0
+};
+OptionList optlstFrontEndC_040 = {0, 0x101, optlstFrontEndC_039};
+OptionList optlstFrontEndC_041 = {0, 0x101, optlstFrontEndC_039};
+Option optlstFrontEndC_042 = {"dialect|lang", 0x8100, 0, &optlstFrontEndC_040, 0, "specify source language"};
+SET_T optlstFrontEndC_043 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.enumsalwaysint};
+Option optlstFrontEndC_044 = {"min", 0x40100, (PARAM_T *)&optlstFrontEndC_043, 0, &optlstFrontEndC_049, "use minimum sized enums"};
+SET_T optlstFrontEndC_045 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.enumsalwaysint};
+Option optlstFrontEndC_046 = {"int", 0x40100, (PARAM_T *)&optlstFrontEndC_045, 0, &optlstFrontEndC_049, "use int-sized enums"};
+Option *optlstFrontEndC_047[] = {
+    &optlstFrontEndC_044,
+    &optlstFrontEndC_046,
+    0
+};
+OptionList optlstFrontEndC_048 = {0, 0x101, optlstFrontEndC_047};
+OptionList optlstFrontEndC_049 = {0, 0x101, optlstFrontEndC_047};
+Option optlstFrontEndC_050 = {"enum", 0x8100, 0, &optlstFrontEndC_048, 0, "specify word size for enumeration types"};
+SET_T optlstFrontEndC_051 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.alwaysinline};
+SET_T optlstFrontEndC_052 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_051, 2, 0x0, (void *)&pFrontEndC.inlinelevel};
+SET_T optlstFrontEndC_053 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_052, 1, 0x0, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_054 = {"on|smart", 0x100, (PARAM_T *)&optlstFrontEndC_053, 0, 0, "turn on inlining for 'inline' functions"};
+SET_T optlstFrontEndC_055 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.alwaysinline};
+SET_T optlstFrontEndC_056 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_055, 2, 0xFFFFFFFF, (void *)&pFrontEndC.inlinelevel};
+SET_T optlstFrontEndC_057 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_056, 1, 0x1, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_058 = {"none|off", 0x100, (PARAM_T *)&optlstFrontEndC_057, 0, 0, "turn off inlining"};
+SET_T optlstFrontEndC_059 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.autoinline};
+SET_T optlstFrontEndC_060 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_059, 1, 0x0, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_061 = {"auto", 0x100, (PARAM_T *)&optlstFrontEndC_060, 0, 0, "auto-inline small functions (without 'inline' explicitly specified)"};
+SET_T optlstFrontEndC_062 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.autoinline};
+Option optlstFrontEndC_063 = {"noauto", 0x100, (PARAM_T *)&optlstFrontEndC_062, 0, 0, "do not auto-inline"};
+SET_T optlstFrontEndC_064 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.autoinline};
+SET_T optlstFrontEndC_065 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_064, 1, 0x0, (void *)&pFrontEndC.alwaysinline};
+SET_T optlstFrontEndC_066 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_065, 2, 0x0, (void *)&pFrontEndC.inlinelevel};
+SET_T optlstFrontEndC_067 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_066, 1, 0x0, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_068 = {"all", 0x100, (PARAM_T *)&optlstFrontEndC_067, 0, 0, "turn on aggressive inlining: same as '~~inline on, auto'"};
+SET_T optlstFrontEndC_069 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.alwaysinline};
+SET_T optlstFrontEndC_070 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_069, 1, 0x0, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_071 = {"always", 0x81100, (PARAM_T *)&optlstFrontEndC_070, 0, 0, "always inlining functions is currently unstable"};
+SET_T optlstFrontEndC_072 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.defer_codegen};
+SET_T optlstFrontEndC_073 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_072, 1, 0x0, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_074 = {"deferred", 0x100, (PARAM_T *)&optlstFrontEndC_073, 0, 0, "defer inlining until end of compilation unit; this allows inlining of functions in both directions"};
+NUM_T optlstFrontEndC_075 = {3, 0x00, "n", 0, 2, 1, 0x0, 0x8, (void *)&pFrontEndC.inlinelevel};
+SET_T optlstFrontEndC_076 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_075, 1, 0x0, (void *)&pFrontEndC.dontinline};
+Option optlstFrontEndC_077 = {"level||depth", 0x2104, (PARAM_T *)&optlstFrontEndC_076, 0, 0, "inline functions up to 'n' levels deep; level 0 is the same as '~~inline on'"};
+Option *optlstFrontEndC_078[] = {
+    &optlstFrontEndC_054,
+    &optlstFrontEndC_058,
+    &optlstFrontEndC_061,
+    &optlstFrontEndC_063,
+    &optlstFrontEndC_068,
+    &optlstFrontEndC_071,
+    &optlstFrontEndC_074,
+    &optlstFrontEndC_077,
+    0
+};
+OptionList optlstFrontEndC_079 = {0, 0x100, optlstFrontEndC_078};
+Option optlstFrontEndC_080 = {"inline", 0xA100, 0, &optlstFrontEndC_079, 0, "specify inline options"};
+ONOFF_T optlstFrontEndC_081 = {7, 0x00, 0, 0, (void *)&pFrontEndC.templateparser};
+Option optlstFrontEndC_082 = {"iso_templates", 0x100, (PARAM_T *)&optlstFrontEndC_081, 0, 0, "enable ISO C++ template parser (note: this requires a different MSL C++ library)"};
+SET_T optlstFrontEndC_083 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.mpwcnewline};
+Option optlstFrontEndC_084 = {"mapcr", 0x100100, (PARAM_T *)&optlstFrontEndC_083, 0, 0, "reverse mapping of '\\n' and '\\r' so that '\\n'==13 and '\\r'==10 (for Macintosh MPW compatability)"};
+GENERIC_T optlstFrontEndC_085 = {13, 0x01, 0, 0, (void *)Opt_AddStringToDefines, (void *)"#pragma cpp_extensions on\n", 0};
+Option optlstFrontEndC_086 = {"on", 0x40100, (PARAM_T *)&optlstFrontEndC_085, 0, &optlstFrontEndC_091, "enable extensions: redefining macros,\015allowing XXX::yyy syntax when declaring method yyy of class XXX,\015allowing extra commas,\015ignoring casts to the same type,\015treating function types with equivalent parameter lists but different return types as equal,\015allowing pointer-to-integer conversions,\015and various syntactical differences"};
+GENERIC_T optlstFrontEndC_087 = {13, 0x01, 0, 0, (void *)Opt_AddStringToDefines, (void *)"#pragma cpp_extensions off\n", 0};
+Option optlstFrontEndC_088 = {"off", 0x40100, (PARAM_T *)&optlstFrontEndC_087, 0, &optlstFrontEndC_091, "disable extensions; default on non-x86 targets"};
+Option *optlstFrontEndC_089[] = {
+    &optlstFrontEndC_086,
+    &optlstFrontEndC_088,
+    0
+};
+OptionList optlstFrontEndC_090 = {0, 0x101, optlstFrontEndC_089};
+OptionList optlstFrontEndC_091 = {0, 0x101, optlstFrontEndC_089};
+Option optlstFrontEndC_092 = {"msext", 0x8100, 0, &optlstFrontEndC_090, 0, "[dis]allow Microsoft VC++ extensions"};
+SET_T optlstFrontEndC_093 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.multibyteaware};
+Option optlstFrontEndC_094 = {"multibyte|multibyteaware", 0x100100, (PARAM_T *)&optlstFrontEndC_093, 0, 0, "enable multi-byte character encodings for source text, comments, and strings"};
+GENERIC_T optlstFrontEndC_095 = {13, 0x01, 0, 0, (void *)Opt_AddStringToDefines, (void *)"#pragma once on\n", 0};
+Option optlstFrontEndC_096 = {"once", 0x100, (PARAM_T *)&optlstFrontEndC_095, 0, 0, "prevent header files from being processed more than once"};
+GENERIC_T optlstFrontEndC_097 = {13, 0x01, 0, 0, (void *)Opt_AddStringToDefines, (void *)"\n", 0};
+GENERIC_T optlstFrontEndC_098 = {13, 0x00, "...", (PARAM_T *)&optlstFrontEndC_097, (void *)Opt_AddStringToDefines, (void *)"#pragma ", 0};
+Option optlstFrontEndC_099 = {"pragma", 0x100, (PARAM_T *)&optlstFrontEndC_098, 0, 0, "define a pragma for the compiler such as \"#pragma ...\""};
+SET_T optlstFrontEndC_100 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.checkprotos};
+Option optlstFrontEndC_101 = {"r|requireprotos", 0x100, (PARAM_T *)&optlstFrontEndC_100, 0, 0, "require prototypes"};
+SET_T optlstFrontEndC_102 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.mpwpointerstyle};
+Option optlstFrontEndC_103 = {"relax_pointers", 0x100, (PARAM_T *)&optlstFrontEndC_102, 0, 0, "relax pointer type-checking rules"};
+ONOFF_T optlstFrontEndC_104 = {7, 0x00, 0, 0, (void *)&pFrontEndC.useRTTI};
+Option optlstFrontEndC_105 = {"RTTI", 0x100, (PARAM_T *)&optlstFrontEndC_104, 0, 0, "select run-time typing information (for C++)"};
+SET_T optlstFrontEndC_106 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.direct_to_som};
+Option optlstFrontEndC_107 = {"som", 0x100, (PARAM_T *)&optlstFrontEndC_106, 0, 0, "enable Apple's Direct-to-SOM implementation"};
+SET_T optlstFrontEndC_108 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.direct_to_som};
+SET_T optlstFrontEndC_109 = {11, 0x01, 0, (PARAM_T *)&optlstFrontEndC_108, 1, 0x1, (void *)&pFrontEndC.som_env_check};
+Option optlstFrontEndC_110 = {"som_env_check", 0x100, (PARAM_T *)&optlstFrontEndC_109, 0, 0, "enables automatic SOM environment and new allocation checking; implies ~~som"};
+ONOFF_T optlstFrontEndC_111 = {7, 0x00, 0, 0, (void *)&pFrontEndC.onlystdkeywords};
+Option optlstFrontEndC_112 = {"stdkeywords", 0x100, (PARAM_T *)&optlstFrontEndC_111, 0, 0, "allow only standard keywords"};
+SET_T optlstFrontEndC_113 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pFrontEndC.dontreusestrings};
+Option optlstFrontEndC_114 = {"reuse", 0x100100, (PARAM_T *)&optlstFrontEndC_113, 0, 0, "reuse strings; equivalent strings are the same object"};
+SET_T optlstFrontEndC_115 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pFrontEndC.poolstrings};
+Option optlstFrontEndC_116 = {"pool", 0x100100, (PARAM_T *)&optlstFrontEndC_115, 0, 0, "pool strings into a single data object"};
+SET_T optlstFrontEndC_117 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pBackEnd.readonlystrings};
+Option optlstFrontEndC_118 = {"readonly", 0x100100, (PARAM_T *)&optlstFrontEndC_117, 0, 0, "make all string constants read-only"};
+Option *optlstFrontEndC_119[] = {
+    &optlstFrontEndC_114,
+    &optlstFrontEndC_116,
+    &optlstFrontEndC_118,
+    0
+};
+OptionList optlstFrontEndC_120 = {0, 0x100, optlstFrontEndC_119};
+Option optlstFrontEndC_121 = {"str|strings", 0x8100, 0, &optlstFrontEndC_120, 0, "specify string constant options"};
+ONOFF_T optlstFrontEndC_122 = {7, 0x00, 0, 0, (void *)&pFrontEndC.ansistrict};
+Option optlstFrontEndC_123 = {"strict", 0x100, (PARAM_T *)&optlstFrontEndC_122, 0, 0, "specify ANSI strictness checking"};
+ONOFF_T optlstFrontEndC_124 = {7, 0x00, 0, 0, (void *)&pFrontEndC.trigraphs};
+Option optlstFrontEndC_125 = {"trigraphs", 0x100, (PARAM_T *)&optlstFrontEndC_124, 0, 0, "enable recognition of trigraphs"};
+ONOFF_T optlstFrontEndC_126 = {7, 0x00, 0, 0, (void *)&pFrontEndC.wchar_type};
+Option optlstFrontEndC_127 = {"wchar_t", 0x100, (PARAM_T *)&optlstFrontEndC_126, 0, 0, "enable wchar_t as a built-in C++ type"};
+Option *optlstFrontEndC_128[] = {
+    &optlstFrontEndC_015,
+    &optlstFrontEndC_017,
+    &optlstFrontEndC_019,
+    &optlstFrontEndC_027,
+    &optlstFrontEndC_029,
+    &optlstFrontEndC_042,
+    &optlstFrontEndC_050,
+    &optlstFrontEndC_080,
+    &optlstFrontEndC_082,
+    &optlstFrontEndC_084,
+    &optlstFrontEndC_092,
+    &optlstFrontEndC_094,
+    &optlstFrontEndC_096,
+    &optlstFrontEndC_099,
+    &optlstFrontEndC_101,
+    &optlstFrontEndC_103,
+    &optlstFrontEndC_105,
+    &optlstFrontEndC_107,
+    &optlstFrontEndC_110,
+    &optlstFrontEndC_112,
+    &optlstFrontEndC_121,
+    &optlstFrontEndC_123,
+    &optlstFrontEndC_125,
+    &optlstFrontEndC_127,
+    0
+};
+OptionList optlstFrontEndC = {"Front-End C/C++ Language Options\n", 0x100, optlstFrontEndC_128};

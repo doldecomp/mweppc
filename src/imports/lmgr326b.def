@@ -1,0 +1,5 @@
+LIBRARY LMGR326B.dll
+EXPORTS
+    lp_checkout @190 NONAME
+    lp_checkin @189 NONAME
+    lp_errstring @191 NONAME

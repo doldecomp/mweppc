@@ -1,0 +1,136 @@
+extern OptionList optlstCmdLine_079;
+extern OptionList optlstCmdLineCompiler_001;
+extern OptionList optlstCmdLineCompiler_003;
+extern OptionList optlstCmdLineCompiler_005;
+MASK_T optlstCmdLine_000 = {9, 0x01, 0, 0, 4, 0x4000, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_001 = {"usage", 0x2101, (PARAM_T *)&optlstCmdLine_000, 0, 0, "show usage information"};
+MASK_T optlstCmdLine_002 = {9, 0x01, 0, 0, 4, 0x100, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_003 = {"spaces", 0x102101, (PARAM_T *)&optlstCmdLine_002, 0, 0, "insert blank lines between options in printout"};
+MASK_T optlstCmdLine_004 = {9, 0x01, 0, 0, 4, 0x6A, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_005 = {"all", 0x42101, (PARAM_T *)&optlstCmdLine_004, 0, &optlstCmdLineCompiler_001, "show all standard options"};
+MASK_T optlstCmdLine_006 = {9, 0x01, 0, 0, 4, 0x80, 0xE, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_007 = {"normal", 0x142101, (PARAM_T *)&optlstCmdLine_006, 0, &optlstCmdLineCompiler_001, "show only standard options"};
+MASK_T optlstCmdLine_008 = {9, 0x01, 0, 0, 4, 0x4, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_009 = {"obsolete", 0x102101, (PARAM_T *)&optlstCmdLine_008, 0, 0, "show obsolete options"};
+MASK_T optlstCmdLine_010 = {9, 0x01, 0, 0, 4, 0x2, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_011 = {"ignored", 0x102101, (PARAM_T *)&optlstCmdLine_010, 0, 0, "show ignored options"};
+MASK_T optlstCmdLine_012 = {9, 0x01, 0, 0, 4, 0x8, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_013 = {"deprecated", 0x102101, (PARAM_T *)&optlstCmdLine_012, 0, 0, "show deprecated options"};
+MASK_T optlstCmdLine_014 = {9, 0x01, 0, 0, 4, 0x20, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_015 = {"meaningless", 0x102101, (PARAM_T *)&optlstCmdLine_014, 0, 0, "show options meaningless for this target"};
+MASK_T optlstCmdLine_016 = {9, 0x01, 0, 0, 4, 0x40, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_017 = {"compatible", 0x102101, (PARAM_T *)&optlstCmdLine_016, 0, 0, "show compatibility options"};
+MASK_T optlstCmdLine_018 = {9, 0x01, 0, 0, 4, 0x10, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_019 = {"secret", 0x103101, (PARAM_T *)&optlstCmdLine_018, 0, 0, 0};
+MASK_T optlstCmdLine_020 = {9, 0x01, 0, 0, 4, 0x1, 0x0, (void *)&parseopts.helpFlags};
+STRING_T optlstCmdLine_021 = {4, 0x00, "name", (PARAM_T *)&optlstCmdLine_020, 64, 0, (void *)&parseopts.helpKey};
+Option optlstCmdLine_022 = {"opt|option", 0x42101, (PARAM_T *)&optlstCmdLine_021, 0, &optlstCmdLineCompiler_003, "show help for a given option"};
+STRING_T optlstCmdLine_023 = {4, 0x00, "keyword", 0, 64, 0, (void *)&parseopts.helpKey};
+Option optlstCmdLine_024 = {"search", 0x42101, (PARAM_T *)&optlstCmdLine_023, 0, &optlstCmdLineCompiler_003, "show help for an option whose name or help contains 'keyword' (case-sensitive)"};
+MASK_T optlstCmdLine_025 = {9, 0x01, 0, 0, 4, 0x8000, 0x0, (void *)&parseopts.helpFlags};
+STRING_T optlstCmdLine_026 = {4, 0x00, "keyword", (PARAM_T *)&optlstCmdLine_025, 64, 0, (void *)&parseopts.helpKey};
+Option optlstCmdLine_027 = {"group", 0x42101, (PARAM_T *)&optlstCmdLine_026, 0, &optlstCmdLineCompiler_003, "show help for groups whose names contain 'keyword' (case-sensitive)"};
+MASK_T optlstCmdLine_028 = {9, 0x01, 0, 0, 4, 0xC00, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_029 = {"all", 0x40101, (PARAM_T *)&optlstCmdLine_028, 0, &optlstCmdLineCompiler_005, "show all options available in this tool"};
+MASK_T optlstCmdLine_030 = {9, 0x01, 0, 0, 4, 0x400, 0x800, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_031 = {"this", 0x40101, (PARAM_T *)&optlstCmdLine_030, 0, &optlstCmdLineCompiler_005, "show options executed by this tool"};
+MASK_T optlstCmdLine_032 = {9, 0x01, 0, 0, 4, 0x800, 0x400, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_033 = {"other|skipped", 0x40101, (PARAM_T *)&optlstCmdLine_032, 0, &optlstCmdLineCompiler_005, "show options passed to another tool"};
+MASK_T optlstCmdLine_034 = {9, 0x01, 0, 0, 4, 0xC00, 0x200, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_035 = {"both", 0x40101, (PARAM_T *)&optlstCmdLine_034, 0, &optlstCmdLineCompiler_005, "show options used in all tools"};
+Option *optlstCmdLine_036[] = {
+    &optlstCmdLine_029,
+    &optlstCmdLine_031,
+    &optlstCmdLine_033,
+    &optlstCmdLine_035,
+    0
+};
+OptionList optlstCmdLine_037 = {0, 0x100, optlstCmdLine_036};
+MASK_T optlstCmdLine_038 = {9, 0x01, 0, 0, 4, 0x200, 0x0, (void *)&parseopts.helpFlags};
+Option optlstCmdLine_039 = {"tool", 0x8101, (PARAM_T *)&optlstCmdLine_038, &optlstCmdLine_037, 0, "categorize groups of options by tool"};
+Option *optlstCmdLine_040[] = {
+    &optlstCmdLine_001,
+    &optlstCmdLine_003,
+    &optlstCmdLine_005,
+    &optlstCmdLine_007,
+    &optlstCmdLine_009,
+    &optlstCmdLine_011,
+    &optlstCmdLine_013,
+    &optlstCmdLine_015,
+    &optlstCmdLine_017,
+    &optlstCmdLine_019,
+    &optlstCmdLine_022,
+    &optlstCmdLine_024,
+    &optlstCmdLine_027,
+    &optlstCmdLine_039,
+    0
+};
+OptionList optlstCmdLine_041 = {0, 0x100, optlstCmdLine_040};
+MASK_T optlstCmdLine_042 = {9, 0x01, 0, 0, 4, 0x680, 0x0, (void *)&parseopts.helpFlags};
+SET_T optlstCmdLine_043 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLine_042, 1, 0x1, (void *)&parseopts.hadAnyOutput};
+SET_T optlstCmdLine_044 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLine_043, 1, 0x1, (void *)&parseopts.showHelp};
+Option optlstCmdLine_045 = {"help||-help", 0x3A101, (PARAM_T *)&optlstCmdLine_044, &optlstCmdLine_041, 0, "display help"};
+SET_T optlstCmdLine_046 = {11, 0x01, 0, 0, 1, 0x1, (void *)&parseopts.hadAnyOutput};
+GENERIC_T optlstCmdLine_047 = {13, 0x01, 0, (PARAM_T *)&optlstCmdLine_046, (void *)Opt_PrintVersion, 0, 0};
+Option optlstCmdLine_048 = {"version", 0x101, (PARAM_T *)&optlstCmdLine_047, 0, 0, "show version, configuration, and build date"};
+SET_T optlstCmdLine_049 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLine.timeWorking};
+Option optlstCmdLine_050 = {"timing", 0x1C1, (PARAM_T *)&optlstCmdLine_049, 0, 0, "collect timing statistics"};
+GENERIC_T optlstCmdLine_051 = {13, 0x01, 0, 0, (void *)Opt_PrintVersion, 0, 0};
+SET_T optlstCmdLine_052 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLine_051, 2, 0x1, (void *)&pCmdLine.verbose};
+Option optlstCmdLine_053 = {"progress", 0x1C1, (PARAM_T *)&optlstCmdLine_052, 0, 0, "show progress and version"};
+GENERIC_T optlstCmdLine_054 = {13, 0x01, 0, 0, (void *)Opt_PrintVersion, 0, 0};
+GENERIC_T optlstCmdLine_055 = {13, 0x01, 0, (PARAM_T *)&optlstCmdLine_054, (void *)Opt_IncreaseVerbosity, 0, 0};
+Option optlstCmdLine_056 = {"v|verbose", 0x1C1, (PARAM_T *)&optlstCmdLine_055, 0, 0, "verbose information; cumulative; implies ~~progress"};
+SET_T optlstCmdLine_057 = {11, 0x01, 0, 0, 1, 0x1, (void *)&parseopts.alwaysUsePaths};
+Option optlstCmdLine_058 = {"search", 0x1C1, (PARAM_T *)&optlstCmdLine_057, 0, 0, "search access paths for source files specified on the command line; may specify object code and libraries as well; this option provides the IDE's 'access paths' functionality"};
+SET_T optlstCmdLine_059 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLine.showLines};
+Option optlstCmdLine_060 = {"lines", 0x11C1, (PARAM_T *)&optlstCmdLine_059, 0, 0, "show line count"};
+SET_T optlstCmdLine_061 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pCmdLine.noWrapOutput};
+Option optlstCmdLine_062 = {"wraplines", 0x1001C1, (PARAM_T *)&optlstCmdLine_061, 0, 0, "word wrap messages"};
+NUM_T optlstCmdLine_063 = {3, 0x00, "max", 0, 2, 0, 0x0, 0x0, (void *)&pCmdLine.maxErrors};
+Option optlstCmdLine_064 = {"maxerrors", 0x1C0, (PARAM_T *)&optlstCmdLine_063, 0, 0, "specify maximum number of errors to print, zero means no maximum"};
+NUM_T optlstCmdLine_065 = {3, 0x00, "max", 0, 2, 0, 0x0, 0x0, (void *)&pCmdLine.maxWarnings};
+Option optlstCmdLine_066 = {"maxwarnings", 0x1C0, (PARAM_T *)&optlstCmdLine_065, 0, 0, "specify maximum number of warnings to print, zero means no maximum"};
+SET_T optlstCmdLine_067 = {11, 0x01, 0, 0, 2, 0x2, (void *)&pCmdLine.msgStyle};
+Option optlstCmdLine_068 = {"mpw", 0x401C1, (PARAM_T *)&optlstCmdLine_067, 0, &optlstCmdLine_079, "use MPW message style"};
+SET_T optlstCmdLine_069 = {11, 0x01, 0, 0, 2, 0x0, (void *)&pCmdLine.msgStyle};
+Option optlstCmdLine_070 = {"std", 0x401C1, (PARAM_T *)&optlstCmdLine_069, 0, &optlstCmdLine_079, "use standard message style"};
+SET_T optlstCmdLine_071 = {11, 0x01, 0, 0, 2, 0x1, (void *)&pCmdLine.msgStyle};
+Option optlstCmdLine_072 = {"gcc", 0x401C1, (PARAM_T *)&optlstCmdLine_071, 0, &optlstCmdLine_079, "use GCC-like message style"};
+SET_T optlstCmdLine_073 = {11, 0x01, 0, 0, 2, 0x3, (void *)&pCmdLine.msgStyle};
+Option optlstCmdLine_074 = {"IDE", 0x401C1, (PARAM_T *)&optlstCmdLine_073, 0, &optlstCmdLine_079, "use CW IDE-like message style"};
+SET_T optlstCmdLine_075 = {11, 0x01, 0, 0, 2, 0x4, (void *)&pCmdLine.msgStyle};
+Option optlstCmdLine_076 = {"parseable", 0x401C1, (PARAM_T *)&optlstCmdLine_075, 0, &optlstCmdLine_079, "use context-free machine-parseable message style"};
+Option *optlstCmdLine_077[] = {
+    &optlstCmdLine_068,
+    &optlstCmdLine_070,
+    &optlstCmdLine_072,
+    &optlstCmdLine_074,
+    &optlstCmdLine_076,
+    0
+};
+OptionList optlstCmdLine_078 = {0, 0x701, optlstCmdLine_077};
+OptionList optlstCmdLine_079 = {0, 0x701, optlstCmdLine_077};
+Option optlstCmdLine_080 = {"msgstyle", 0x81C1, 0, &optlstCmdLine_078, 0, "set error/warning message style"};
+GENERIC_T optlstCmdLine_081 = {13, 0x01, 0, 0, (void *)Opt_SavePrefs, 0, 0};
+SET_T optlstCmdLine_082 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLine_081, 1, 0x0, (void *)&pCmdLine.stderr2stdout};
+Option optlstCmdLine_083 = {"stderr", 0x1001C1, (PARAM_T *)&optlstCmdLine_082, 0, 0, "use separate stderr and stdout streams; if using ~~nostderr, stderr goes to stdout"};
+GENERIC_T optlstCmdLine_084 = {13, 0x01, 0, 0, (void *)Opt_FindAndAddFile, 0, 0};
+Option optlstCmdLine_085 = {"", 0x100, (PARAM_T *)&optlstCmdLine_084, 0, 0, 0};
+Option *optlstCmdLine_086[] = {
+    &optlstCmdLine_045,
+    &optlstCmdLine_048,
+    &optlstCmdLine_050,
+    &optlstCmdLine_053,
+    &optlstCmdLine_056,
+    &optlstCmdLine_058,
+    &optlstCmdLine_060,
+    &optlstCmdLine_062,
+    &optlstCmdLine_064,
+    &optlstCmdLine_066,
+    &optlstCmdLine_080,
+    &optlstCmdLine_083,
+    &optlstCmdLine_085,
+    0
+};
+OptionList optlstCmdLine = {"General Command-Line Options\n\tPlease see '~~help usage' for details about the meaning of this help.\b", 0x700, optlstCmdLine_086};

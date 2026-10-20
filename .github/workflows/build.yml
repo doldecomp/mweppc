@@ -1,0 +1,51 @@
+name: Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install Python packages
+        run: uv sync --locked
+
+      - name: Check formatting
+        run: git ls-files -z '*.c' '*.cpp' '*.h' | xargs -0 .venv/bin/clang-format --dry-run -Werror
+
+      - name: Check Python formatting
+        run: .venv/bin/ruff format --check
+
+      - name: Lint Python
+        run: .venv/bin/ruff check
+
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install Python packages
+        run: uv sync --locked
+
+      - name: Install ninja and LLVM
+        run: sudo apt-get update && sudo apt-get install -y ninja-build clang lld llvm
+
+      - name: Restore the downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            lib
+            build/downloads
+          key: downloads-${{ hashFiles('tools/download_tool.py') }}
+
+      - name: Build every version's compiler with clang
+        run: |
+          .venv/bin/python configure.py
+          ninja

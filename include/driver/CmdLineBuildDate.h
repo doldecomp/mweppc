@@ -1,0 +1,7 @@
+#ifndef DRIVER_CMDLINEBUILDDATE_H
+#define DRIVER_CMDLINEBUILDDATE_H
+
+extern const char* CMDLINE_BUILD_TIME;
+extern const char* CMDLINE_BUILD_DATE;
+
+#endif

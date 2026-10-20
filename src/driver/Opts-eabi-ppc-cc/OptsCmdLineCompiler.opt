@@ -1,0 +1,181 @@
+extern OptionList optlstCmdLineCompiler_024;
+extern OptionList optlstCmdLineLinker_001;
+Option *optlstCmdLineCompiler_000[] = {
+    &optlstCmdLine_005,
+    &optlstCmdLine_007,
+    0
+};
+OptionList optlstCmdLineCompiler_001 = {0, 0x0, optlstCmdLineCompiler_000};
+Option *optlstCmdLineCompiler_002[] = {
+    &optlstCmdLine_022,
+    &optlstCmdLine_024,
+    &optlstCmdLine_027,
+    0
+};
+OptionList optlstCmdLineCompiler_003 = {0, 0x0, optlstCmdLineCompiler_002};
+Option *optlstCmdLineCompiler_004[] = {
+    &optlstCmdLine_029,
+    &optlstCmdLine_031,
+    &optlstCmdLine_033,
+    &optlstCmdLine_035,
+    0
+};
+OptionList optlstCmdLineCompiler_005 = {0, 0x0, optlstCmdLineCompiler_004};
+SET_T optlstCmdLineCompiler_006 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLineCompiler.browserEnabled};
+Option optlstCmdLineCompiler_007 = {"browse", 0x1101, (PARAM_T *)&optlstCmdLineCompiler_006, 0, 0, "record browse information to file named <output file>.b"};
+SET_T optlstCmdLineCompiler_008 = {11, 0x01, 0, 0, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_009 = {"c", 0x101, (PARAM_T *)&optlstCmdLineCompiler_008, 0, 0, "compile only, do not link"};
+GENERIC_T optlstCmdLineCompiler_010 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Cg", 0};
+Option optlstCmdLineCompiler_011 = {"codegen", 0x100101, (PARAM_T *)&optlstCmdLineCompiler_010, 0, 0, "generate object code"};
+SET_T optlstCmdLineCompiler_012 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pCmdLineCompiler.canonicalIncludes};
+Option optlstCmdLineCompiler_013 = {"convertpaths", 0x100101, (PARAM_T *)&optlstCmdLineCompiler_012, 0, 0, "interpret #include filepaths specified for a foreign operating system; i.e., <sys/stat.h> or <:sys:stat.h>; when enabled, '/' and ':' will separate directories and cannot be used in filenames (note: this is not a problem on Win32, since these characters are already disallowed in filenames; it is safe to leave the option 'on')"};
+SET_T optlstCmdLineCompiler_014 = {11, 0x01, 0, 0, 2, 0x0, (void *)&pCmdLineCompiler.includeSearch};
+Option optlstCmdLineCompiler_015 = {"proj", 0x40100, (PARAM_T *)&optlstCmdLineCompiler_014, 0, &optlstCmdLineCompiler_024, "begin search in current working directory"};
+SET_T optlstCmdLineCompiler_016 = {11, 0x01, 0, 0, 2, 0x1, (void *)&pCmdLineCompiler.includeSearch};
+Option optlstCmdLineCompiler_017 = {"source", 0x40100, (PARAM_T *)&optlstCmdLineCompiler_016, 0, &optlstCmdLineCompiler_024, "begin search in directory of source file"};
+SET_T optlstCmdLineCompiler_018 = {11, 0x01, 0, 0, 2, 0x2, (void *)&pCmdLineCompiler.includeSearch};
+Option optlstCmdLineCompiler_019 = {"explicit", 0x40100, (PARAM_T *)&optlstCmdLineCompiler_018, 0, &optlstCmdLineCompiler_024, "no implicit directory; only search '~~I' or '~~ir' paths"};
+SET_T optlstCmdLineCompiler_020 = {11, 0x01, 0, 0, 2, 0x3, (void *)&pCmdLineCompiler.includeSearch};
+Option optlstCmdLineCompiler_021 = {"include", 0x40100, (PARAM_T *)&optlstCmdLineCompiler_020, 0, &optlstCmdLineCompiler_024, "begin search in directory of referencing file"};
+Option *optlstCmdLineCompiler_022[] = {
+    &optlstCmdLineCompiler_015,
+    &optlstCmdLineCompiler_017,
+    &optlstCmdLineCompiler_019,
+    &optlstCmdLineCompiler_021,
+    0
+};
+OptionList optlstCmdLineCompiler_023 = {0, 0x101, optlstCmdLineCompiler_022};
+OptionList optlstCmdLineCompiler_024 = {0, 0x101, optlstCmdLineCompiler_022};
+Option optlstCmdLineCompiler_025 = {"cwd", 0x8100, 0, &optlstCmdLineCompiler_023, 0, "specify #include searching semantics:  before searching any access paths, the path specified by this option will be searched"};
+SETTING_T optlstCmdLineCompiler_026 = {15, 0x06, "name", 0, (void *)Opt_DefineSymbol, "value"};
+Option optlstCmdLineCompiler_027 = {"D|d|define", 0x106, (PARAM_T *)&optlstCmdLineCompiler_026, 0, 0, "define symbol 'name' to 'value' if specified, else '1'"};
+SET_T optlstCmdLineCompiler_028 = {11, 0x01, 0, 0, 1, 0x1, (void *)&useDefaultIncludes};
+Option optlstCmdLineCompiler_029 = {"defaults", 0x100141, (PARAM_T *)&optlstCmdLineCompiler_028, 0, 0, "same as '~~[no]stdinc'"};
+GENERIC_T optlstCmdLineCompiler_030 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Ds", 0};
+SET_T optlstCmdLineCompiler_031 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_030, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_032 = {"dis|disassemble", 0x1C1, (PARAM_T *)&optlstCmdLineCompiler_031, 0, 0, "disassemble files to stdout"};
+GENERIC_T optlstCmdLineCompiler_033 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Pp", 0};
+SET_T optlstCmdLineCompiler_034 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_033, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_035 = {"E", 0x105, (PARAM_T *)&optlstCmdLineCompiler_034, 0, 0, "preprocess source files"};
+GENERIC_T optlstCmdLineCompiler_036 = {13, 0x01, 0, 0, (void *)Opt_AddStringToDefines, (void *)"#pragma simple_prepdump on\n", 0};
+GENERIC_T optlstCmdLineCompiler_037 = {13, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_036, (void *)Opt_SetStage, (void *)"Pp", 0};
+SET_T optlstCmdLineCompiler_038 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_037, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_039 = {"EP", 0x105, (PARAM_T *)&optlstCmdLineCompiler_038, 0, 0, "preprocess and strip out #line directives"};
+STRING_T optlstCmdLineCompiler_040 = {4, 0x00, "extension", 0, 15, 0, (void *)&pCmdLineCompiler.objFileExt};
+Option optlstCmdLineCompiler_041 = {"ext", 0x101, (PARAM_T *)&optlstCmdLineCompiler_040, 0, 0, "specify extension for generated object files; with a leading period ('.'), appends extension; without, replaces source file's extension"};
+SETSTRING_T optlstCmdLineCompiler_042 = {12, 0x01, 0, 0, "eppc.o", 0, (void *)&pCmdLineCompiler.objFileExt};
+Option optlstCmdLineCompiler_043 = {"fatext", 0x101, (PARAM_T *)&optlstCmdLineCompiler_042, 0, 0, "use 'eppc.o' as extension for generated object files"};
+SET_T optlstCmdLineCompiler_044 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLineCompiler.compileIgnored};
+Option optlstCmdLineCompiler_045 = {"force_compile", 0x101101, (PARAM_T *)&optlstCmdLineCompiler_044, 0, 0, "force compilation of unrecognized files"};
+SET_T optlstCmdLineCompiler_046 = {11, 0x01, 0, 0, 2, 0x3, (void *)&pCmdLineCompiler.includeSearch};
+SET_T optlstCmdLineCompiler_047 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_046, 1, 0x1, (void *)&dashIMinusMovesPaths};
+SET_T optlstCmdLineCompiler_048 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_047, 1, 0x1, (void *)&namingSysPaths};
+Option optlstCmdLineCompiler_049 = {"gccinc|gccincludes", 0x101, (PARAM_T *)&optlstCmdLineCompiler_048, 0, 0, "adopt GCC #include semantics:  add '~~I' paths to system list if '~~I-' is not specified, and search directory of referencing file first for #includes (same as '~~cwd include')"};
+SET_T optlstCmdLineCompiler_050 = {11, 0x01, 0, 0, 2, 0x2, (void *)&pCmdLineCompiler.includeSearch};
+SET_T optlstCmdLineCompiler_051 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_050, 1, 0x1, (void *)&usedDashIMinus};
+SET_T optlstCmdLineCompiler_052 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_051, 1, 0x1, (void *)&namingSysPaths};
+GENERIC_T optlstCmdLineCompiler_053 = {13, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_052, (void *)Opt_MaybeMoveAccessPaths, 0, 0};
+Option optlstCmdLineCompiler_054 = {"i-|I-", 0x101, (PARAM_T *)&optlstCmdLineCompiler_053, 0, 0, "change target for '~~I' access paths to the system list; implies '~~cwd explicit'; while compiling, user paths then system paths are searched when using '#include \"...\"; only system paths are searched with '#include <...>'"};
+GENERIC_T optlstCmdLineCompiler_055 = {13, 0x00, "path", 0, (void *)Opt_AddAccessPath, 0, 0};
+Option optlstCmdLineCompiler_056 = {"I|i", 0x107, (PARAM_T *)&optlstCmdLineCompiler_055, 0, 0, "append access path to current #include list(see '~~gccincludes' and '~~I-')"};
+GENERIC_T optlstCmdLineCompiler_057 = {13, 0x00, "file", 0, (void *)Opt_AddPrefixFile, 0, 0};
+Option optlstCmdLineCompiler_058 = {"include", 0x100, (PARAM_T *)&optlstCmdLineCompiler_057, 0, 0, "prefix text file or precompiled header onto all source files"};
+GENERIC_T optlstCmdLineCompiler_059 = {13, 0x00, "path", 0, (void *)Opt_AddAccessPath, (void *)"", 0};
+Option optlstCmdLineCompiler_060 = {"ir", 0x101, (PARAM_T *)&optlstCmdLineCompiler_059, 0, 0, "append a recursive access path to current #include list"};
+SET_T optlstCmdLineCompiler_061 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLineCompiler.keepObjects};
+Option optlstCmdLineCompiler_062 = {"keepobj|keepobjects", 0x100101, (PARAM_T *)&optlstCmdLineCompiler_061, 0, 0, "keep object files generated after invoking linker; if disabled, intermediate object files are temporary and deleted after link stage; objects are always kept when compiling"};
+STRING_T optlstCmdLineCompiler_063 = {4, 0x00, 0, 0, 64, 0, (void *)&pCmdLineCompiler.linkerName};
+Option optlstCmdLineCompiler_064 = {"linkername", 0x1101, (PARAM_T *)&optlstCmdLineCompiler_063, 0, 0, "give name of alternate linker"};
+GENERIC_T optlstCmdLineCompiler_065 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Dp", 0};
+SET_T optlstCmdLineCompiler_066 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_065, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_067 = {"M", 0x105, (PARAM_T *)&optlstCmdLineCompiler_066, 0, 0, "scan source files for dependencies and emit Makefile, do not generate object code"};
+GENERIC_T optlstCmdLineCompiler_068 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Dp", 0};
+SET_T optlstCmdLineCompiler_069 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_068, 1, 0x1, (void *)&pCmdLineCompiler.depsOnlyUserFiles};
+SET_T optlstCmdLineCompiler_070 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_069, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_071 = {"MM", 0x105, (PARAM_T *)&optlstCmdLineCompiler_070, 0, 0, "like ~~M, but do not list system include files"};
+GENERIC_T optlstCmdLineCompiler_072 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"DpCg", 0};
+MASK_T optlstCmdLineCompiler_073 = {9, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_072, 2, 0xA, 0x0, (void *)&pCmdLine.toDisk};
+SET_T optlstCmdLineCompiler_074 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_073, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_075 = {"MD", 0x105, (PARAM_T *)&optlstCmdLineCompiler_074, 0, 0, "like ~~M, but write dependency map to a file and generate object code"};
+GENERIC_T optlstCmdLineCompiler_076 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"DpCg", 0};
+SET_T optlstCmdLineCompiler_077 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_076, 1, 0x1, (void *)&pCmdLineCompiler.depsOnlyUserFiles};
+MASK_T optlstCmdLineCompiler_078 = {9, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_077, 2, 0xA, 0x0, (void *)&pCmdLine.toDisk};
+SET_T optlstCmdLineCompiler_079 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_078, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_080 = {"MMD", 0x105, (PARAM_T *)&optlstCmdLineCompiler_079, 0, 0, "like ~~MD, but do not list system include files"};
+GENERIC_T optlstCmdLineCompiler_081 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Dp", 0};
+SET_T optlstCmdLineCompiler_082 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_081, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_083 = {"make", 0x101, (PARAM_T *)&optlstCmdLineCompiler_082, 0, 0, "scan source files for dependencies and emit Makefile, do not generate object code"};
+SET_T optlstCmdLineCompiler_084 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLineCompiler.noFail};
+Option optlstCmdLineCompiler_085 = {"nofail", 0x100, (PARAM_T *)&optlstCmdLineCompiler_084, 0, 0, "continue working after errors in earlier files"};
+SET_T optlstCmdLineCompiler_086 = {11, 0x01, 0, 0, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_087 = {"nolink", 0x101, (PARAM_T *)&optlstCmdLineCompiler_086, 0, 0, "compile only, do not link"};
+GENERIC_T optlstCmdLineCompiler_088 = {13, 0x01, 0, 0, (void *)Opt_SavePrefs, 0, 0};
+SET_T optlstCmdLineCompiler_089 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_088, 1, 0x2, (void *)&pCmdLineCompiler.forcePrecompile};
+Option optlstCmdLineCompiler_090 = {"noprecompile", 0x40100, (PARAM_T *)&optlstCmdLineCompiler_089, 0, &optlstCmdLineLinker_001, "do not precompile any files based on the filename extension"};
+SET_T optlstCmdLineCompiler_091 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLineCompiler.noSysPath};
+Option optlstCmdLineCompiler_092 = {"nosyspath", 0x101, (PARAM_T *)&optlstCmdLineCompiler_091, 0, 0, "treat #include <...> like #include \"...\"; always search both user and system path lists"};
+GENERIC_T optlstCmdLineCompiler_093 = {13, 0x00, "file|dir", 0, (void *)Opt_HandleOutputName, 0, 0};
+Option optlstCmdLineCompiler_094 = {"o", 0x100, (PARAM_T *)&optlstCmdLineCompiler_093, 0, 0, "specify output filename or directory for object file(s) or text output"};
+GENERIC_T optlstCmdLineCompiler_095 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Pp", 0};
+MASK_T optlstCmdLineCompiler_096 = {9, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_095, 2, 0x1, 0x0, (void *)&pCmdLine.toDisk};
+SET_T optlstCmdLineCompiler_097 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_096, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_098 = {"P", 0x105, (PARAM_T *)&optlstCmdLineCompiler_097, 0, 0, "preprocess and send output to file; do not generate code"};
+GENERIC_T optlstCmdLineCompiler_099 = {13, 0x01, 0, 0, (void *)Opt_SavePrefs, 0, 0};
+SET_T optlstCmdLineCompiler_100 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_099, 1, 0x1, (void *)&pCmdLineCompiler.forcePrecompile};
+GENERIC_T optlstCmdLineCompiler_101 = {13, 0x00, "file|dir", (PARAM_T *)&optlstCmdLineCompiler_100, (void *)Opt_HandleOutputName, 0, 0};
+SET_T optlstCmdLineCompiler_102 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_101, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_103 = {"precompile", 0x40100, (PARAM_T *)&optlstCmdLineCompiler_102, 0, &optlstCmdLineLinker_001, "generate precompiled header from source; write header to 'file' if specified, or put header in 'dir'; if argument is \"\", write header to source-specified location; if neither is defined, header filename is derived from source filename; note: the driver can tell whether to precompile a file based on its extension; '~~precompile file source' then is the same as '~~c ~~o file source'"};
+GENERIC_T optlstCmdLineCompiler_104 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Pp", 0};
+SET_T optlstCmdLineCompiler_105 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_104, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_106 = {"preprocess", 0x101, (PARAM_T *)&optlstCmdLineCompiler_105, 0, 0, "preprocess source files"};
+GENERIC_T optlstCmdLineCompiler_107 = {13, 0x00, "file", 0, (void *)Opt_AddPrefixFile, 0, 0};
+Option optlstCmdLineCompiler_108 = {"prefix", 0x100, (PARAM_T *)&optlstCmdLineCompiler_107, 0, 0, "prefix text file or precompiled header onto all source files"};
+GENERIC_T optlstCmdLineCompiler_109 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Ds", 0};
+MASK_T optlstCmdLineCompiler_110 = {9, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_109, 2, 0x4, 0x0, (void *)&pCmdLine.toDisk};
+SET_T optlstCmdLineCompiler_111 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineCompiler_110, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineCompiler_112 = {"S", 0x1C5, (PARAM_T *)&optlstCmdLineCompiler_111, 0, 0, "disassemble and send output to file"};
+SET_T optlstCmdLineCompiler_113 = {11, 0x01, 0, 0, 1, 0x1, (void *)&useDefaultIncludes};
+Option optlstCmdLineCompiler_114 = {"stdinc", 0x100101, (PARAM_T *)&optlstCmdLineCompiler_113, 0, 0, "use standard system include paths (specified by the environment variable %MWCIncludes%); added after all system '~~I' paths"};
+GENERIC_T optlstCmdLineCompiler_115 = {13, 0x00, "name", 0, (void *)Opt_UndefineSymbol, 0, 0};
+Option optlstCmdLineCompiler_116 = {"U|u|undefine", 0x106, (PARAM_T *)&optlstCmdLineCompiler_115, 0, 0, "undefine symbol 'name'"};
+Option *optlstCmdLineCompiler_117[] = {
+    &optlstCmdLineCompiler_007,
+    &optlstCmdLineCompiler_009,
+    &optlstCmdLineCompiler_011,
+    &optlstCmdLineCompiler_013,
+    &optlstCmdLineCompiler_025,
+    &optlstCmdLineCompiler_027,
+    &optlstCmdLineCompiler_029,
+    &optlstCmdLineCompiler_032,
+    &optlstCmdLineCompiler_035,
+    &optlstCmdLineCompiler_039,
+    &optlstCmdLineCompiler_041,
+    &optlstCmdLineCompiler_043,
+    &optlstCmdLineCompiler_045,
+    &optlstCmdLineCompiler_049,
+    &optlstCmdLineCompiler_054,
+    &optlstCmdLineCompiler_056,
+    &optlstCmdLineCompiler_058,
+    &optlstCmdLineCompiler_060,
+    &optlstCmdLineCompiler_062,
+    &optlstCmdLineCompiler_064,
+    &optlstCmdLineCompiler_067,
+    &optlstCmdLineCompiler_071,
+    &optlstCmdLineCompiler_075,
+    &optlstCmdLineCompiler_080,
+    &optlstCmdLineCompiler_083,
+    &optlstCmdLineCompiler_085,
+    &optlstCmdLineCompiler_087,
+    &optlstCmdLineCompiler_090,
+    &optlstCmdLineCompiler_092,
+    &optlstCmdLineCompiler_094,
+    &optlstCmdLineCompiler_098,
+    &optlstCmdLineCompiler_103,
+    &optlstCmdLineCompiler_106,
+    &optlstCmdLineCompiler_108,
+    &optlstCmdLineCompiler_112,
+    &optlstCmdLineCompiler_114,
+    &optlstCmdLineCompiler_116,
+    0
+};
+OptionList optlstCmdLineCompiler = {"Preprocessing, Precompiling, and Input File Control Options\n", 0x100, optlstCmdLineCompiler_117};

@@ -1,0 +1,98 @@
+GENERIC_T optlstOptimizer_000 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G2Pe", 0};
+Option optlstOptimizer_001 = {"O", 0x100, (PARAM_T *)&optlstOptimizer_000, 0, 0, "same as '~~O2'"};
+GENERIC_T optlstOptimizer_002 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G0-ShPe|", 0};
+Option optlstOptimizer_003 = {"0", 0x100, (PARAM_T *)&optlstOptimizer_002, 0, 0, "same as '~~opt off'"};
+GENERIC_T optlstOptimizer_004 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G1", 0};
+Option optlstOptimizer_005 = {"1", 0x100, (PARAM_T *)&optlstOptimizer_004, 0, 0, "same as '~~opt level=1'"};
+GENERIC_T optlstOptimizer_006 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G2Pe", 0};
+Option optlstOptimizer_007 = {"2", 0x100, (PARAM_T *)&optlstOptimizer_006, 0, 0, "same as '~~opt level=2, peephole'"};
+GENERIC_T optlstOptimizer_008 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G3Pe", 0};
+Option optlstOptimizer_009 = {"3", 0x100, (PARAM_T *)&optlstOptimizer_008, 0, 0, "same as '~~opt level=3, peephole'"};
+GENERIC_T optlstOptimizer_010 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G4ShPe|", 0};
+Option optlstOptimizer_011 = {"4", 0x100, (PARAM_T *)&optlstOptimizer_010, 0, 0, "same as '~~opt level=4, peephole, schedule'"};
+GENERIC_T optlstOptimizer_012 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Gp", 0};
+Option optlstOptimizer_013 = {"p", 0x100, (PARAM_T *)&optlstOptimizer_012, 0, 0, "same as '~~opt speed'"};
+GENERIC_T optlstOptimizer_014 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Gs", 0};
+Option optlstOptimizer_015 = {"s", 0x100, (PARAM_T *)&optlstOptimizer_014, 0, 0, "same as '~~opt space'"};
+Option *optlstOptimizer_016[] = {
+    &optlstOptimizer_003,
+    &optlstOptimizer_005,
+    &optlstOptimizer_007,
+    &optlstOptimizer_009,
+    &optlstOptimizer_011,
+    &optlstOptimizer_013,
+    &optlstOptimizer_015,
+    0
+};
+OptionList optlstOptimizer_017 = {0, 0x100, optlstOptimizer_016};
+Option optlstOptimizer_018 = {"O", 0x8106, 0, &optlstOptimizer_017, 0, "control optimization; you may combine options as in '~~O4,p'"};
+GENERIC_T optlstOptimizer_019 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G0-ShPe|", 0};
+Option optlstOptimizer_020 = {"off|none", 0x100, (PARAM_T *)&optlstOptimizer_019, 0, 0, "suppress all optimizations; default"};
+GENERIC_T optlstOptimizer_021 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G2Pe", 0};
+Option optlstOptimizer_022 = {"on", 0x100, (PARAM_T *)&optlstOptimizer_021, 0, 0, "same as ~~opt level=2, peephole"};
+GENERIC_T optlstOptimizer_023 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G4GpShPe|", 0};
+Option optlstOptimizer_024 = {"all|full", 0x100, (PARAM_T *)&optlstOptimizer_023, 0, 0, "same as ~~opt speed,level=4, peephole, schedule"};
+GENERIC_T optlstOptimizer_025 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Gs", 0};
+Option optlstOptimizer_026 = {"space", 0x100100, (PARAM_T *)&optlstOptimizer_025, 0, 0, "optimize for space"};
+GENERIC_T optlstOptimizer_027 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Gp", 0};
+Option optlstOptimizer_028 = {"speed", 0x100100, (PARAM_T *)&optlstOptimizer_027, 0, 0, "optimize for speed"};
+GENERIC_T optlstOptimizer_029 = {13, 0x01, 0, 0, (void *)SetPragmaOptimizationsToUnspecified, 0, 0};
+NUM_T optlstOptimizer_030 = {3, 0x00, "num", (PARAM_T *)&optlstOptimizer_029, 1, 0, 0x0, 0x4, (void *)&pGlobalOptimizer.optimizationlevel};
+Option optlstOptimizer_031 = {"l|level", 0x20100, (PARAM_T *)&optlstOptimizer_030, 0, 0, "set optimization level:\015level 0: global register allocation only for temporary values\015level 1: adds dead code elimination\015level 2: adds common subexpression elimination and copy propagation\015level 3: adds loop transformations, strength reducation, and loop-invariant code motion\015level 4: adds repeated common subexpression elimination and loop-invariant code motion"};
+GENERIC_T optlstOptimizer_032 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Cs", 0};
+Option optlstOptimizer_033 = {"cse|commonsubs", 0x100100, (PARAM_T *)&optlstOptimizer_032, 0, 0, "common subexpression elimination"};
+GENERIC_T optlstOptimizer_034 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Dc", 0};
+Option optlstOptimizer_035 = {"deadcode", 0x100100, (PARAM_T *)&optlstOptimizer_034, 0, 0, "removal of dead code"};
+GENERIC_T optlstOptimizer_036 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Ds", 0};
+Option optlstOptimizer_037 = {"deadstore", 0x100100, (PARAM_T *)&optlstOptimizer_036, 0, 0, "removal of dead assignments"};
+GENERIC_T optlstOptimizer_038 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Lt", 0};
+Option optlstOptimizer_039 = {"lifetimes", 0x100100, (PARAM_T *)&optlstOptimizer_038, 0, 0, "computation of variable lifetimes"};
+GENERIC_T optlstOptimizer_040 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Li", 0};
+Option optlstOptimizer_041 = {"loop|loopinvariants", 0x100100, (PARAM_T *)&optlstOptimizer_040, 0, 0, "removal of loop invariants"};
+GENERIC_T optlstOptimizer_042 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Pr", 0};
+Option optlstOptimizer_043 = {"prop|propagation", 0x100100, (PARAM_T *)&optlstOptimizer_042, 0, 0, "propagation of constant and copy assignments"};
+GENERIC_T optlstOptimizer_044 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Sr", 0};
+Option optlstOptimizer_045 = {"strength", 0x100100, (PARAM_T *)&optlstOptimizer_044, 0, 0, "strength reduction; reducing multiplication by an index variable into addition"};
+GENERIC_T optlstOptimizer_046 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"DcDs", 0};
+Option optlstOptimizer_047 = {"dead", 0x100100, (PARAM_T *)&optlstOptimizer_046, 0, 0, "same as ~~opt [no]deadcode and [no]deadstore"};
+GENERIC_T optlstOptimizer_048 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Pe", 0};
+Option optlstOptimizer_049 = {"peep|peephole", 0x100100, (PARAM_T *)&optlstOptimizer_048, 0, 0, "peephole optimization"};
+GENERIC_T optlstOptimizer_050 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"Sh", 0};
+Option optlstOptimizer_051 = {"schedule", 0x100100, (PARAM_T *)&optlstOptimizer_050, 0, 0, 0};
+GENERIC_T optlstOptimizer_052 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G1PeS1", 0};
+Option optlstOptimizer_053 = {"inter|local|unroll", 0x1100, (PARAM_T *)&optlstOptimizer_052, 0, 0, "opt level=1, peep, schedule=601"};
+GENERIC_T optlstOptimizer_054 = {13, 0x01, 0, 0, (void *)SetOptFlags, (void *)"G2PeS1", 0};
+Option optlstOptimizer_055 = {"rep", 0x1100, (PARAM_T *)&optlstOptimizer_054, 0, 0, "opt level=2, peep, schedule=601"};
+GENERIC_T optlstOptimizer_056 = {13, 0x01, 0, 0, (void *)DisplayOptimizationOptions, 0, 0};
+Option optlstOptimizer_057 = {"display|dump", 0x100, (PARAM_T *)&optlstOptimizer_056, 0, 0, "display list of active optimizations"};
+Option *optlstOptimizer_058[] = {
+    &optlstOptimizer_020,
+    &optlstOptimizer_022,
+    &optlstOptimizer_024,
+    &optlstOptimizer_026,
+    &optlstOptimizer_028,
+    &optlstOptimizer_031,
+    &optlstOptimizer_033,
+    &optlstOptimizer_035,
+    &optlstOptimizer_037,
+    &optlstOptimizer_039,
+    &optlstOptimizer_041,
+    &optlstOptimizer_043,
+    &optlstOptimizer_045,
+    &optlstOptimizer_047,
+    &optlstOptimizer_049,
+    &optlstOptimizer_051,
+    &optlstOptimizer_053,
+    &optlstOptimizer_055,
+    &optlstOptimizer_057,
+    0
+};
+OptionList optlstOptimizer_059 = {0, 0x102, optlstOptimizer_058};
+Option optlstOptimizer_060 = {"opt", 0x8100, 0, &optlstOptimizer_059, 0, "specify optimization options"};
+Option *optlstOptimizer_061[] = {
+    &optlstOptimizer_001,
+    &optlstOptimizer_018,
+    &optlstOptimizer_060,
+    0
+};
+OptionList optlstOptimizer = {"Optimizer Options\n\tNote that all options besides '-opt off|on|all|space|speed|level=...' (marked with 'compatibility') are for backwards compatibility or special needs only; other optimization options may be superceded by use of '~~opt level=xxx'.\b", 0x100, optlstOptimizer_061};

@@ -1,0 +1,70 @@
+extern OptionList optlstLinker_032;
+extern OptionList optlstDisassembler_001;
+Option *optlstLinker_000[] = {
+    &optlstProject_003,
+    &optlstProject_005,
+    &optlstProject_119,
+    &optlstProject_121,
+    &optlstProject_123,
+    &optlstProject_125,
+    0
+};
+OptionList optlstLinker_001 = {0, 0x0, optlstLinker_000};
+Option *optlstLinker_002[] = {
+    &optlstProject_020,
+    &optlstProject_022,
+    0
+};
+OptionList optlstLinker_003 = {0, 0x0, optlstLinker_002};
+STRING_T optlstLinker_004 = {6, 0x00, 0, 0, 64, 0, (void *)&pLinker.mainname};
+SET_T optlstLinker_005 = {11, 0x01, 0, (PARAM_T *)&optlstLinker_004, 1, 0x1, 0};
+Option optlstLinker_006 = {"m|main", 0x40040, (PARAM_T *)&optlstLinker_005, 0, &optlstDisassembler_001, "set main entry point for application or shared library"};
+SETSTRING_T optlstLinker_007 = {12, 0x01, 0, 0, "", 0, (void *)&pLinker.mainname};
+SET_T optlstLinker_008 = {11, 0x01, 0, (PARAM_T *)&optlstLinker_007, 1, 0x1, 0};
+Option optlstLinker_009 = {"noentry|nomain", 0x40040, (PARAM_T *)&optlstLinker_008, 0, &optlstDisassembler_001, "do not use an entry point"};
+FILEPATH_T optlstLinker_010 = {2, 0x00, "filename", 0, 1, "<outfile>.MAP", (void *)&pCLTExtras.mapfile, 0xFF};
+IFARG_T optlstLinker_011 = {14, 0x02, 0, 0, (PARAM_T *)&optlstLinker_010, "set output filename for map file", 0, 0};
+SET_T optlstLinker_012 = {11, 0x01, 0, (PARAM_T *)&optlstLinker_011, 1, 0x1, (void *)&pLinker.map};
+Option optlstLinker_013 = {"map", 0x40, (PARAM_T *)&optlstLinker_012, 0, 0, "generate link map file"};
+SET_T optlstLinker_014 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pLinker.mapunused};
+SET_T optlstLinker_015 = {11, 0x01, 0, (PARAM_T *)&optlstLinker_014, 1, 0x1, (void *)&pLinker.map};
+Option optlstLinker_016 = {"mapunused|unused", 0x100040, (PARAM_T *)&optlstLinker_015, 0, 0, "include list of unused symbols in map file; implies '~~map'"};
+GENERIC_T optlstLinker_017 = {13, 0x00, "file", 0, (void *)Opt_DummyLinkerRoutine, 0, 0};
+Option optlstLinker_018 = {"o", 0x20040, (PARAM_T *)&optlstLinker_017, 0, 0, "specify output filename"};
+Option optlstLinker_019 = {"nosrec", 0x3840, 0, 0, 0, "option only has a positive form"};
+FILEPATH_T optlstLinker_020 = {2, 0x00, "filename", 0, 1, "<outfile>.mot", (void *)&pCLTExtras.srecfile, 0xFF};
+IFARG_T optlstLinker_021 = {14, 0x02, 0, 0, (PARAM_T *)&optlstLinker_020, "specify filename for S-record file", 0, 0};
+SET_T optlstLinker_022 = {11, 0x01, 0, (PARAM_T *)&optlstLinker_021, 1, 0x1, (void *)&pLinker.srec};
+Option optlstLinker_023 = {"srec", 0x40, (PARAM_T *)&optlstLinker_022, 0, 0, "generate an S-record file"};
+SET_T optlstLinker_024 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pLinker.sreceol};
+Option optlstLinker_025 = {"mac", 0x40040, (PARAM_T *)&optlstLinker_024, 0, &optlstLinker_032, "Macintosh"};
+SET_T optlstLinker_026 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pLinker.sreceol};
+Option optlstLinker_027 = {"dos", 0x40040, (PARAM_T *)&optlstLinker_026, 0, &optlstLinker_032, "DOS"};
+SET_T optlstLinker_028 = {11, 0x01, 0, 0, 1, 0x2, (void *)&pLinker.sreceol};
+Option optlstLinker_029 = {"unix", 0x40040, (PARAM_T *)&optlstLinker_028, 0, &optlstLinker_032, "Unix"};
+Option *optlstLinker_030[] = {
+    &optlstLinker_025,
+    &optlstLinker_027,
+    &optlstLinker_029,
+    0
+};
+OptionList optlstLinker_031 = {0, 0x201, optlstLinker_030};
+OptionList optlstLinker_032 = {0, 0x201, optlstLinker_030};
+SET_T optlstLinker_033 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pLinker.srec};
+Option optlstLinker_034 = {"sreceol", 0x8040, (PARAM_T *)&optlstLinker_033, &optlstLinker_031, 0, "set end-of-line separator for S-record file; implies '~~srec'"};
+NUM_T optlstLinker_035 = {3, 0x00, "length", 0, 2, 1, 0x8, 0xFF, (void *)&pLinker.sreclength};
+SET_T optlstLinker_036 = {11, 0x01, 0, (PARAM_T *)&optlstLinker_035, 1, 0x1, (void *)&pLinker.srec};
+Option optlstLinker_037 = {"sreclength", 0x40, (PARAM_T *)&optlstLinker_036, 0, 0, "specify length of S-records; implies '~~srec'"};
+Option *optlstLinker_038[] = {
+    &optlstLinker_006,
+    &optlstLinker_009,
+    &optlstLinker_013,
+    &optlstLinker_016,
+    &optlstLinker_018,
+    &optlstLinker_019,
+    &optlstLinker_023,
+    &optlstLinker_034,
+    &optlstLinker_037,
+    0
+};
+OptionList optlstLinker = {"ELF Linker Options\n", 0x200, optlstLinker_038};

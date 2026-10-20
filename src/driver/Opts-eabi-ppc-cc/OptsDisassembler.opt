@@ -1,0 +1,85 @@
+extern OptionList optlstDisassembler_006;
+Option *optlstDisassembler_000[] = {
+    &optlstLinker_006,
+    &optlstLinker_009,
+    0
+};
+OptionList optlstDisassembler_001 = {0, 0x0, optlstDisassembler_000};
+SET_T optlstDisassembler_002 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.extended};
+Option optlstDisassembler_003 = {"x", 0x1400C0, (PARAM_T *)&optlstDisassembler_002, 0, &optlstDisassembler_006, "[don't] show extended mnemonics"};
+Option *optlstDisassembler_004[] = {
+    &optlstDisassembler_003,
+    0
+};
+OptionList optlstDisassembler_005 = {0, 0x601, optlstDisassembler_004};
+OptionList optlstDisassembler_006 = {0, 0x601, optlstDisassembler_004};
+Option optlstDisassembler_007 = {"fmt|format", 0xC0C0, 0, &optlstDisassembler_005, 0, "specify formatting options"};
+SET_T optlstDisassembler_008 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pDisassembler.headers};
+SET_T optlstDisassembler_009 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_008, 1, 0x0, (void *)&pDisassembler.debug};
+SET_T optlstDisassembler_010 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_009, 1, 0x0, (void *)&pDisassembler.tables};
+SET_T optlstDisassembler_011 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_010, 1, 0x0, (void *)&pDisassembler.detail};
+SET_T optlstDisassembler_012 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_011, 1, 0x0, (void *)&pDisassembler.extended};
+SET_T optlstDisassembler_013 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_012, 1, 0x1, (void *)&pDisassembler.binary};
+SET_T optlstDisassembler_014 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_013, 1, 0x0, (void *)&pDisassembler.xtables};
+SET_T optlstDisassembler_015 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_014, 1, 0x0, (void *)&pDisassembler.code};
+SET_T optlstDisassembler_016 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_015, 1, 0x0, (void *)&pDisassembler.data};
+Option optlstDisassembler_017 = {"only|none", 0xC0, (PARAM_T *)&optlstDisassembler_016, 0, 0, "as in '~~show none' or, e.g.,\015'~~show only,code,data'"};
+SET_T optlstDisassembler_018 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.headers};
+SET_T optlstDisassembler_019 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_018, 1, 0x1, (void *)&pDisassembler.debug};
+SET_T optlstDisassembler_020 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_019, 1, 0x1, (void *)&pDisassembler.tables};
+SET_T optlstDisassembler_021 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_020, 1, 0x1, (void *)&pDisassembler.detail};
+SET_T optlstDisassembler_022 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_021, 1, 0x1, (void *)&pDisassembler.extended};
+SET_T optlstDisassembler_023 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_022, 1, 0x0, (void *)&pDisassembler.binary};
+SET_T optlstDisassembler_024 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_023, 1, 0x1, (void *)&pDisassembler.xtables};
+SET_T optlstDisassembler_025 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_024, 1, 0x1, (void *)&pDisassembler.code};
+SET_T optlstDisassembler_026 = {11, 0x01, 0, (PARAM_T *)&optlstDisassembler_025, 1, 0x1, (void *)&pDisassembler.data};
+Option optlstDisassembler_027 = {"all", 0xC0, (PARAM_T *)&optlstDisassembler_026, 0, 0, "show everything"};
+SET_T optlstDisassembler_028 = {11, 0x01, 0, 0, 1, 0x0, (void *)&pDisassembler.binary};
+Option optlstDisassembler_029 = {"binary", 0x1000C0, (PARAM_T *)&optlstDisassembler_028, 0, 0, "show binary information, such as address and opcodes, for object code"};
+SET_T optlstDisassembler_030 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.code};
+Option optlstDisassembler_031 = {"code|text", 0x1000C0, (PARAM_T *)&optlstDisassembler_030, 0, 0, "show .text sections"};
+SET_T optlstDisassembler_032 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.data};
+Option optlstDisassembler_033 = {"data", 0x1000C0, (PARAM_T *)&optlstDisassembler_032, 0, 0, "show data"};
+SET_T optlstDisassembler_034 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.detail};
+Option optlstDisassembler_035 = {"detail", 0x1000C0, (PARAM_T *)&optlstDisassembler_034, 0, 0, "show detailed dump information"};
+SET_T optlstDisassembler_036 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.extended};
+Option optlstDisassembler_037 = {"extended", 0x1000C0, (PARAM_T *)&optlstDisassembler_036, 0, 0, "show extended mnemonics"};
+SET_T optlstDisassembler_038 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.xtables};
+Option optlstDisassembler_039 = {"exceptions|xtab|xtables", 0x1000C0, (PARAM_T *)&optlstDisassembler_038, 0, 0, "show exception tables; implies '~~show data'"};
+SET_T optlstDisassembler_040 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.headers};
+Option optlstDisassembler_041 = {"headers", 0x1000C0, (PARAM_T *)&optlstDisassembler_040, 0, 0, "show object headers"};
+SET_T optlstDisassembler_042 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.debug};
+Option optlstDisassembler_043 = {"debug|dwarf", 0x1000C0, (PARAM_T *)&optlstDisassembler_042, 0, 0, "show DWARF information"};
+SET_T optlstDisassembler_044 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.tables};
+Option optlstDisassembler_045 = {"tables", 0x1000C0, (PARAM_T *)&optlstDisassembler_044, 0, 0, "show string and symbol tables"};
+SET_T optlstDisassembler_046 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.xtables};
+Option optlstDisassembler_047 = {"xtables", 0x1000C0, (PARAM_T *)&optlstDisassembler_046, 0, 0, "show exception tables"};
+Option *optlstDisassembler_048[] = {
+    &optlstDisassembler_017,
+    &optlstDisassembler_027,
+    &optlstDisassembler_029,
+    &optlstDisassembler_031,
+    &optlstDisassembler_033,
+    &optlstDisassembler_035,
+    &optlstDisassembler_037,
+    &optlstDisassembler_039,
+    &optlstDisassembler_041,
+    &optlstDisassembler_043,
+    &optlstDisassembler_045,
+    &optlstDisassembler_047,
+    0
+};
+OptionList optlstDisassembler_049 = {0, 0x600, optlstDisassembler_048};
+Option optlstDisassembler_050 = {"show", 0x80C0, 0, &optlstDisassembler_049, 0, "specify display options"};
+SET_T optlstDisassembler_051 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pDisassembler.relocate};
+Option optlstDisassembler_052 = {"relocate", 0x1000C0, (PARAM_T *)&optlstDisassembler_051, 0, 0, "for DWARF information, relocate addends in .rela.text and .rela.debug"};
+ONOFF_T optlstDisassembler_053 = {7, 0x00, 0, 0, (void *)&pDisassembler.xtables};
+Option optlstDisassembler_054 = {"xtables", 0x40C0, (PARAM_T *)&optlstDisassembler_053, 0, 0, "show exception tables"};
+Option *optlstDisassembler_055[] = {
+    &optlstDisassembler_007,
+    &optlstDisassembler_050,
+    &optlstDisassembler_052,
+    &optlstDisassembler_054,
+    0
+};
+OptionList optlstDisassembler = {"Embedded PowerPC Disassembler Options\n", 0x600, optlstDisassembler_055};

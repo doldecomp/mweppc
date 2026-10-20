@@ -1,0 +1,81 @@
+---
+BasedOnStyle: LLVM
+Standard: Latest
+
+ColumnLimit: 100
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+IndentCaseBlocks: false
+IndentGotoLabels: false
+IndentPPDirectives: None
+IndentExternBlock: NoIndent
+IndentWrappedFunctionNames: false
+MaxEmptyLinesToKeep: 1
+KeepEmptyLines:
+  AtStartOfBlock: false
+  AtStartOfFile: false
+  AtEndOfFile: false
+InsertNewlineAtEOF: true
+LineEnding: LF
+
+BreakBeforeBraces: Attach
+InsertBraces: true
+
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+
+AlignAfterOpenBracket: BlockIndent
+BreakAfterOpenBracketIf: false
+BreakBeforeCloseBracketIf: false
+AlignOperands: DontAlign
+AlignTrailingComments:
+  Kind: Never
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+AlignConsecutiveMacros: None
+AlignConsecutiveBitFields: None
+AlignEscapedNewlines: DontAlign
+AlignArrayOfStructures: None
+BinPackArguments: false
+BinPackParameters: OnePerLine
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+BreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 10000
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+BreakBinaryOperations:
+  Default: Never
+  PerOperator:
+    - Operators: ["&&", "||"]
+      Style: OnePerLine
+Cpp11BracedListStyle: true
+SeparateDefinitionBlocks: Leave
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Pointer
+QualifierAlignment: Leave
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyBlock: false
+SpacesBeforeTrailingComments: 1
+SpacesInParens: Never
+SpacesInSquareBrackets: false
+
+SortIncludes: Never
+IncludeBlocks: Preserve
+ReflowComments: false
+BreakStringLiterals: false
+RemoveParentheses: Leave
+RemoveSemicolon: false
+RemoveBracesLLVM: false
+WhitespaceSensitiveMacros: [OS_ASSERT, OPTION_ASSERT, IRO_ASSERT, IRO_ASSERT_T]

@@ -1,0 +1,39 @@
+Option *optlstCmdLineLinker_000[] = {
+    &optlstCmdLineCompiler_090,
+    &optlstCmdLineCompiler_103,
+    0
+};
+OptionList optlstCmdLineLinker_001 = {0, 0x0, optlstCmdLineLinker_000};
+GENERIC_T optlstCmdLineLinker_002 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Ds", 0};
+SET_T optlstCmdLineLinker_003 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineLinker_002, 1, 0x0, 0};
+SET_T optlstCmdLineLinker_004 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineLinker_003, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineLinker_005 = {"dis|disassemble", 0xC1, (PARAM_T *)&optlstCmdLineLinker_004, 0, 0, "disassemble object code and do not link; implies '~~nostdlib'"};
+GENERIC_T optlstCmdLineLinker_006 = {13, 0x00, "path", 0, (void *)Opt_DummyLinkerRoutine, 0, 0};
+Option optlstCmdLineLinker_007 = {"L|l", 0xC7, (PARAM_T *)&optlstCmdLineLinker_006, 0, 0, "add library search path; default is to search current working directory and then system directories (see '~~defaults'); search paths have global scope over the command line and are searched in the order given"};
+GENERIC_T optlstCmdLineLinker_008 = {13, 0x00, "path", 0, (void *)Opt_DummyLinkerRoutine, (void *)1, 0};
+Option optlstCmdLineLinker_009 = {"lr", 0xC1, (PARAM_T *)&optlstCmdLineLinker_008, 0, 0, "like '~~l', but add recursive library search path"};
+GENERIC_T optlstCmdLineLinker_010 = {13, 0x00, "file", 0, (void *)Opt_DummyLinkerRoutine, 0, 0};
+Option optlstCmdLineLinker_011 = {"l", 0xC6, (PARAM_T *)&optlstCmdLineLinker_010, 0, 0, "add a library by searching access paths for file named lib<file>.<ext> where <ext> is a typical library extension; added before system libraries (see '~~defaults')"};
+SET_T optlstCmdLineLinker_012 = {11, 0x01, 0, 0, 1, 0x1, 0};
+Option optlstCmdLineLinker_013 = {"defaults", 0x100041, (PARAM_T *)&optlstCmdLineLinker_012, 0, 0, "same as ~~[no]stdlib"};
+SET_T optlstCmdLineLinker_014 = {11, 0x01, 0, 0, 1, 0x1, (void *)&pCmdLineCompiler.noFail};
+Option optlstCmdLineLinker_015 = {"nofail", 0x40, (PARAM_T *)&optlstCmdLineLinker_014, 0, 0, "continue importing or disassembling after errors in earlier files"};
+SET_T optlstCmdLineLinker_016 = {11, 0x01, 0, 0, 1, 0x1, 0};
+Option optlstCmdLineLinker_017 = {"stdlib", 0x100041, (PARAM_T *)&optlstCmdLineLinker_016, 0, 0, "use system library access paths (specified by %MWLibraries%) and add system libraries (specified by %MWLibraryFiles%)"};
+GENERIC_T optlstCmdLineLinker_018 = {13, 0x01, 0, 0, (void *)Opt_SetStage, (void *)"Ds", 0};
+MASK_T optlstCmdLineLinker_019 = {9, 0x01, 0, (PARAM_T *)&optlstCmdLineLinker_018, 2, 0x4, 0x0, (void *)&pCmdLine.toDisk};
+SET_T optlstCmdLineLinker_020 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineLinker_019, 1, 0x0, 0};
+SET_T optlstCmdLineLinker_021 = {11, 0x01, 0, (PARAM_T *)&optlstCmdLineLinker_020, 2, 0x2, (void *)&pCmdLine.state};
+Option optlstCmdLineLinker_022 = {"S", 0xC5, (PARAM_T *)&optlstCmdLineLinker_021, 0, 0, "disassemble and send output to file; do not link; implies '~~nostdlib'"};
+Option *optlstCmdLineLinker_023[] = {
+    &optlstCmdLineLinker_005,
+    &optlstCmdLineLinker_007,
+    &optlstCmdLineLinker_009,
+    &optlstCmdLineLinker_011,
+    &optlstCmdLineLinker_013,
+    &optlstCmdLineLinker_015,
+    &optlstCmdLineLinker_017,
+    &optlstCmdLineLinker_022,
+    0
+};
+OptionList optlstCmdLineLinker = {"Command-Line Linker Options\n", 0x200, optlstCmdLineLinker_023};
