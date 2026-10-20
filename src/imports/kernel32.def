@@ -1,0 +1,65 @@
+; The KERNEL32.dll functions the compiler and its MSL runtime call, in the order the original imports them.
+; Each "@N" is the hint the original's import library gave (the linker writes it into the import table).
+; 2.0 does not call GetSystemDefaultLangID.
+LIBRARY KERNEL32.dll
+EXPORTS
+    GetStdHandle@4 @360
+    WriteFile@20 @782
+    GetEnvironmentStrings@0 @281
+    FreeEnvironmentStringsA@4 @193
+    TlsAlloc@0 @720
+    TlsFree@4 @721
+    TlsSetValue@8 @723
+    TlsGetValue@4 @722
+    ExitProcess@4 @140
+    GetCommandLineA@0 @218
+    InitializeCriticalSection@4 @453
+    DeleteCriticalSection@4 @90
+    EnterCriticalSection@4 @111
+    LeaveCriticalSection@4 @478
+    GetCurrentDirectoryA@8 @263
+    CloseHandle@4 @30
+    GetLastError@0 @301
+    SetFilePointer@16 @661
+    ReadFile@20 @573
+    RemoveDirectoryA@4 @587
+    DeleteFileA@4 @92
+    CreateFileA@28 @55
+    GlobalAlloc@8 @412
+    GlobalFree@4 @419
+    GetFullPathNameA@16 @297
+    CreateProcessA@40 @71
+    WaitForSingleObject@8 @765
+    GetTickCount@0 @390
+    FindFirstFileA@8 @163
+    FindClose@4 @159
+    FormatMessageA@28 @190
+    GetFileAttributesA@4 @288
+    GetFileTime@16 @295
+    SetFileTime@16 @663
+    GetFileSize@8 @293
+    SetEndOfFile@4 @652
+    CreateDirectoryA@8 @48
+    SetStdHandle@8 @680
+    GetExitCodeProcess@8 @286
+    FindNextFileA@8 @172
+    GetSystemTime@4 @372
+    SystemTimeToFileTime@8 @712
+    GlobalReAlloc@12 @426
+    GlobalFlags@4 @418
+    FileTimeToSystemTime@8 @153
+    GetModuleHandleA@4 @314
+    FindResourceA@12 @178
+    LoadResource@8 @484
+    LockResource@4 @498
+    SizeofResource@8 @706
+    IsDBCSLeadByte@4 @468
+    GetShortPathNameA@12 @356
+    SetFileAttributesA@8 @659
+    SetConsoleCtrlHandler@8 @620
+    GetConsoleScreenBufferInfo@8 @256
+    GetSystemDirectoryA@8 @368
+    GetWindowsDirectoryA@8 @407
+    GetSystemDefaultLangID@0 @366
+    GetLocalTime@4 @303
+    GetTimeZoneInformation@4 @393

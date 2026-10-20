@@ -1,0 +1,45 @@
+// The driver's resources: its version information and its icon. VERSION selects the release (include/version.h).
+#include "version.h"
+
+#if VERSION <= VERSION_GC_2_0P2
+#define BUILD 92
+#define BUILD_STRING L"2.4.7.92\0"
+#elif VERSION == VERSION_GC_2_5
+#define BUILD 105
+#define BUILD_STRING L"2.4.7.105\0"
+#elif VERSION == VERSION_GC_2_6
+#define BUILD 107
+#define BUILD_STRING L"2.4.7.107\0"
+#else
+#define BUILD 108
+#define BUILD_STRING L"2.4.7.108\0"
+#endif
+
+1 VERSIONINFO MOVEABLE PURE DISCARDABLE
+FILEVERSION 2,4,7,BUILD
+PRODUCTVERSION 2,4,7,BUILD
+FILEFLAGSMASK 0x3f
+FILEFLAGS 0
+FILEOS 0x40004 // VOS_NT_WINDOWS32
+FILETYPE 2 // VFT_DLL, as the original says
+FILESUBTYPE 0
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", L"Metrowerks Corporation\0"
+            VALUE "FileDescription", L"CodeWarrior GAMECUBE C/C++ Compiler\0"
+            VALUE "FileVersion", BUILD_STRING
+            VALUE "LegalCopyright", L"Copyright \251 2002\0"
+            VALUE "ProductName", L"Metrowerks CodeWarrior\0"
+            VALUE "ProductVersion", BUILD_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+APPICON ICON MOVEABLE PURE DISCARDABLE "mwcceppc.ico"

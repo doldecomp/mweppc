@@ -1,0 +1,6 @@
+; FLEXlm's license manager client (tools/lmgr_stub stands in for it), which exports these by ordinal alone.
+LIBRARY LMGR326B.dll
+EXPORTS
+    lp_checkout @190 NONAME
+    lp_checkin @189 NONAME
+    lp_errstring @191 NONAME

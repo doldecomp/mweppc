@@ -1,0 +1,7 @@
+# clangd in editors: configure.py writes compile_commands.json (each source's clang command, the primary version's
+# defines), and formatting follows .clang-format.
+Diagnostics:
+  # (include-cleaner credits a struct to its typedef in common.h and calls the header defining it unused; removing it
+  # breaks the MWCC build: tools/includes.py trim decides by both compilers)
+  UnusedIncludes: None
+  MissingIncludes: None

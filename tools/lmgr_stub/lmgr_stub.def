@@ -1,0 +1,5 @@
+LIBRARY LMGR326B
+EXPORTS
+    lp_checkin @189
+    lp_checkout @190
+    lp_errstring @191
