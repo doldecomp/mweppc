@@ -225,7 +225,7 @@ CASE_STAMP = "build/clang/case/ok"
 
 def clang_edges(version):
     out, objects = [], []
-    for c in build.compilations(version):
+    for c in clang.compilations(version):
         obj = project.relative(clang.object_path(version, c.source))
         out += [
             f"build {obj}: clang {c.source} || {CASE_STAMP} lib/ok.pro53",

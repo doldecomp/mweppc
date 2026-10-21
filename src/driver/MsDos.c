@@ -7,6 +7,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef __MWERKS__
+#include "host/ShiftJIS.h"
+#define CreateFileA ShiftJIS_CreateFileA
+#define ReadFile ShiftJIS_ReadFile
+#define GetFileSize ShiftJIS_GetFileSize
+#define SetFilePointer ShiftJIS_SetFilePointer
+#define CloseHandle ShiftJIS_CloseHandle
+#define IsDBCSLeadByte ShiftJIS_IsDBCSLeadByte
+#endif
+
 static char unused_zeroes[0x8000] = {0};
 
 int __stdcall OS_EqualNameSpec(const OSNameSpec* a, const OSNameSpec* b);

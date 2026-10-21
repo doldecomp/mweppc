@@ -13,9 +13,13 @@ sys.path.insert(0, str(Path(__file__).parent))
 from mw import build, clang, config, extab, project
 
 
-def compile_one(root, compiler, job, output):
+def compile_one(root, compiler, job, output, native_sjis=False):
     command = build.windows_prefix()
-    if job.get("sjis"):
+    environment = dict(os.environ, MWCIncludes=".")
+    environment.pop("MWCC_SJIS", None)
+    if job.get("sjis") and native_sjis:
+        environment["MWCC_SJIS"] = "1"
+    elif job.get("sjis"):
         command.append(str(Path(root) / "build/tools/sjiswrap.exe"))
     command += [str(compiler), *job["cflags"], "-c", job["source"], "-o", str(output)]
     output.unlink(missing_ok=True)
@@ -27,7 +31,7 @@ def compile_one(root, compiler, job, output):
             text=True,
             errors="replace",
             timeout=900,
-            env=dict(os.environ, MWCIncludes="."),
+            env=environment,
         )
     except subprocess.TimeoutExpired:
         return "timeout"
@@ -43,7 +47,7 @@ def same(a: bytes, b: bytes, padding: bytes | None) -> tuple[bool, int]:
     return a == b, changed_a + changed_b
 
 
-def run(corpus_path, out, original, candidate, padding=b"\0\0"):
+def run(corpus_path, out, original, candidate, padding=b"\0\0", native_sjis=False):
     try:
         corpus = json.loads(Path(corpus_path).read_text())
     except (OSError, ValueError) as e:
@@ -66,7 +70,7 @@ def run(corpus_path, out, original, candidate, padding=b"\0\0"):
         failure = compile_one(corpus["root"], original, job, a)
         if failure:
             return dict(result, result="original fails", log=failure)
-        failure = compile_one(corpus["root"], candidate, job, b)
+        failure = compile_one(corpus["root"], candidate, job, b, native_sjis)
         if failure:
             return dict(result, result="candidate fails", log=failure)
         job_padding = (
@@ -176,6 +180,12 @@ def main():
             help="the two bytes both sides' exception-action padding is set to before comparing (default 0000), or "
             "raw to compare the objects as written",
         )
+        parser.add_argument(
+            "--native-sjis",
+            action="store_true",
+            help="run the candidate's sjis jobs with MWCC_SJIS=1 instead of through sjiswrap (a clang build's own "
+            "conversion)",
+        )
         options = parser.parse_args(args)
         try:
             padding = None if options.extab_padding == "raw" else extab.parse_padding(options.extab_padding)
@@ -198,7 +208,7 @@ def main():
                 raise project.Error(f"{compiler} does not exist")
         if project.digest(Path(original).read_bytes()) == project.digest(Path(candidate).read_bytes()):
             raise project.Error(f"{candidate} is the original compiler itself")
-        if not run(options.corpus, Path(options.out).resolve(), original, candidate, padding):
+        if not run(options.corpus, Path(options.out).resolve(), original, candidate, padding, options.native_sjis):
             sys.exit(1)
     except (project.Error, extab.ExtabError) as e:
         sys.exit(f"error: {e}")

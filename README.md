@@ -46,7 +46,8 @@ ninja
 
 By default, this builds every supported compiler with clang under `build/VERSION/clang/mwcceppc.exe`, as well as
 `compile_commands.json` for LSP support. This should be a drop-in replacement to the original compiler and can be used
-the same as before.
+the same as before. It also has support for UTF-8 -> Shift-JIS support by setting `MWCC_SJIS=1` in your environment,
+superceding the need for [sjiswrap](https://github.com/encounter/sjiswrap).
 
 `configure.py --version GC_2_6` configures only the specified versions to be built using clang.
 

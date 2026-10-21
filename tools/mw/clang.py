@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import dataclasses
 import fnmatch
 import functools
 import json
@@ -38,6 +39,8 @@ WARNINGS = ("-Wno-multichar",)
 LIBRARY_PREFIX = "include/msl/clang_prefix.h"
 HEADER_DIRECTORIES = ("include/compiler", "include/driver")
 LICENSING = ROOT / "tools/lmgr_stub/lmgr326b.dll"
+HOST_SOURCES = ("src/host/ShiftJIS.c",)
+HOST_LIKE = "src/driver/MsDos.c"
 
 
 def _case_shim_path(directory: Path) -> Path:
@@ -141,6 +144,12 @@ def build_arguments(compilation: build.Compilation) -> list[str]:
     return args
 
 
+def compilations(version: Version | str | None = None) -> list[build.Compilation]:
+    sources = build.compilations(version)
+    like = next(c for c in sources if c.source == HOST_LIKE)
+    return sources + [dataclasses.replace(like, source=source) for source in HOST_SOURCES]
+
+
 def object_path(version: Version | str | None, source: str) -> Path:
     return get_version(version).build / "clang/obj" / f"{source}.obj"
 
@@ -150,15 +159,15 @@ def output_path(version: Version | str | None) -> Path:
 
 
 def write_compile_commands(version: Version | str | None = None) -> int:
-    compilations = build.compilations(version)
-    make_case_shims(compilations)
+    sources = compilations(version)
+    make_case_shims(sources)
     entries = [
         {
             "directory": str(ROOT),
             "file": str(ROOT / c.source),
             "arguments": [*build_arguments(c), "-c", c.source, "-o", relative(object_path(c.version, c.source))],
         }
-        for c in compilations
+        for c in sources
     ]
     text = json.dumps(entries, indent=1) + "\n"
     if not COMMANDS.exists() or COMMANDS.read_text() != text:
@@ -227,7 +236,7 @@ def link_command(inputs: list[str], output: Path, map_path: Path) -> list[str]:
 
 def link_compiler(version: Version | str | None) -> Path:
     v = get_version(version)
-    objects = [object_path(v, c.source) for c in build.compilations(v)]
+    objects = [object_path(v, c.source) for c in compilations(v)]
     absent = [relative(p) for p in objects if not p.exists()]
     if absent:
         raise Error(f"{v}: not compiled: {', '.join(absent[:5])}{' ...' if len(absent) > 5 else ''}")

@@ -60,3 +60,5 @@ EXPORTS
     GetSystemDefaultLangID@0 @366
     GetLocalTime@4 @303
     GetTimeZoneInformation@4 @393
+    SetLastError@4
+    VirtualAlloc@16
