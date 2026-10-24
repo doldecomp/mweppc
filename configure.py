@@ -241,6 +241,29 @@ def clang_edges(version):
     ]
 
 
+def native_edges(version):
+    out, objects = [], []
+    for c in clang.native_compilations(version):
+        obj = project.relative(clang.native_object_path(version, c.source))
+        resources = f" {clang.native_resources(version)}" if c.source == "src/host/linux/Start.c" else ""
+        out += [
+            f"build {obj}: clang {c.source} |{resources} || {CASE_STAMP} lib/ok.pro53",
+            f"  cflags = {join(clang.native_arguments(c)[1:])}",
+        ]
+        objects.append(obj)
+    output = project.relative(clang.native_output_path(version))
+    return out + [
+        f"build {output} {output}.map: native_link {' '.join(objects)} | tools/clang_build.py {LIBRARY}",
+        f"  version = {version}",
+    ]
+
+
+def native_outputs():
+    if not clang.native_supported():
+        return []
+    return [project.relative(clang.native_output_path(v)) for v in project.ALL_VERSIONS]
+
+
 def clang_rules():
     return [
         "rule clang",
@@ -251,6 +274,9 @@ def clang_rules():
         "rule clang_link",
         "  command = $python tools/clang_build.py link $version",
         "  description = LINK (clang) $out",
+        "rule native_link",
+        "  command = $python tools/clang_build.py native $version",
+        "  description = LINK (Linux) $out",
         "rule clang_case",
         "  command = $python tools/clang_build.py case $out",
         "  description = CASE $out",
@@ -302,10 +328,15 @@ def generate_clang(versions):
     ]
     for v in project.ALL_VERSIONS:
         out += resources_edge(v) + clang_edges(v)
+        if clang.native_supported():
+            out += native_edges(v)
     outputs = [project.relative(clang.output_path(v)) for v in versions]
+    if clang.native_supported():
+        outputs += [project.relative(clang.native_output_path(v)) for v in versions]
     out += [
         f"default {' '.join(outputs)}",
         "build clang: phony " + " ".join(project.relative(clang.output_path(v)) for v in project.ALL_VERSIONS),
+        *([f"build native: phony {' '.join(native_outputs())}"] if native_outputs() else []),
         f"build build.ninja: configure | configure.py {LIBRARY} config/sources.json include/version.h "
         + " ".join(f"config/{v}/config.json" for v in project.ALL_VERSIONS),
         "",
@@ -414,6 +445,8 @@ def generate(versions, relink):
         out += edges + resources_edge(v) + derived_edges(v, objects)
     for v in project.ALL_VERSIONS:
         out += clang_edges(v)
+        if clang.native_supported():
+            out += native_edges(v)
     defaults = [f"build/{v}/ok" for v in versions]
     regenerate = [
         "configure.py",
@@ -432,6 +465,7 @@ def generate(versions, relink):
         f"build all_debug: phony {' '.join(selected_debug)}",
         f"build progress: phony build/{selected}/report.json",
         "build clang: phony " + " ".join(project.relative(clang.output_path(v)) for v in project.ALL_VERSIONS),
+        *([f"build native: phony {' '.join(native_outputs())}"] if native_outputs() else []),
         "build verify: phony "
         + " ".join(f"build/{v}/ok build/{v}/source-only/mwcceppc.exe" for v in project.VERSIONS)
         + " "

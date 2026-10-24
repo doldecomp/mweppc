@@ -5,6 +5,7 @@ import fnmatch
 import functools
 import json
 import os
+import platform
 import re
 import shutil
 import struct
@@ -158,6 +159,108 @@ def output_path(version: Version | str | None) -> Path:
     return get_version(version).build / "clang/mwcceppc.exe"
 
 
+LINUX = "i386-unknown-linux-gnu"
+LINUX_DIRECTORY = "src/host/linux/"
+LINUX_SOURCES = (
+    "src/host/linux/Start.c",
+    "src/host/linux/Kernel32.c",
+    "src/host/linux/Heap.c",
+    "src/host/linux/License.c",
+)
+LINUX_EXCLUDED = ("src/runtime/maincrt.c",)
+LINUX_FLAGS = (
+    "-fno-pic",
+    "-fno-pie",
+    "-fno-stack-protector",
+    "-fno-builtin-bcmp",
+    "-fno-builtin-stpcpy",
+    "-mms-bitfields",
+    "-nostdlibinc",
+    "-Ddllimport=",
+    "-DMWCC_LINUX=1",
+)
+LINUX_MICROSOFT = ("-mlong-double-64", "-D_INTEGRAL_MAX_BITS=64")
+
+
+def native_supported() -> bool:
+    return sys.platform.startswith("linux") and platform.machine().lower() in ("x86_64", "amd64", "i386", "i686")
+
+
+def native_compilations(version: Version | str | None = None) -> list[build.Compilation]:
+    sources = [c for c in compilations(version) if c.source not in LINUX_EXCLUDED]
+    like = next(c for c in sources if c.source == "src/runtime/setupargs.c")
+    return sources + [dataclasses.replace(like, source=source) for source in LINUX_SOURCES]
+
+
+def native_library(compilation: build.Compilation) -> bool:
+    return library(compilation) or compilation.source.startswith(LINUX_DIRECTORY)
+
+
+def native_arguments(compilation: build.Compilation) -> list[str]:
+    lib = native_library(compilation)
+    args = _arguments(compilation, LINUX, mwerks=False, absolute=False)
+    args += [*SEMANTICS, *WARNINGS, *_file_names(compilation), *LINUX_FLAGS]
+    if lib:
+        args += [*LINUX_MICROSOFT, "-include", LIBRARY_PREFIX]
+    else:
+        args.append("-fshort-enums")
+        args += ["-fno-exceptions", "-fno-rtti"] if _cpp(compilation) else ["-fgnu89-inline"]
+    if compilation.source == "src/host/linux/Start.c":
+        args.append(f'-DNATIVE_RESOURCES="{native_resources(compilation.version)}"')
+    return args
+
+
+def native_resources(version: Version | str | None) -> str:
+    return f"build/{get_version(version)}/resources.res"
+
+
+def native_object_path(version: Version | str | None, source: str) -> Path:
+    return get_version(version).build / "native/obj" / f"{source}.o"
+
+
+def native_output_path(version: Version | str | None) -> Path:
+    return get_version(version).build / "native/mwcceppc"
+
+
+def native_link_command(inputs: list[str], output: Path, map_path: Path) -> list[str]:
+    return [
+        "ld.lld",
+        "-m",
+        "elf_i386",
+        "-static",
+        "-nostdlib",
+        "--entry=_start",
+        "--gc-sections",
+        "-o",
+        relative(output),
+        f"-Map={relative(map_path)}",
+        *inputs,
+    ]
+
+
+def link_native(version: Version | str | None) -> Path:
+    v = get_version(version)
+    objects = [native_object_path(v, c.source) for c in native_compilations(v)]
+    absent = [relative(p) for p in objects if not p.exists()]
+    if absent:
+        raise Error(f"{v}: not compiled: {', '.join(absent[:5])}{' ...' if len(absent) > 5 else ''}")
+    output = native_output_path(v)
+    listing = output.parent / "inputs.txt"
+    write_atomic(listing, "".join(f"{relative(p)}\n" for p in objects))
+    command = native_link_command([f"@{relative(listing)}"], output, output.with_suffix(".map"))
+    try:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, errors="replace")
+    except FileNotFoundError:
+        raise Error("ld.lld is not installed (LLVM's linker links the Linux build)") from None
+    if result.returncode or result.stdout.strip() or result.stderr.strip():
+        output.unlink(missing_ok=True)
+        raise Error(f"the link fails:\n{(result.stdout + result.stderr)[-3000:]}")
+    if ".init_array" in output.with_suffix(".map").read_text():
+        output.unlink(missing_ok=True)
+        raise Error(f"{v}: static constructors, which nothing in the Linux build runs")
+    return output
+
+
 def write_compile_commands(version: Version | str | None = None) -> int:
     sources = compilations(version)
     make_case_shims(sources)
@@ -168,6 +271,20 @@ def write_compile_commands(version: Version | str | None = None) -> int:
             "arguments": [*build_arguments(c), "-c", c.source, "-o", relative(object_path(c.version, c.source))],
         }
         for c in sources
+    ] + [
+        {
+            "directory": str(ROOT),
+            "file": str(ROOT / c.source),
+            "arguments": [
+                *native_arguments(c),
+                "-c",
+                c.source,
+                "-o",
+                relative(native_object_path(c.version, c.source)),
+            ],
+        }
+        for c in native_compilations(version)
+        if c.source in LINUX_SOURCES
     ]
     text = json.dumps(entries, indent=1) + "\n"
     if not COMMANDS.exists() or COMMANDS.read_text() != text:

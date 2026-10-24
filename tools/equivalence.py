@@ -13,11 +13,17 @@ sys.path.insert(0, str(Path(__file__).parent))
 from mw import build, clang, config, extab, project
 
 
+def windows_program(path) -> bool:
+    with open(path, "rb") as f:
+        return f.read(2) == b"MZ"
+
+
 def compile_one(root, compiler, job, output, native_sjis=False):
-    command = build.windows_prefix()
+    windows = windows_program(compiler)
+    command = build.windows_prefix() if windows else []
     environment = dict(os.environ, MWCIncludes=".")
     environment.pop("MWCC_SJIS", None)
-    if job.get("sjis") and native_sjis:
+    if job.get("sjis") and (native_sjis or not windows):
         environment["MWCC_SJIS"] = "1"
     elif job.get("sjis"):
         command.append(str(Path(root) / "build/tools/sjiswrap.exe"))
@@ -184,7 +190,7 @@ def main():
             "--native-sjis",
             action="store_true",
             help="run the candidate's sjis jobs with MWCC_SJIS=1 instead of through sjiswrap (a clang build's own "
-            "conversion)",
+            "conversion; a Linux build always does)",
         )
         options = parser.parse_args(args)
         try:

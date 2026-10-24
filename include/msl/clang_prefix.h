@@ -19,4 +19,15 @@ typedef char* va_list;
 #define va_copy(dest, src) __builtin_va_copy(dest, src)
 #define va_arg(ap, type) __builtin_va_arg(ap, type)
 
+#ifdef MWCC_LINUX
+__attribute__((weak)) unsigned long long __stdcall Int64ShllMod32(
+    unsigned long long, unsigned long
+);
+__attribute__((weak)) long long __stdcall Int64ShraMod32(long long, unsigned long);
+__attribute__((weak)) unsigned long long __stdcall Int64ShrlMod32(
+    unsigned long long, unsigned long
+);
+__attribute__((weak)) double scalbn(double, int);
+#endif
+
 #endif

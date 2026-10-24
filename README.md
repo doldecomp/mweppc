@@ -29,7 +29,7 @@ A decompilation of the Metrowerks CodeWarrior toolchain. Currently supported ver
 - Linux (x86-64, or arm64 for the clang build alone), macOS or Windows.
 - Python 3.11 or newer, with [uv](https://docs.astral.sh/uv/) installed.
 - The [ninja](https://ninja-build.org) build system.
-- [LLVM](https://llvm.org) 16 or newer: `clang`, `lld-link`, `llvm-rc` and `llvm-dlltool` (Debian and Ubuntu:
+- [LLVM](https://llvm.org) 16 or newer: `clang`, `lld-link`, `ld.lld`, `llvm-rc` and `llvm-dlltool` (Debian and Ubuntu:
   `clang`, `lld` and `llvm`).
 
 Everything else (the original compilers, library code used straight from CodeWarrior discs, and various tooling) are
@@ -48,6 +48,9 @@ By default, this builds every supported compiler with clang under `build/VERSION
 `compile_commands.json` for LSP support. This should be a drop-in replacement to the original compiler and can be used
 the same as before. It also has support for UTF-8 -> Shift-JIS support by setting `MWCC_SJIS=1` in your environment,
 superceding the need for [sjiswrap](https://github.com/encounter/sjiswrap).
+
+On x86 Linux it also builds `build/VERSION/native/mwcceppc` (`ninja native`), a static 32-bit Linux program that runs
+without [wibo](https://github.com/decompals/wibo) and supports `MWCC_SJIS=1` the same way.
 
 `configure.py --version GC_2_6` configures only the specified versions to be built using clang.
 
@@ -112,6 +115,8 @@ These are some of the known bugs of the original Metrowerks compilers (clang rep
 - **Not reproducible**, because they vary with the host:
   - two padding bytes in some C++ exception tables (decomp-toolkit's `extab_padding` sets them);
   - a stack address in a local class's mangled name;
+  - heap addresses, which the `bool` conversion above depends on: the clang `.exe` gets its host's (Windows, wine or
+    wibo), the Linux build has its own;
   - the bytes of precompiled headers;
   - the x87's starting precision on Windows (53 bits, against 64 under wibo and in the clang build).
 - **Where the clang build differs:** it keeps going where the original crashes, and does not follow a `#pragma

@@ -13,14 +13,17 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True, metavar="COMMAND")
     command = commands.add_parser("link", help="link build/VERSION/clang/mwcceppc.exe from the clang build's objects")
     command.add_argument("version", metavar="VERSION")
+    command = commands.add_parser("native", help="link build/VERSION/native/mwcceppc, the Linux build, with ld.lld")
+    command.add_argument("version", metavar="VERSION")
     command = commands.add_parser(
         "case", help="make the lowercase links to lib/'s headers a case-sensitive file system needs, then touch STAMP"
     )
     command.add_argument("stamp", metavar="STAMP")
     args = parser.parse_args()
     try:
-        if args.command == "link":
-            output = clang.link_compiler(project.version(args.version))
+        if args.command in ("link", "native"):
+            link = clang.link_compiler if args.command == "link" else clang.link_native
+            output = link(project.version(args.version))
             print(f"{args.version}: {project.relative(output)}")
         else:
             clang.make_case_shims([c for v in project.ALL_VERSIONS for c in build.compilations(v)])

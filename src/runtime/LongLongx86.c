@@ -1,12 +1,14 @@
 #include "ansi_prefix.Win32.h"
 #include <LongLongx86.c>
 #ifndef __MWERKS__
+#ifndef MWCC_LINUX
 __asm__(
 	".globl __alldiv\n__alldiv:\n\tjmp __rt_divs64@16\n"
 	".globl __aulldiv\n__aulldiv:\n\tjmp __rt_divu64@16\n"
 	".globl __allrem\n__allrem:\n\tjmp __rt_mods64@16\n"
 	".globl __aullrem\n__aullrem:\n\tjmp __rt_modu64@16\n"
 	".globl __allmul\n__allmul:\n\tjmp __rt_mul64@16\n");
+#endif
 
 long long __divdi3(long long left, long long right)
 {
