@@ -22,6 +22,10 @@ static int is_add(PCode* instr) {
         !(instr->args[0].data.reg.reg < n_real_registers[instr->args[0].arg]);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static int addpropagatestouse(int candidateID, int useID) {
     PCode* candidateInstr;
     PCode* useInstr;
@@ -185,7 +189,15 @@ static int addpropagatestouse(int candidateID, int useID) {
 
     return TRUE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void propagateandremoveadd(int id) {
     PCode* instr;
     RegUseOrDef* list;
@@ -277,6 +289,10 @@ static void propagateandremoveadd(int id) {
     deletepcode(instr);
     propagatedadds = TRUE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 // clang-format off
 static Propagation add_prop = {

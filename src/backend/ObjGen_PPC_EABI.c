@@ -282,11 +282,30 @@ void ObjGen_BestSection(Object* func) {
     SectionSymbolAttributes* header;
     Boolean compress = FALSE;
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -13
+#endif
     CError_ASSERT(422, !ok_to_compress);
     ok_to_compress = TRUE;
     if (copts.prepare_compress) {
+#if VERSION < VERSION_GC_2_0
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -10
+        switch (copts.processor) {
+            case CPU_PPC556:
+            case CPU_PPC565:
+                CError_ASSERT(426, !switchtables);
+                compress = TRUE;
+                break;
+            default:
+                PPCError_Warning(PPCERR_PREPARE_COMPRESS_IGNORED);
+                break;
+        }
+#else
         CError_ASSERT(426, !switchtables);
         compress = TRUE;
+#endif
     }
     if (CurFile != AllFiles || compress) {
         section = select_object_section(func, 0, TRUE, TRUE, TRUE);
@@ -302,6 +321,10 @@ void ObjGen_BestSection(Object* func) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -5
+#endif
 void ObjGen_SymFunc(Object* func) {
     CError_ASSERT(451, ok_to_compress);
     if (!ELFfile.debug_sections_inited) {
@@ -312,6 +335,10 @@ void ObjGen_SymFunc(Object* func) {
     last_line_offset = -1;
     CurFile->lastLine = -1;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void ObjGen_SegmentName(HashNameNode* name) {}
 
@@ -376,6 +403,10 @@ void ObjGen_DeclareReadOnlyData(
     declaredata(object, data, list, size, TRUE);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -5
+#endif
 char* GetSourceFileName(ObjGenSection* section) {
     CNameNode* file;
     SInt32 uid;
@@ -389,7 +420,15 @@ char* GetSourceFileName(ObjGenSection* section) {
     CError_FATAL(667);
     return NULL;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -5
+#endif
 int ObjGen_GetAddressing(Object* obj) {
     SectionSymbolAttributes* entry;
     SInt32 id;
@@ -404,7 +443,11 @@ int ObjGen_GetAddressing(Object* obj) {
         return AM_FAR_ABS;
     }
 
+#if VERSION < VERSION_GC_2_0
+    PPC_EABI_SetSection(obj, obj->type->size, FALSE);
+#else
     PPC_EABI_SetSection(obj, obj->type->size, FALSE, FALSE);
+#endif
     id = pseudo_section_index(obj->section);
     if (section_table_dirty) {
         CodeGen_PragmaPush();
@@ -421,6 +464,10 @@ int ObjGen_GetAddressing(Object* obj) {
     }
     return entry->dataMode;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 Boolean is_16bitdata(Object* obj) {
     AddressingMode value = ObjGen_GetAddressing(obj);
@@ -562,9 +609,13 @@ void CodeGen_PragmaPop(void) {
         copts.sectionHeaderTableSize = ELFfile.sectionHeaderCount;
     }
     for (i = 0, section = ELFfile.section_list; section; section = section->next, i++) {
+#if VERSION < VERSION_GC_2_0
+        section->header = copts.sectionHeaderTable[i];
+#else
         if (copts.sectionHeaderTable[i]) {
             section->header = copts.sectionHeaderTable[i];
         }
+#endif
     }
 }
 
@@ -782,6 +833,10 @@ void InitElfSections(void) {
     CodeGen_PragmaPush();
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -9
+#endif
 short GetCurrentSection(short kind) {
     unsigned short value;
     switch (kind) {
@@ -805,8 +860,20 @@ short GetCurrentSection(short kind) {
     }
     return value;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -8
+#endif
+#if VERSION < VERSION_GC_2_0
+void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst) {
+#else
 void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean allowSmall) {
+#endif
     InterruptGenerationRecord* rec;
     SInt16 section;
 
@@ -844,6 +911,7 @@ void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean a
             strncmp(object->name->name, "__vt__", 6) == 0) {
             size = object->type->size;
         }
+#if VERSION >= VERSION_GC_2_0
         if (!allowSmall) {
             if ((size <= copts.sdata2_threshold && size <= copts.sdata_threshold) ||
                 (!isConst && !is_const_object(object)) ||
@@ -851,10 +919,15 @@ void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean a
                 allowSmall = TRUE;
             }
         }
+#endif
         if (isConst) {
             if (size == 0) {
                 section = rec == NULL ? copts.constSection->header->index : rec->constSection;
-            } else if (allowSmall && copts.sdata2_threshold && size <= copts.sdata2_threshold) {
+            } else if (
+#if VERSION >= VERSION_GC_2_0
+                allowSmall &&
+#endif
+                copts.sdata2_threshold && size <= copts.sdata2_threshold) {
                 section = rec == NULL ? copts.sconstSection->header->index : rec->sconstSection;
             } else {
                 section = rec == NULL ? copts.constSection->header->index : rec->constSection;
@@ -862,7 +935,11 @@ void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean a
         } else {
             if (size == 0) {
                 section = rec == NULL ? copts.dataSection->header->index : rec->dataSection;
-            } else if (allowSmall && copts.sdata_threshold && size <= copts.sdata_threshold) {
+            } else if (
+#if VERSION >= VERSION_GC_2_0
+                allowSmall &&
+#endif
+                copts.sdata_threshold && size <= copts.sdata_threshold) {
                 section = rec == NULL ? copts.sdataSection->header->index : rec->sdataSection;
             } else {
                 section = rec == NULL ? copts.dataSection->header->index : rec->dataSection;
@@ -873,6 +950,10 @@ void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean a
                object->datatype == DINLINEFUNC) {
         section = rec == NULL ? copts.textSection->header->index : rec->textSection;
     }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
     if (rec != NULL) {
         switch (rec->kind) {
             case InterruptRecord_Interrupt:
@@ -889,6 +970,10 @@ void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean a
     object->section = section;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 int base_register(Object* obj) {
     switch ((AddressingMode)ObjGen_GetAddressing(obj)) {
         case AM_FAR_ABS:
@@ -912,7 +997,15 @@ int base_register(Object* obj) {
             return 2;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 static ObjGenSection* select_object_section(
     Object* obj, SInt32 size, Boolean initialized, Boolean noCommon, Boolean isConst
 ) {
@@ -922,7 +1015,11 @@ static ObjGenSection* select_object_section(
     SectionSymbolAttributes* entry;
     Boolean hasAuxiliary = FALSE;
 
+#if VERSION < VERSION_GC_2_0
+    PPC_EABI_SetSection(obj, size, isConst);
+#else
     PPC_EABI_SetSection(obj, size, isConst, TRUE);
+#endif
     id = pseudo_section_index(obj->section);
     if (section_table_dirty) {
         CodeGen_PragmaPush();
@@ -960,6 +1057,10 @@ static ObjGenSection* select_object_section(
     }
     return section;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void report_section_permission_conflict(
     Object* object, ObjGenSection* section, char* kind, UInt32 permissions
@@ -1126,6 +1227,10 @@ static void emit_object_data_and_relocations(
     object_data_size += size;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 void ObjGen_DeclareFloatConst(Object* object) {
     ObjGenSection* section;
     BE_SymNode* sym;
@@ -1150,7 +1255,15 @@ void ObjGen_DeclareFloatConst(Object* object) {
     }
     object_data_size += object->type->size;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 void ObjGen_DeclareSwitchTable(Object* tableobj, Object* funcobj) {
     UInt32 i;
     ObjGenRelocation* reloc;
@@ -1208,11 +1321,27 @@ void ObjGen_DeclareSwitchTable(Object* tableobj, Object* funcobj) {
     );
     object_data_size += sym->elf.st_size;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 void ObjGen_DeclareCodeLabel(Object* labelobj, SInt32 offset, Object* funcobj) {
     CError_FATAL(1718);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 ObjGenSection* ObjGen_DeclareCode(Object* object, SInt32 size) {
     BE_SymNode* sym;
     ObjGenSection* section;
@@ -1225,9 +1354,11 @@ ObjGenSection* ObjGen_DeclareCode(Object* object, SInt32 size) {
     if (section->flags && !(section->permissions & 0x40000000)) {
         CError_FATAL(1761);
     }
+#if VERSION >= VERSION_GC_2_0
     if (copts.prepare_compress && !section->flags) {
         PPCError_Error(PPCERR_MIXED_COMPRESSED_SECTIONS);
     }
+#endif
     if (interrupt_routine_flags &&
         !(interrupt_routine_flags->flags & Interrupt_NoWarn) &&
         size > 256) {
@@ -1246,7 +1377,15 @@ ObjGenSection* ObjGen_DeclareCode(Object* object, SInt32 size) {
     last_base_offset = section->buffer.size;
     return section;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -23
+#endif
 void ObjGen_DeclareEntry(Object* object, SInt32 offset) {
     BE_SymNode* record;
 
@@ -1254,7 +1393,15 @@ void ObjGen_DeclareEntry(Object* object, SInt32 offset) {
     record = AddEntry(object, last_function_section);
     record->elf.st_value = last_base_offset + offset;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 static void emit_relocation(SInt32 type, SInt32 offset, Object* obj, void* section, SInt32 value) {
     ObjGenSection* relocations;
     ObjGenRelocation* reloc;
@@ -1264,6 +1411,11 @@ static void emit_relocation(SInt32 type, SInt32 offset, Object* obj, void* secti
     relocations->relocationCount++;
     reloc = galloc(sizeof(ObjGenRelocation));
     reloc->symbol = MakeSymbolTableEntry(obj);
+#if VERSION < VERSION_GC_2_0
+    if (is_pooled_object(obj) && type != 14 && type != 15) {
+        reloc->symbol = reloc->symbol->section->symbolLink->symbol;
+    }
+#endif
     offset += last_base_offset;
     reloc->kind = -1;
     record.r_addend = value;
@@ -1318,7 +1470,15 @@ static void emit_relocation(SInt32 type, SInt32 offset, Object* obj, void* secti
     reloc->next = allrelocations;
     allrelocations = reloc;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 void ObjGen_SourceRef(UInt32 line, UInt32 offset) {
     SInt32 sline;
     SInt32 soffset;
@@ -1337,19 +1497,39 @@ void ObjGen_SourceRef(UInt32 line, UInt32 offset) {
     newDWARF_line(CurFile->lastLine = sline, soffset + last_base_offset);
     last_line_offset = soffset;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 SInt16 update_section(Object* func) {
     last_function_section = select_object_section(func, 0, TRUE, TRUE, FALSE);
+#if VERSION < VERSION_GC_2_0
+    PPC_EABI_SetSection(func, 0, FALSE);
+#else
     PPC_EABI_SetSection(func, 0, FALSE, TRUE);
+#endif
     return pseudo_section_index(func->section);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 void ObjGen_DeclareSymInfo(void) {
     CError_ASSERT(1954, ok_to_compress);
     SymContainedVars();
     endDWARF_function();
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 void ObjGen_DeclareExceptionTables(
     Object* obj, SInt32 codesize, void* data, SInt32 size, OLinkList* list
 ) {
@@ -1495,18 +1675,34 @@ void ObjGen_DeclareExceptionTables(
     }
     object_data_size += sizeof(descriptor);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 GList* ObjGen_GetSectionGList(ObjGenSection* section) {
     return &section->buffer;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 void ObjGen_RelocateObj(
     ObjGenSection* section, SInt32 offset, Object* object, UInt8 type, SInt32 addend
 ) {
     CError_ASSERT(2169, ok_to_compress);
     emit_relocation(type, offset, object, section, addend);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 void declareinit(Object* object) {
     Elf32_Rela rela;
     UInt32 zero;
@@ -1534,7 +1730,15 @@ void declareinit(Object* object) {
     reloc->next = allrelocations;
     allrelocations = reloc;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 short pseudo_section_index(short key) {
     InterruptGenerationRecord* record;
 
@@ -1554,6 +1758,10 @@ short pseudo_section_index(short key) {
     }
     return key;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 InterruptGenerationRecord* get_current_pseudo_section_info(void) {
     InterruptGenerationRecord* rec;
@@ -1582,6 +1790,10 @@ InterruptGenerationRecord* get_current_pseudo_section_info(void) {
     return rec;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 static InterruptGenerationRecord* resolve_object_pseudo_section(Object* obj, BE_SymNode* sym) {
     InterruptGenerationRecord* rec;
     SInt32 id;
@@ -1629,7 +1841,15 @@ static InterruptGenerationRecord* resolve_object_pseudo_section(Object* obj, BE_
     }
     return rec;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 InterruptGenerationRecord* GetInterruptRoutineFlags(Object* obj) {
     InterruptGenerationRecord* info;
 
@@ -1637,6 +1857,10 @@ InterruptGenerationRecord* GetInterruptRoutineFlags(Object* obj) {
     CError_ASSERT(2396, info);
     return info;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void create_main_file_object(void) {
     Boolean savedFileSymInfo;
@@ -1672,7 +1896,11 @@ static void create_main_file_object(void) {
     obj->name = GetHashNameNodeExport(objectName);
     obj->sclass = TK_EXTERN;
     obj->datatype = DDATA;
+#if VERSION < VERSION_GC_2_0
+    PPC_EABI_SetSection(obj, obj->type->size, FALSE);
+#else
     PPC_EABI_SetSection(obj, obj->type->size, FALSE, TRUE);
+#endif
     MakeSymbolTableEntry(obj);
     copts.filesyminfo = FALSE;
     ObjGen_DeclareData(obj, NULL, NULL, obj->type->size);
@@ -1716,6 +1944,10 @@ void MWCATS_AddProc(Object* object, UInt8 flags) {
     list->tail->flags = flags;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -18
+#endif
 void MWCATS_AddExit(ObjGenSection* section, unsigned int offset) {
     SectionAttributeNode* proc = section->output->sectionData.attributes->tail;
 
@@ -1735,6 +1967,10 @@ void MWCATS_AddExit(ObjGenSection* section, unsigned int offset) {
         proc->exitCount++;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void MWCATS_WriteFunction(Object* func, int codesize) {
     ObjGenSection* catsSection;

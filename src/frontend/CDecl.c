@@ -1636,6 +1636,15 @@ Object* CDecl_GetFunctionObject(
         if (declinfo->requireTemplateClassMember ||
             (list->next && list->next->object->otype == OT_OBJECT)) {
             if (TYPE_FUNC(declinfo->thetype)->flags & (FUNC_CONST | FUNC_VOLATILE)) {
+#if VERSION < VERSION_GC_2_0
+                CDecl_AddThisPointerArgument(TYPE_FUNC(declinfo->thetype), nspace2->theclass);
+                obj = CDecl_OverloadFunctionObject(
+                    list, declinfo, NULL, OverloadMode_Member, matchTemplate
+                );
+                if (!obj) {
+                    return NULL;
+                }
+#else
                 TypeMemberFunc* tmeth = galloc(sizeof(TypeMemberFunc));
                 memclrw(tmeth, sizeof(TypeMemberFunc));
                 *TYPE_FUNC(tmeth) = *TYPE_FUNC(declinfo->thetype);
@@ -1649,6 +1658,7 @@ Object* CDecl_GetFunctionObject(
                 if (!obj) {
                     return NULL;
                 }
+#endif
             } else {
                 obj = CDecl_OverloadFunctionObject(
                     list, declinfo, NULL, OverloadMode_MemberWithoutThis, matchTemplate
@@ -1787,6 +1797,10 @@ Object* CDecl_GetFunctionObject(
     return obj;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 void CDecl_TypedefDeclarator(DeclInfo* declinfo) {
     NameSpaceObjectList* list;
     ObjType* objt;
@@ -1886,7 +1900,15 @@ void CDecl_TypedefDeclarator(DeclInfo* declinfo) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CDecl_DataDeclarator(DeclInfo* declinfo, AccessType access, Boolean isMember) {
     NameSpaceObjectList* list;
     Object* obj;
@@ -2086,6 +2108,10 @@ static void CDecl_DataDeclarator(DeclInfo* declinfo, AccessType access, Boolean 
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 Boolean CDecl_FunctionDeclarator(
     DeclInfo* declinfo, NameSpace* nspace, Boolean allowDefinition, Boolean unused
@@ -2141,6 +2167,10 @@ Boolean CDecl_FunctionDeclarator(
     return TRUE;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CDecl_ParseSpecialMember(DeclInfo* declinfo, Boolean parseDeclarator) {
     Object* obj;
     NameSpace* savedNSpace;
@@ -2248,6 +2278,10 @@ static void CDecl_ParseSpecialMember(DeclInfo* declinfo, Boolean parseDeclarator
 
     CError_Error(ERR_DECLARATION_SYNTAX_ERROR);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CDecl_ScanDeclarator(DeclInfo* declinfo) {
     if (declinfo->resolvedObjects || declinfo->resolvedObject) {
@@ -2292,6 +2326,10 @@ void CDecl_ScanDeclarator(DeclInfo* declinfo) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 void scandeclaratorlist(DeclInfo* declinfo) {
     CScopeSave savescope;
     Type* type;
@@ -2350,6 +2388,10 @@ void scandeclaratorlist(DeclInfo* declinfo) {
         CError_Error(ERR_SEMICOLON_EXPECTED);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static TypeIntegral* CDecl_FindSignedType(short size) {
     if (stsignedchar.size == size) {
@@ -3056,6 +3098,10 @@ static TypeEnum* CDecl_ParseEnumList(TypeEnum* tenum, HashNameNode* name) {
     return tenum;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 void scanenum(DeclInfo* declinfo) {
     HashNameNode* name;
     Type* type;
@@ -3131,6 +3177,10 @@ define_enum:
 
     declinfo->thetype = TYPE(&stsignedint);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CDecl_ScanStructDeclarator(BigDeclInfo* bde) {
     ENode* expr;
@@ -3269,6 +3319,10 @@ not_a_bitfield:
     bde->valid = TRUE;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CDecl_LayoutStruct(TypeStruct* tstruct) {
     StructMember* member;
     SInt32 unionSize;
@@ -3398,6 +3452,10 @@ static void CDecl_LayoutStruct(TypeStruct* tstruct) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static SInt32 scanstructdeclarationlist(TypeStruct* tstruct, Boolean addToBrowse) {
     SInt32 offset;
@@ -3672,6 +3730,10 @@ static void CDecl_MakeFunctionVirtual(TypeClass* tclass, Object* func) {
     func->datatype = DVFUNC;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CDecl_AddFunctionMember(
     ClassLayout* decle,
     TypeClass* tclass,
@@ -3793,6 +3855,10 @@ static void CDecl_AddFunctionMember(
         );
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static Boolean CDecl_IsAccessDeclaration(TypeClass* tclass, AccessType access) {
     SInt32 state;
@@ -4018,6 +4084,10 @@ static void CDecl_ParseFriendDecl(TypeClass* tclass) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ObjMemberVar* CDecl_InstanceDataDeclarator(
     ClassLayout* decle,
     TypeClass* tclass,
@@ -4084,6 +4154,10 @@ static ObjMemberVar* CDecl_InstanceDataDeclarator(
 
     return ivar;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 Boolean CDecl_CheckCtorIntegrity(FuncArg* args, TypeClass* tclass) {
     if (args && args->type == TYPE(tclass)) {
@@ -5152,6 +5226,10 @@ static void CDecl_AddDefaultDestructor(ClassLayout* decle, TypeClass* tclass) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CDecl_SetupClassLayout(ClassLayout* decle, TypeClass* tclass, ObjBase** objbuf) {
     SInt32 index;
     SInt32 i;
@@ -5249,6 +5327,10 @@ static void CDecl_SetupClassLayout(ClassLayout* decle, TypeClass* tclass, ObjBas
 
     CError_ASSERT(6527, index == decle->lex_order_count);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CDecl_CompleteClass(ClassLayout* decle, TypeClass* tclass) {
     ClassList* base;
@@ -5287,6 +5369,10 @@ void CDecl_CompleteClass(ClassLayout* decle, TypeClass* tclass) {
     CClass_ClassDefaultFuncAction(tclass);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 TypeClass* CDecl_DefineClass(
     NameSpace* nspace,
     HashNameNode* name,
@@ -5350,6 +5436,10 @@ TypeClass* CDecl_DefineClass(
 
     return tclass;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CDecl_ParseClassDeclSpec(UInt8* declspec) {
     DeclInfo declinfo;
@@ -5395,6 +5485,10 @@ static TemplClass* CDecl_SpecializeTemplateClass(TemplClass* tmclass) {
     return tmclass;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 void CDecl_ParseClass(DeclInfo* declinfo, short mode, Boolean lexAfterBody, UInt8 class_declspec) {
     TypeClass* tclass;
     HashNameNode* classname;
@@ -5579,3 +5673,7 @@ tagtype_search:
     }
     CScope_RestoreScope(&scopesave);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif

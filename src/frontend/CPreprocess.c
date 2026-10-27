@@ -10,8 +10,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#if VERSION >= VERSION_GC_2_0
 static SInt32 pp_text_depth;
 static char* pp_text_start;
+#endif
 
 void CPrep_PreprocessDumpNewLine(void) {
     if (copts.line_prepdump && pplist.data && filesp >= 0) {
@@ -27,11 +29,17 @@ void CPrep_PreprocessDumpFileInfo(Boolean newLine) {
     SInt16 tmp16;
 
     if (pplist.data && filesp >= 0) {
+#if VERSION < VERSION_GC_2_0
+        if (nlflag && newLine && pplist.size > 0) {
+            AppendGListName(&pplist, "\r\n");
+        }
+#else
         if (pplist.size > 0 &&
             ((nlflag && newLine) ||
              (*pplist.data)[pplist.size - 1] != "\r\n"[strlen("\r\n") - 1])) {
             AppendGListName(&pplist, "\r\n");
         }
+#endif
 
         if (copts.line_prepdump) {
             size = sprintf(linebuf, "#line %ld\t\"", (long)linenumber);
@@ -179,6 +187,7 @@ static void CPrep_DumpString(UInt8* str, short len) {
     }
 }
 
+#if VERSION >= VERSION_GC_2_0
 void CPrep_PreprocessDumpDirective(char* directive, char* name) {
     if (!copts.line_prepdump && nlflag && pplist.size > 0) {
         AppendGListName(&pplist, "\r\n");
@@ -197,7 +206,12 @@ void CPrep_PreprocessDumpDirectiveEnd(void) {
         AppendGListData(&pplist, pp_text_start, pos - pp_text_start);
     }
 }
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -43
+#endif
 void CPrep_Preprocess(void) {
     int innertoken;
     short token;
@@ -722,3 +736,7 @@ void CPrep_Preprocess(void) {
     AppendGListByte(&pplist, 0);
     COS_ResizeHandle(pplist.data, pplist.size);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif

@@ -39,7 +39,7 @@ static Boolean is_safe_const(Object* obj) {
     Type* type;
 
     type = obj->type;
-#if VERSION < VERSION_GC_2_5
+#if VERSION >= VERSION_GC_2_0 && VERSION < VERSION_GC_2_5
     if (IS_TYPE_POINTER(type) && !IS_TYPE_ARRAY(type) && IS_TYPE_ARRAY(TPTR_TARGET(type))) {
         type = TPTR_TARGET(type);
     }
@@ -75,13 +75,18 @@ Alias* make_distinct_virtual_alias(Object* obj, SInt32 offset, SInt32 size) {
     object->type = TYPE(&worst_case_memory_type);
     object->datatype = DDATA;
     object->name = CParser_GetUniqueName();
+#if VERSION >= VERSION_GC_2_0
     object->flags = obj->flags;
     object->qual = obj->qual;
+#endif
 #if VERSION == VERSION_GC_2_0P2
     return make_alias(object, 0x7FFFFF, 1);
 #else
     alias = make_alias_set();
     add_alias_member(alias, make_alias(object, offset, size));
+#if VERSION < VERSION_GC_2_0
+    add_alias_member(worst_case_ptr, alias);
+#endif
     return alias;
 #endif
 }
@@ -150,7 +155,11 @@ static inline Boolean is_virtual_or_local_static(Object* obj) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -16
+#define CError_LINE_SHIFT (-16 + CError_LINE_DELTA)
+#endif
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
 #endif
 void add_aliased_locals_to_worst_case(Alias* alias) {
     AliasMember* member;
@@ -175,6 +184,10 @@ void add_aliased_locals_to_worst_case(Alias* alias) {
         CError_FATAL(259);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static inline UInt32 hash_alias(Object* object, int offset, int size) {
     return (UInt32)(object->name->hashval * offset * size) % 997;
@@ -339,9 +352,13 @@ void add_alias_member(Alias* parent, Alias* child) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -20
+#endif
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -48
+#define CError_LINE_SHIFT (-48 + CError_LINE_DELTA)
 #endif
 static inline Alias* make_displ_alias(Alias* alias, SInt32 offset, SInt32 size) {
     Alias* a;
@@ -926,7 +943,7 @@ static inline void propagatealiasinfo(Object* proc) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT 0
+#define CError_LINE_SHIFT (0 + CError_LINE_DELTA)
 static void gather_instruction_alias(PCode* pcode, UInt32* myvec) {
     Alias* alias_array[2];
     Alias* alias_choice;
@@ -1215,9 +1232,13 @@ void gather_alias_info(void) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -30
+#endif
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -81
+#define CError_LINE_SHIFT (-81 + CError_LINE_DELTA)
 #endif
 static Boolean may_alias_alias(Alias* a, Alias* b) {
     switch ((a->type * 3) + b->type) {
@@ -1352,7 +1373,7 @@ void initialize_alias_values(void) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -140
+#define CError_LINE_SHIFT (-140 + CError_LINE_DELTA)
 #endif
 void update_alias_value(Alias* alias, PCode* pcode) {
     AliasMember* member2;

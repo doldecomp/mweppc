@@ -983,7 +983,7 @@ nextDef:
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -159
+#define CError_LINE_SHIFT (-159 + CError_LINE_DELTA)
 #endif
 static void MarkUsesByIndirect(IROLinear* linear, BitVector* a, BitVector* b) {
     IROListNode* scan;

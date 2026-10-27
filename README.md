@@ -4,6 +4,7 @@ A decompilation of the Metrowerks CodeWarrior toolchain. Currently supported ver
 
 | Compiler       | Version    | Internal version | Exact functions | Linked functions    | Linked bytes | Notes                         |
 | -------------- | ---------- | ---------------- | --------------- | ------------------- | ------------ | ----------------------------- |
+| GameCube 1.3.2 | `GC_1_3_2` | 2.4.2 build 81   | 3978 / 4039     | 2532 / 4042 (62.6%) | 49.4%        | from 2.0's sources            |
 | GameCube 2.0   | `GC_2_0`   | 2.4.7 build 92   | 4016 / 4065     | 2850 / 4068 (70.1%) | 54.3%        |                               |
 | GameCube 2.0p2 | `GC_2_0p2` | 2.4.7 build 92   | 4019 / 4068     | 2853 / 4071 (70.1%) | 54.3%        | GameCube 2.0 patched for BFBB |
 | GameCube 2.5   | `GC_2_5`   | 2.4.7 build 105  | 4026 / 4076     | 2860 / 4079 (70.1%) | 54.3%        |                               |
@@ -175,7 +176,7 @@ been:
 
 In scope, with no promise of when:
 
-- the other GameCube compilers: 1.0 to 1.3.2 (decompiled separately, to be rewritten and merged) and the 3.0 alphas;
+- the other GameCube compilers: 1.0 to 1.3 (decompiled separately, to be rewritten and merged) and the 3.0 alphas;
 - the Wii compilers, whose public symbols give real names from the start;
 - the linker and assembler;
 - CodeWarrior's other platforms, such as Nintendo DS and PlayStation 2.

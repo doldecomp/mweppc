@@ -122,6 +122,9 @@ def environment(**extra) -> dict[str, str]:
 def run(
     command: list[str], cwd: Path | str = ROOT, timeout: float | None = 600, env=None, check: bool = False
 ) -> subprocess.CompletedProcess:
+    if WINDOWS and command and not Path(command[0]).is_absolute() and (Path(cwd) / command[0]).exists():
+        # (Windows looks a relative program up from this process's directory, not cwd's)
+        command = [str(Path(cwd) / command[0]), *command[1:]]
     result = subprocess.run(
         command, cwd=cwd, capture_output=True, text=True, errors="replace", timeout=timeout, env=env or environment()
     )

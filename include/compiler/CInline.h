@@ -55,7 +55,9 @@ struct CInlineBackendOptions {
     UInt8 gen_isel;
     UInt8 gen_fsel;
     UInt8 gecko_float_typecons;
+#if VERSION >= VERSION_GC_2_0
     UInt8 disable_vector_frame;
+#endif
     UInt8 opt_bcc_lr_ctr;
     UInt8 use_lmw_stmw;
     UInt8 report_heap_info;
@@ -102,6 +104,9 @@ struct CI_Var {
 struct CI_SwitchCase {
     short labelID;
     CInt64 min;
+#if VERSION < VERSION_GC_2_0
+    CInt64 max;
+#endif
 };
 
 struct CI_Switch {

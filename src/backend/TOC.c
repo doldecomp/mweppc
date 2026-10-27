@@ -291,7 +291,11 @@ Object* createfloatconstant(Type* type, Float* data) {
     obj->qual = Q_CONST | Q_INLINE_DATA;
 #endif
     obj->datatype = DDATA;
+#if VERSION < VERSION_GC_2_0
+    PPC_EABI_SetSection(obj, type->size, TRUE);
+#else
     PPC_EABI_SetSection(obj, type->size, TRUE, TRUE);
+#endif
     MakeSymbolTableEntry(obj);
 
     obj->flags |= OBJECT_REFERENCED;
@@ -1790,11 +1794,13 @@ static void expandTOCexpression(ENode* expr, Type* type, int ignored) {
             if (ENODE_IS(tmpexpr, EINDIRECT) && IS_TYPE_FUNC(tmpexpr->rtype)) {
                 *tmpexpr = *tmpexpr->data.monadic;
             }
+#if VERSION >= VERSION_GC_2_0
             if (ENODE_IS(tmpexpr, ETYPCON) &&
                 ENODE_IS(tmpexpr->data.monadic, EOBJREF) &&
                 tmpexpr->data.monadic->data.objref->datatype == DFUNC) {
                 *tmpexpr = *tmpexpr->data.monadic;
             }
+#endif
 
             if (ENODE_IS(expr->data.funccall.funcref, EOBJREF)) {
                 expr->data.funccall.funcref->hascall = FALSE;
@@ -1957,6 +1963,7 @@ opassign_common:
                     }
                 }
             }
+#if VERSION >= VERSION_GC_2_0
         case ELESS:
         case EGREATER:
         case ELESSEQU:
@@ -1985,6 +1992,7 @@ opassign_common:
                         break;
                 }
             }
+#endif
         case EDIV:
             if (ENODE_IS(expr, EDIV) &&
                 ENODE_IS(expr->data.diadic.right, EFLOATCONST) &&
@@ -1996,6 +2004,12 @@ opassign_common:
         case EMODULO:
         case ESHL:
         case ESHR:
+#if VERSION < VERSION_GC_2_0
+        case ELESS:
+        case EGREATER:
+        case ELESSEQU:
+        case EGREATEREQU:
+#endif
             expandTOCexpression(expr->data.diadic.left, NULL, FALSE);
             expandTOCexpression(expr->data.diadic.right, NULL, FALSE);
             expr->hascall = expr->data.diadic.left->hascall | expr->data.diadic.right->hascall;
@@ -2117,6 +2131,10 @@ opassign_common:
                         case 8:
                             break;
                         default:
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -36
+#endif
                             CError_FATAL(3816);
                     }
                 } else {
@@ -2234,7 +2252,9 @@ opassign_common:
                 !ENODE_IS_RANGE(expr->data.monadic, ELESS, ENOTEQU)) {
                 expr->data.monadic = comparewithzero(expr->data.monadic);
             }
+#if VERSION >= VERSION_GC_2_0
             type = NULL;
+#endif
         case EMONMIN:
         case EBINNOT:
             expandTOCexpression(tmpexpr = expr->data.monadic, type, FALSE);
@@ -2434,6 +2454,11 @@ void expandTOCreferences(Statement** stmts) {
                                     vi->used = TRUE;
                                     vi->usage++;
                                 }
+#if VERSION < VERSION_GC_2_0
+                            } else if (op->type == IAOpnd_GlobalObj) {
+                                uses_globals = TRUE;
+                            }
+#else
                             } else if (op->type == IAOpnd_GlobalObj ||
                                        op->type == IAOpnd_LocalObj) {
                                 switch (op->u.obj.obj->datatype) {
@@ -2447,6 +2472,7 @@ void expandTOCreferences(Statement** stmts) {
                                         break;
                                 }
                             }
+#endif
                         }
 
                         if (ia->flags & IAFlag_Call) {
@@ -2494,7 +2520,11 @@ Object* createstaticinitobject(void) {
     obj->name = GetHashNameNodeExport(buf);
     obj->sclass = TK_STATIC;
     obj->datatype = DFUNC;
+#if VERSION < VERSION_GC_2_0
+    PPC_EABI_SetSection(obj, 4, TRUE);
+#else
     PPC_EABI_SetSection(obj, 4, TRUE, TRUE);
+#endif
     MakeSymbolTableEntry(obj);
     return obj;
 }

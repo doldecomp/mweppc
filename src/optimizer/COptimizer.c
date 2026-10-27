@@ -181,7 +181,11 @@ static void optimizeswitch(Statement* stmt) {
 
     if (ENODE_IS(stmt->expr, EINTCONST)) {
         for (swcase = info->cases; swcase; swcase = swcase->next) {
+#if VERSION < VERSION_GC_2_0
+            if (CInt64_GreaterEqual(swcase->min, stmt->expr->data.intval) && CInt64_LessEqual(swcase->max, stmt->expr->data.intval)) {
+#else
             if (CInt64_Equal(swcase->min, stmt->expr->data.intval)) {
+#endif
                 break;
             }
         }

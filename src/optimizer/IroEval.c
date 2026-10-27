@@ -524,7 +524,11 @@ Boolean IRO_EvaluateConditionals(void) {
 
                     found = FALSE;
                     while (swcase) {
+#if VERSION < VERSION_GC_2_0
+                        if (CInt64_GreaterEqual(val, swcase->min) && CInt64_LessEqual(val, swcase->max)) {
+#else
                         if (CInt64_Equal(swcase->min, val)) {
+#endif
                             found = TRUE;
                             nd->u.label.label = swcase->label;
                             break;

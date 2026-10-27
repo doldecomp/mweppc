@@ -1258,6 +1258,7 @@ def align_view(version, unit, reverse, pro7_root):
 
 def main():
     if hasattr(signal, "SIGPIPE"):
+        if hasattr(signal, "SIGPIPE"):
         signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     parser = argparse.ArgumentParser(
         prog="tools/evidence.py",

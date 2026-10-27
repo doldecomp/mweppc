@@ -1793,9 +1793,11 @@ static Type* CExpr_ParseTypeExpression(Boolean* isZero) {
     Type* type;
     DeclInfo di;
 
+#if VERSION >= VERSION_GC_2_0
     if (isZero) {
         *isZero = FALSE;
     }
+#endif
     tk = lex();
     if (tk == '(' && islookaheaddeclaration()) {
         tk = lex();
@@ -2038,6 +2040,10 @@ static ENode* CExpr_NewPTMFCall(void) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 static ENode* call_ptmf(ENode* expr) {
     ENodeList* list;
     Type* rettype;
@@ -2079,6 +2085,10 @@ static ENode* call_ptmf(ENode* expr) {
     tk = lex();
     return expr;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ENode* CExpr_DummyDestr(ENode* expr) {
     DeclInfo di;
@@ -2170,6 +2180,10 @@ parsed:
     return expr;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 static ENode* postfix_expression(Boolean isAddressOf) {
     Conversion conv;
     NameResult pr;
@@ -2468,6 +2482,10 @@ dont_do_indirect:
 
     return expr;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ENode* CExpr_ParseSizeof(void) {
     Type* type;
@@ -2668,6 +2686,10 @@ static ENode* CExpr_MakeStaticMemberList(NameSpaceObjectList* list) {
     return result;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 static ENode* CExpr_MakePTDM(ENode* expr) {
     ENode* result;
 
@@ -2683,6 +2705,10 @@ static ENode* CExpr_MakePTDM(ENode* expr) {
     return result;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 ENode* getpointertomemberfunc(ENode* expr, Type* type, Boolean buildData) {
     NameSpaceObjectList* list;
     Object* obj;
@@ -2769,7 +2795,15 @@ ENode* getpointertomemberfunc(ENode* expr, Type* type, Boolean buildData) {
 
     return create_objectnode(dataobj);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 static ENode* getpointertomember(ENode* expr) {
     CError_ASSERT(3556, ENODE_IS(expr, EMEMBER));
 
@@ -2788,7 +2822,15 @@ static ENode* getpointertomember(ENode* expr) {
 
     return expr;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 ENode* CExpr_New_ELOGNOT_Node(ENode* input) {
     ENode* expr;
     Conversion conv;
@@ -2836,7 +2878,15 @@ ENode* CExpr_New_ELOGNOT_Node(ENode* input) {
 
     return logicalexpression(CodeGen_CheckExpr(expr));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 ENode* CExpr_New_EMONMIN_Node(ENode* input) {
     ENode* expr;
     Conversion conv;
@@ -2873,7 +2923,15 @@ ENode* CExpr_New_EMONMIN_Node(ENode* input) {
             return expr;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 ENode* CExpr_New_EBINNOT_Node(ENode* input) {
     ENode* expr;
     Conversion conv;
@@ -2900,7 +2958,15 @@ ENode* CExpr_New_EBINNOT_Node(ENode* input) {
     expr = CodeGen_CheckExpr(expr);
     return expr;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 ENode* unary_expression(void) {
     ENode* expr;
     ENode* node;
@@ -3089,6 +3155,10 @@ ENode* unary_expression(void) {
 
     return postfix_expression(FALSE);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 ENode* do_castnullcheck(ENode* condexpr, ENode* nullcheckexpr) {
     ENode* result;
@@ -3125,6 +3195,10 @@ ENode* CExpr_SafeClassPointerCast(
     return result;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 ENode* PointerToMemberCast(
     ENode* expr, TypeMemberPointer* tm1, TypeMemberPointer* tm2, Boolean checkAccess
 ) {
@@ -3209,6 +3283,10 @@ failed:
         return result;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 ENode* CExpr_MemberPointerConversion(ENode* expr, TypeMemberPointer* type, Boolean buildData) {
     if (ENODE_IS(expr, EINTCONST) && CInt64_IsZero(&expr->data.intval)) {
@@ -3473,11 +3551,15 @@ ENode* cast_expression(void) {
     }
 
     if (copts.altivec_model && tk == '(' && IS_TYPE_VECTOR(di.thetype)) {
+#if VERSION >= VERSION_GC_2_0
         Boolean save_warn = copts.warn_no_side_effect;
         copts.warn_no_side_effect = FALSE;
+#endif
         tk = lex();
         expr = s_expression();
+#if VERSION >= VERSION_GC_2_0
         copts.warn_no_side_effect = save_warn;
+#endif
         if (tk != ')') {
             CError_ErrorSkip(ERR_RPAREN_EXPECTED);
         } else {
@@ -3521,6 +3603,10 @@ ENode* cast_expression(void) {
     return do_typecast(expr, di.thetype, di.qual);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ENode* pm_expression(void) {
     ENode* left;
     ENode* right;
@@ -3638,7 +3724,15 @@ common_part:
             return left;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EMUL_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -3658,7 +3752,15 @@ ENode* CExpr_New_EMUL_Node(ENode* left, ENode* right) {
 
     return makemultnode(left, right);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EDIV_Node(ENode* left, ENode* right, Boolean no_warning) {
     Conversion conv;
 
@@ -3678,7 +3780,15 @@ ENode* CExpr_New_EDIV_Node(ENode* left, ENode* right, Boolean no_warning) {
 
     return makedivnode(left, right, no_warning);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EMODULO_Node(ENode* left, ENode* right, Boolean no_warning) {
     Conversion conv;
 
@@ -3725,7 +3835,15 @@ ENode* CExpr_New_EMODULO_Node(ENode* left, ENode* right, Boolean no_warning) {
 
     return makediadicnode(left, right, EMODULO);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EADD_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -3745,7 +3863,15 @@ ENode* CExpr_New_EADD_Node(ENode* left, ENode* right) {
 
     return makeaddnode(left, right);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ESUB_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -3765,7 +3891,15 @@ ENode* CExpr_New_ESUB_Node(ENode* left, ENode* right) {
 
     return makesubnode(left, right);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ESHL_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -3798,7 +3932,15 @@ ENode* CExpr_New_ESHL_Node(ENode* left, ENode* right) {
 
     return CodeGen_CheckExpr(makediadicnode(left, right, ESHL));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ESHR_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -3831,7 +3973,15 @@ ENode* CExpr_New_ESHR_Node(ENode* left, ENode* right) {
 
     return CodeGen_CheckExpr(makediadicnode(left, right, ESHR));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ENode* pointercompare(ENodeType nt, ENode* left, ENode* right) {
     Type* ltype;
     Type* rtype;
@@ -3916,6 +4066,10 @@ static ENode* pointercompare(ENodeType nt, ENode* left, ENode* right) {
 
     return logicalexpression(makediadicnode(left, right, nt));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ENode* unsigncheck(ENode* expr, Boolean isLess, Boolean orEqual) {
     if (is_unsigned(expr->data.diadic.left->rtype)) {
@@ -3940,6 +4094,10 @@ static ENode* unsigncheck(ENode* expr, Boolean isLess, Boolean orEqual) {
     return logicalexpression(expr);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ELESS_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -3980,7 +4138,15 @@ ENode* CExpr_New_ELESS_Node(ENode* left, ENode* right) {
     left = CodeGen_CheckExpr(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ELESSEQU_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4023,7 +4189,15 @@ ENode* CExpr_New_ELESSEQU_Node(ENode* left, ENode* right) {
     left = CodeGen_CheckExpr(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EGREATER_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4064,7 +4238,15 @@ ENode* CExpr_New_EGREATER_Node(ENode* left, ENode* right) {
     left = CodeGen_CheckExpr(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EGREATEREQU_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4108,6 +4290,10 @@ ENode* CExpr_New_EGREATEREQU_Node(ENode* left, ENode* right) {
     left = CodeGen_CheckExpr(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 ENode* memberpointercompare(ENodeType nt, ENode* left, ENode* right) {
     Object* func;
@@ -4173,6 +4359,10 @@ ENode* memberpointercompare(ENodeType nt, ENode* left, ENode* right) {
     return left;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EEQU_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4220,7 +4410,15 @@ ENode* CExpr_New_EEQU_Node(ENode* left, ENode* right) {
     left = CodeGen_CheckExpr(left);
     return logicalexpression(left);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ENOTEQU_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4267,7 +4465,15 @@ ENode* CExpr_New_ENOTEQU_Node(ENode* left, ENode* right) {
     left = CodeGen_CheckExpr(left);
     return logicalexpression(left);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EAND_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4307,7 +4513,15 @@ ENode* CExpr_New_EAND_Node(ENode* left, ENode* right) {
     optimizecomm(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EXOR_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4347,7 +4561,15 @@ ENode* CExpr_New_EXOR_Node(ENode* left, ENode* right) {
     optimizecomm(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_EOR_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4387,7 +4609,15 @@ ENode* CExpr_New_EOR_Node(ENode* left, ENode* right) {
     optimizecomm(left);
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ELAND_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4474,7 +4704,15 @@ ENode* CExpr_New_ELAND_Node(ENode* left, ENode* right) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ELOR_Node(ENode* left, ENode* right) {
     Conversion conv;
 
@@ -4559,7 +4797,15 @@ ENode* CExpr_New_ELOR_Node(ENode* left, ENode* right) {
         return CodeGen_CheckExpr(left);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_NewDyadicNode(ENode* left, ENodeType nt, ENode* right) {
     switch (nt) {
         default:
@@ -4602,6 +4848,10 @@ ENode* CExpr_NewDyadicNode(ENode* left, ENodeType nt, ENode* right) {
             return CExpr_New_ELOR_Node(left, right);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 typedef struct DyadicInfo {
     ENodeType t;
@@ -4779,6 +5029,10 @@ static Boolean CExpr_IsBlockMoveType(Type* type) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_New_ECOND_Node(ENode* cond, ENode* expr1, ENode* expr2) {
     ENode* result;
     ENodeList* args;
@@ -5015,6 +5269,10 @@ failed:
     }
     return CodeGen_CheckExpr(result);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ENode* conditional_expression(void) {
     ENode* cond;
@@ -5096,6 +5354,10 @@ static ENode* CExpr_MakeOpAssNode(ENode* left, ENode* right, ENodeType nt) {
     return CodeGen_CheckExpr(left);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ENode* makeassignmentnode(ENode* left, ENodeType nt, short token) {
     ENode* right;
     ENode* result;
@@ -5212,7 +5474,15 @@ continue_anyway:
     right->flags = left->flags;
     return CodeGen_CheckExpr(right);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ENode* makepassignmentnode(ENode* left, ENodeType nt, short token) {
     ENode* right;
     Boolean is_array;
@@ -5284,7 +5554,15 @@ static ENode* makepassignmentnode(ENode* left, ENodeType nt, short token) {
         return CExpr_MakeOpAssNode(left, right, nt);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ENode* makemulassignmentnode(ENode* left, ENodeType nt, short token) {
     ENode* right;
     Boolean is_array;
@@ -5333,6 +5611,10 @@ static ENode* makemulassignmentnode(ENode* left, ENodeType nt, short token) {
 
     return CExpr_MakeOpAssNode(left, right, nt);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ENode* CExpr_TransformOpAssign(ENode* expr) {
     switch (expr->type) {
@@ -5442,6 +5724,10 @@ ENode* conv_assignment_expression(void) {
     return pointer_generation(assignment_expression());
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static Boolean CExpr_HasSideEffect(ENode* expr) {
     switch (expr->type) {
         case EMONMIN:
@@ -5538,7 +5824,15 @@ static Boolean CExpr_HasSideEffect(ENode* expr) {
             return FALSE;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 void CExpr_CheckUnusedExpression(ENode* expr) {
     ENode* scan;
     ENodeList* arg;
@@ -5600,7 +5894,15 @@ void CExpr_CheckUnusedExpression(ENode* expr) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* s_expression(void) {
     ENode* left;
     ENode* right;
@@ -5623,6 +5925,10 @@ ENode* s_expression(void) {
 
     return left;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 ENode* expression(void) {
     return pointer_generation(s_expression());
@@ -5650,6 +5956,10 @@ CInt64 CExpr_IntegralConstExprType(Type** tint) {
     return cint64_zero;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 ENode* CExpr_IntegralConstOrDepExpr(void) {
     ENode* expr;
 
@@ -5675,6 +5985,10 @@ ENode* CExpr_IntegralConstOrDepExpr(void) {
     expr->rtype = TYPE(&stchar);
     return expr;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 CInt64 CExpr_IntegralConstExpr(void) {
     Type* throwaway;

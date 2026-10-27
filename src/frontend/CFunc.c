@@ -997,6 +997,9 @@ static void scancase(DeclThing* thing) {
     SwitchCase* swcase;
     Statement* stmt;
     CInt64 min;
+#if VERSION < VERSION_GC_2_0
+    CInt64 max;
+#endif
 
     if (!thing->switchinfo) {
         CError_Error(ERR_ILLEGAL_USE_KEYWORD);
@@ -1007,10 +1010,38 @@ static void scancase(DeclThing* thing) {
     min = CExpr_IntConstConvert(
         thing->switchinfo->exprtype, thing->switchinfo->exprtype, CExpr_IntegralConstExpr()
     );
+#if VERSION < VERSION_GC_2_0
+    if (!copts.ANSIstrict && tk == TK_ELLIPSIS) {
+        tk = lex();
+        max = CExpr_IntConstConvert(
+            thing->switchinfo->exprtype, thing->switchinfo->exprtype, CExpr_IntegralConstExpr()
+        );
+        if (CInt64_Greater(min, max)) {
+            CError_Error(ERR_CASE_EMPTY_RANGE_VALUES);
+        }
+        if (thing->switchinfo->exprtype->size == stsignedlonglong.size) {
+            CError_Error(ERR_LONG_LONG_CASE_RANGE_NOT_SUPPORTED);
+        }
+    } else {
+        max = min;
+    }
+#endif
     for (swcase = thing->switchinfo->cases; swcase; swcase = swcase->next) {
+#if VERSION < VERSION_GC_2_0
+        if (CInt64_GreaterEqual(swcase->min, min) && CInt64_LessEqual(swcase->min, max)) {
+            CError_Error(ERR_CASE_CONSTANT_DEFINED_MORE_THAN_ONCE);
+        }
+        if (CInt64_GreaterEqual(swcase->max, min) && CInt64_LessEqual(swcase->max, max)) {
+            CError_Error(ERR_CASE_CONSTANT_DEFINED_MORE_THAN_ONCE);
+        }
+        if (CInt64_Less(swcase->min, min) && CInt64_Greater(swcase->max, max)) {
+            CError_Error(ERR_CASE_CONSTANT_DEFINED_MORE_THAN_ONCE);
+        }
+#else
         if (CInt64_GreaterEqual(swcase->min, min) && CInt64_LessEqual(swcase->min, min)) {
             CError_Error(ERR_CASE_CONSTANT_DEFINED_MORE_THAN_ONCE);
         }
+#endif
     }
 
     stmt = CFunc_AppendStatement(ST_LABEL);
@@ -1022,6 +1053,9 @@ static void scancase(DeclThing* thing) {
     swcase->label = stmt->label;
     swcase->next = thing->switchinfo->cases;
     thing->switchinfo->cases = swcase;
+#if VERSION < VERSION_GC_2_0
+    swcase->max = max;
+#endif
 
     if (tk != ':') {
         CError_ErrorSkip(ERR_COLON_EXPECTED);
@@ -3387,8 +3421,10 @@ void CFunc_GenerateSingleExprFunc(Object* func, ENode* expr) {
         stmt = CFunc_AppendStatement(ST_EXPRESSION);
         stmt->expr = expr;
 
+#if VERSION >= VERSION_GC_2_0
         stmt = CFunc_AppendStatement(ST_RETURN);
         stmt->expr = NULL;
+#endif
 
         CFunc_CodeCleanup(&firstStmt);
         CInline_GenFunc(&firstStmt, func, 0);
@@ -3398,6 +3434,10 @@ void CFunc_GenerateSingleExprFunc(Object* func, ENode* expr) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -2
+#endif
 void CFunc_GenerateDummyCtorFunc(Object* func, Object* real_ctor) {
     NameSpace* nspace;
     FuncArg* arg;
@@ -3468,5 +3508,9 @@ void CFunc_GenerateDummyCtorFunc(Object* func, Object* real_ctor) {
         copts.filesyminfo = saveDebugInfo;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 #pragma pack(2)

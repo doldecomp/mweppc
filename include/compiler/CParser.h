@@ -99,7 +99,9 @@ struct CompilerLinkerOptions {
     UInt8 gen_isel;
     UInt8 gen_fsel;
     UInt8 gecko_float_typecons;
+#if VERSION >= VERSION_GC_2_0
     UInt8 disable_vector_frame;
+#endif
     UInt8 opt_bcc_lr_ctr;
     UInt8 use_lmw_stmw;
     char report_heap_info;
@@ -347,7 +349,9 @@ extern Type stvoid;
 extern TypePointer void_ptr;
 extern TypeFunc rt_func;
 
-#ifdef __MWERKS__
+/* NONMATCHING: a build of these sources that is not the original's (it may still define __MWERKS__, like the
+   WebAssembly build): its objects are not at the original's addresses, so it emulates them as the clang build does. */
+#if defined(__MWERKS__) && !defined(NONMATCHING)
 #define ORIGINAL_ADDRESS(ptr) ((UInt32)(ptr))
 #define TYPE_INTEGRAL_UNCHECKED(ty) (TYPE_INTEGRAL(ty)->integral)
 #else

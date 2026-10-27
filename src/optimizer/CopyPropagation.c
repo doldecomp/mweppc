@@ -86,7 +86,12 @@ static void computecandidatelist(void) {
                             }
                         }
 
+#if VERSION < VERSION_GC_2_0
+                        // 1.3.2: the read/write test is always true (precedence slip)
+                        if (((pcode->flags & fIsRead) | fIsWrite) && (pcode->flags & fUpdatesPtr)) {
+#else
                         if (PCODE_FLAG_SET_F(pcode) & fUpdatesPtr) {
+#endif
                             for (list = reg_Uses[pcode->args[1].arg][pcode->args[1].data.reg.reg];
                                  list;
                                  list = list->next) {

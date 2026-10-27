@@ -23,11 +23,20 @@ BE_SymNode* First(void) {
     return TheSymbolTable.current = TheSymbolTable.first;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -4
+#endif
 BE_SymNode* Next(void) {
     CError_ASSERT(58, TheSymbolTable.current != NULL);
     return TheSymbolTable.current = TheSymbolTable.current->next;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION >= VERSION_GC_2_0
 BE_SymNode* AddSymbol(
     BE_SymNode* node,
     SInt32 size,
@@ -70,7 +79,42 @@ BE_SymNode* AddSymbol(
     return node;
 }
 
+#endif
+
 BE_SymNode* AddObject(Object* obj, SInt32 size, ObjGenSection* section) {
+#if VERSION < VERSION_GC_2_0
+    UInt8 binding;
+    UInt8 linkageKind;
+    BE_SymNode* node;
+
+    linkageKind = 0;
+    if (obj->type->type == TYPEFUNC) {
+        return AddFunction(obj, size, section);
+    }
+    if (obj->qual & Q_IMPLICIT_WEAK) {
+        binding = STB_WEAK;
+        linkageKind = 13;
+    } else if (obj->qual & Q_WEAK) {
+        binding = STB_WEAK;
+        linkageKind = 14;
+    } else if (CParser_HasInternalLinkage(obj)) {
+        binding = STB_LOCAL;
+    } else {
+        binding = STB_GLOBAL;
+    }
+    node = MakeSymbolTableEntry(obj);
+    node->elf.st_info = ELF32_ST_INFO(binding, STT_OBJECT);
+    node->elf.st_size = size;
+    node->elf.st_shndx = SHN_UNDEF;
+    node->section = section;
+    node->alignment = CMach_AllocationAlignment(obj->type, obj->qual);
+    node->linkageKind = linkageKind;
+    node->linkageFlags = 0;
+    if (copts.force_active) {
+        node->linkageFlags |= 8;
+    }
+    return node;
+#else
     BE_SymNode* node;
     SInt16 sclass;
 
@@ -92,6 +136,7 @@ BE_SymNode* AddObject(Object* obj, SInt32 size, ObjGenSection* section) {
         obj->flags,
         section
     );
+#endif
 }
 
 BE_SymNode* AddFunction(Object* obj, SInt32 size, ObjGenSection* section) {
@@ -207,6 +252,10 @@ BE_SymNode* InorderFirst(void) {
     return TheSymbolTable.inorder;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -60
+#endif
 static inline BE_SymNode* FindSymbolTableEntry(HashNameNode* name, SInt16 sclass) {
     BE_SymNode* node;
 #if VERSION >= VERSION_GC_2_7
@@ -455,3 +504,8 @@ Boolean NeedsXREF(Object* obj) {
     }
     return TRUE;
 }
+
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif

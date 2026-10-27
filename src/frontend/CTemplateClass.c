@@ -259,6 +259,10 @@ static TemplClassInst* CTemplClass_NewInstance(
     return inst;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -3
+#endif
 TemplClassInst* CTemplClass_GetInstance(TemplClass* tmclass, TemplArg* inst_args, TemplArg* oargs) {
     TemplClassInst* inst;
 
@@ -272,6 +276,10 @@ TemplClassInst* CTemplClass_GetInstance(TemplClass* tmclass, TemplArg* inst_args
 
     return CTemplClass_NewInstance(tmclass, inst_args, oargs);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 TemplateMember* CTemplClass_DefineMember(
     TemplClass* tmclass, Object* object, FileOffsetInfo* foi, TokenStream* stream
@@ -321,6 +329,10 @@ static void CTemplClass_ParseBody(TemplClass* templ, short mode, SInt32* offset)
     CBrowse_NewTemplateClass(templ, di.file2, di.sourceoffset, CPrep_BrowserFileOffset() + 1);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -3
+#endif
 void CTemplClass_ParsePartialSpecialization(
     TemplateScopeState* templateScope, TemplParam* params, short mode, SInt32* offset
 ) {
@@ -464,6 +476,10 @@ void CTemplClass_ParsePartialSpecialization(
             CError_Error(ERR_DECLARATION_SYNTAX_ERROR);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CTemplClass_ParseClass(
     TemplateScopeState* templateScope, TemplParam* params, short mode, SInt32* offset
@@ -556,6 +572,10 @@ static Boolean CTemplClass_TypeParamCompare(TemplArg* arg, Type* type, UInt32 qu
     return is_typesame(type, arg->data.typeparam.type) && arg->data.typeparam.qual == qual;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static TemplArg* CTemplClass_PartialTemplateArgMatch(
     TemplPartialSpec* pspec, TemplArg* args, Boolean buildArgs
 ) {
@@ -671,7 +691,15 @@ static TemplArg* CTemplClass_PartialTemplateArgMatch(
         i++;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static Boolean CTemplClass_PartialClassIsAtLeastAsSpecialized(
     TemplPartialSpec* pspec1, TemplPartialSpec* pspec2
 ) {
@@ -769,6 +797,10 @@ static Boolean CTemplClass_PartialClassIsAtLeastAsSpecialized(
         argB = argB->next;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static Boolean CTemplClass_PartialClassIsMoreSpecialized(
     TemplPartialSpec* pspec1, TemplPartialSpec* pspec2
@@ -942,6 +974,10 @@ static void CTemplClass_CopyNestedClass(TypeDeduce* deduce, TemplClass* templ) {
     CScope_AddObject(deduce->inst->theclass.nspace, templ->theclass.classname, OBJ_BASE(tag));
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyBaseClasses(
     TypeDeduce* deduce, TemplClassInst* inst, TemplClass* templ
 ) {
@@ -1028,6 +1064,10 @@ static void CTemplClass_CopyBaseClasses(
         CDecl_MakeVBaseList(TYPE_CLASS(inst));
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CTemplClass_CopyEnum(TypeDeduce* deduce, TemplateAction* action) {
     TypeEnum* srcenum;
@@ -1076,6 +1116,10 @@ static void CTemplClass_CopyEnum(TypeDeduce* deduce, TemplateAction* action) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CompleteEnumType(
     TypeDeduce* deduce, TemplateAction* action, TypeEnum* destenum
 ) {
@@ -1126,6 +1170,10 @@ static void CTemplClass_CompleteEnumType(
 
     CDecl_ComputeUnderlyingEnumType(destenum);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CTemplClass_CopyObjMemberVarPath(TypeDeduce* deduce, ObjMemberVarPath* ivar) {
     ObjMemberVarPath* copy;
@@ -1141,6 +1189,10 @@ static void CTemplClass_CopyObjMemberVarPath(TypeDeduce* deduce, ObjMemberVarPat
     CScope_AddObject(deduce->inst->theclass.nspace, copy->name, OBJ_BASE(copy));
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyIVars(TypeDeduce* deduce, TemplClassInst* inst, TemplClass* templ) {
     ObjMemberVar* src;
     ObjMemberVar* dest;
@@ -1182,7 +1234,15 @@ static void CTemplClass_CopyIVars(TypeDeduce* deduce, TemplClassInst* inst, Temp
         src = src->next;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyObjType(TypeDeduce* deduce, ObjType* src, HashNameNode* name) {
     TemplateAction* scanaction;
     NameSpaceObjectList* list;
@@ -1219,6 +1279,10 @@ static void CTemplClass_CopyObjType(TypeDeduce* deduce, ObjType* src, HashNameNo
         CScope_AddObject(deduce->inst->theclass.nspace, name, OBJ_BASE(dest));
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CTemplClass_CopyObjTypeTag(TypeDeduce* deduce, ObjTypeTag* src, HashNameNode* name) {
     UInt32 qual = 0;
@@ -1230,6 +1294,10 @@ static void CTemplClass_CopyObjTypeTag(TypeDeduce* deduce, ObjTypeTag* src, Hash
     CScope_AddObject(deduce->inst->theclass.nspace, name, OBJ_BASE(dest));
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyMemberTemplate(TypeDeduce* deduce, Object* src) {
     TemplateFunction* desttempl;
     TemplateFunction* srctempl;
@@ -1288,7 +1356,15 @@ static void CTemplClass_CopyMemberTemplate(TypeDeduce* deduce, Object* src) {
 
     CScope_AddObject(deduce->inst->theclass.nspace, dest->name, OBJ_BASE(dest));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyObject(TypeDeduce* deduce, Object* src) {
     ObjectTemplated* dest;
     TemplateAction* action;
@@ -1397,7 +1473,15 @@ static void CTemplClass_CopyObject(TypeDeduce* deduce, Object* src) {
 
     CScope_AddObject(deduce->inst->theclass.nspace, dest->object.name, OBJ_BASE(dest));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CompleteObject(
     TypeDeduce* deduce, TemplateAction* action, ObjBase* refobj
 ) {
@@ -1482,6 +1566,10 @@ static void CTemplClass_CompleteObject(
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CTemplClass_CompleteObjectInit(
     TypeDeduce* deduce, TemplateAction* action, Object* object
@@ -1498,6 +1586,10 @@ static void CTemplClass_CompleteObjectInit(
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyNameSpace(TypeDeduce* deduce, TemplClassInst* inst, TemplClass* templ) {
     NameSpaceName* nsname;
     NameSpaceObjectList* list;
@@ -1530,7 +1622,15 @@ static void CTemplClass_CopyNameSpace(TypeDeduce* deduce, TemplClassInst* inst, 
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyUsingDecl(TypeDeduce* deduce, TypeTemplDep* type, AccessType access) {
     TypeClass* tclass;
     UInt32 qual = 0;
@@ -1546,7 +1646,15 @@ static void CTemplClass_CopyUsingDecl(TypeDeduce* deduce, TypeTemplDep* type, Ac
     CDecl_CompleteType(TYPE(tclass));
     CScope_AddClassUsingDeclaration(TYPE_CLASS(deduce->inst), tclass, type->u.qual.name, access);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CTemplClass_CopyFriend(TypeDeduce* deduce, TemplateFriend* tfriend) {
     TemplArg* arg;
     Object* funcobj;
@@ -1608,7 +1716,15 @@ static void CTemplClass_CopyFriend(TypeDeduce* deduce, TemplateFriend* tfriend) 
         CDecl_AddFriend(TYPE_CLASS(deduce->inst), NULL, TYPE_CLASS(di.thetype));
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 Boolean CTempl_InstantiateTemplateClass(TypeClass* tclass) {
     TemplClassInst* inst;
     ParserTryBlock* tryBlock;
@@ -1787,3 +1903,7 @@ Boolean CTempl_InstantiateTemplateClass(TypeClass* tclass) {
 
     return TRUE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif

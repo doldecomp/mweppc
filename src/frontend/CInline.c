@@ -2523,6 +2523,9 @@ static void CInline_UnpackSwitch(Statement* stmt, CI_Statement* packstmt, CLabel
 
         swcase->next = NULL;
         swcase->min = packstmt->u.switchdata->cases[i].min;
+#if VERSION < VERSION_GC_2_0
+        swcase->max = packstmt->u.switchdata->cases[i].max;
+#endif
         CError_ASSERT(2740, swcase->label = labels[packstmt->u.switchdata->cases[i].labelID]);
     }
 }
@@ -3402,6 +3405,9 @@ static CI_Switch* CInline_PackSwitch(Statement* start, Statement* stmt) {
     for (swcase = info->cases, numcases = 0; swcase; swcase = swcase->next, numcases++) {
         packed->cases[numcases].labelID = CInline_GetStatementNumber(start, swcase->label->stmt);
         packed->cases[numcases].min = swcase->min;
+#if VERSION < VERSION_GC_2_0
+        packed->cases[numcases].max = swcase->max;
+#endif
     }
 
     return packed;

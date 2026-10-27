@@ -202,6 +202,7 @@ def main():
     import signal
 
     if hasattr(signal, "SIGPIPE"):
+        if hasattr(signal, "SIGPIPE"):
         signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     parser = argparse.ArgumentParser(
         prog="tools/unit.py",

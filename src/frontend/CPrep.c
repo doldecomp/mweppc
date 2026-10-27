@@ -96,7 +96,9 @@ CompilerOption compileroptions[] = {
     "cats", OPT_OFFSET(cats),
     "force_cats", OPT_OFFSET(force_cats),
     "gecko_float_typecons", OPT_OFFSET(gecko_float_typecons),
+#if VERSION >= VERSION_GC_2_0
     "disable_vector_frame", OPT_OFFSET(disable_vector_frame),
+#endif
     "ppc_opt_bclr_bcctr", OPT_OFFSET(opt_bcc_lr_ctr),
     "misaligned_mem_access", OPT_OFFSET(misaligned_mem_access),
     "switch_tables", OPT_OFFSET(switch_tables),
@@ -3969,6 +3971,12 @@ static void pragma_message(void) {
     }
 }
 
+// GC 1.3.2 has no #pragma dump for -E output: the cases that skip goendofline just return
+#if VERSION < VERSION_GC_2_0
+#define PRAGMA_EXIT return
+#else
+#define PRAGMA_EXIT goto exit
+#endif
 static void preppragma(void) {
     CompilerOption* opt;
     Boolean save_eoltokens;
@@ -3979,9 +3987,11 @@ static void preppragma(void) {
 
     macrocheck = FALSE;
     if (lexidentifier() == TK_IDENTIFIER) {
+#if VERSION >= VERSION_GC_2_0
         if (preprocessing_only) {
             CPrep_PreprocessDumpDirective("#pragma ", tkidentifier->name);
         }
+#endif
         if (!strcmp(tkidentifier->name, "pack")) {
             pragma_pack();
         } else if (!strcmp(tkidentifier->name, "optimization_level")) {
@@ -4001,7 +4011,7 @@ static void preppragma(void) {
         } else if (!strcmp(tkidentifier->name, "options")) {
             pragma_options();
             macrocheck = TRUE;
-            goto exit;
+            PRAGMA_EXIT;
         } else if (!strcmp(tkidentifier->name, "segment")) {
             pragma_segment();
         } else if (!strcmp(tkidentifier->name, "push")) {
@@ -4017,7 +4027,7 @@ static void preppragma(void) {
         } else if (!strcmp(tkidentifier->name, "mark")) {
             skipendofline();
             macrocheck = TRUE;
-            goto exit;
+            PRAGMA_EXIT;
         } else if (!strcmp(tkidentifier->name, "precompile_target")) {
             pragma_precompile_target();
         } else if (!strcmp(tkidentifier->name, "message")) {
@@ -4065,7 +4075,7 @@ static void preppragma(void) {
             CodeGen_ParsePragma(tkidentifier);
             cprep_eoltokens = save_eoltokens;
             macrocheck = TRUE;
-            goto exit;
+            PRAGMA_EXIT;
         }
     } else {
         if (copts.warn_illpragma) {
@@ -4073,17 +4083,20 @@ static void preppragma(void) {
         }
         skipendofline();
         macrocheck = TRUE;
-        goto exit;
+        PRAGMA_EXIT;
     }
 foundOption:
     goendofline();
     CPrep_Reconfig();
     macrocheck = TRUE;
+#if VERSION >= VERSION_GC_2_0
 exit:
     if (preprocessing_only) {
         CPrep_PreprocessDumpDirectiveEnd();
     }
+#endif
 }
+#undef PRAGMA_EXIT
 
 static void prepinclude(Boolean isImport) {
     short t;
@@ -4596,6 +4609,10 @@ static void prepifndef(void) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -13
+#endif
 static void prepelif(void) {
     if (iflevel <= 0 ||
         ifstack[iflevel - 1].state == IfState_ElseActive ||
@@ -4624,7 +4641,15 @@ static void prepelif(void) {
             CError_FATAL(5787);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -13
+#endif
 static void prepelse(void) {
     if (iflevel <= 0 ||
         ifstack[iflevel - 1].state == IfState_ElseActive ||
@@ -4655,6 +4680,10 @@ static void prepelse(void) {
             CError_FATAL(5825);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void prependif(void) {
     if (iflevel <= 0) {

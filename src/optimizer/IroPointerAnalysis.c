@@ -370,7 +370,7 @@ static Boolean ObjectIsAnExtendedParamCandidate(Object* obj) {
     IRO_ASSERT(1042, obj != NULL);
 
     return Inline_IsObjectData(obj) ||
-#if VERSION < VERSION_GC_2_5
+#if VERSION >= VERSION_GC_2_0 && VERSION < VERSION_GC_2_5
         obj->datatype == DABSOLUTE ||
 #endif
         obj->datatype == DFUNC ||
@@ -380,14 +380,26 @@ static Boolean ObjectIsAnExtendedParamCandidate(Object* obj) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT 1
+#define CError_LINE_SHIFT (1 + CError_LINE_DELTA)
+#endif
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
 #endif
 static Boolean ObjectIsAFunction(Object* obj) {
     IRO_ASSERT(1053, obj != NULL);
 
     return obj->datatype == DFUNC || obj->datatype == DVFUNC || obj->datatype == DINLINEFUNC;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean LocationSetRepresentsSingleLocation(
     LocationSet* ls, Object* proc, PointsToFunction* pointsToFunc
 ) {
@@ -454,7 +466,15 @@ static Boolean LocationSetRepresentsSingleLocation(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalExprAction(LocationSet* ls, void* refcon) {
     CInt64 value;
     UInt32 stride;
@@ -484,7 +504,15 @@ static void EvalExprAction(LocationSet* ls, void* refcon) {
         LocationSet_SetField(ls, value);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalExprAction2(LocationSet* ls, void* refcon) {
     UInt32 value;
 
@@ -498,7 +526,15 @@ static void EvalExprAction2(LocationSet* ls, void* refcon) {
     }
     LocationSet_SetStride(ls, value);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalExprAction3(LocationSet* ls, void* refcon) {
     EvalExprAction3Params* params;
 
@@ -519,7 +555,15 @@ static void EvalExprAction3(LocationSet* ls, void* refcon) {
         params->indRtype
     );
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalExprAction4(LocationSet* ls, void* refcon) {
     Type* type;
     PAMemoryBlock* mb;
@@ -552,7 +596,15 @@ static void EvalExprAction4(LocationSet* ls, void* refcon) {
         LocationSet_SetRtype(ls, type);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean EvalExpr(
     LocationSetSet* set,
     Object* proc,
@@ -901,6 +953,10 @@ static Boolean EvalExpr(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static IROAddrRecord* IRO_InitENodeAddrRecordPointer(ENode* enode) {
     IROAddrRecord* addr = IRO_malloc(sizeof(IROAddrRecord));
@@ -1373,6 +1429,10 @@ static Boolean EvalVariable(
     return result;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void StoreReturnedLocationsAction(LocationSet* loc, void* refcon) {
     IROLinear* nd;
 
@@ -1403,7 +1463,15 @@ static void StoreReturnedLocationsAction(LocationSet* loc, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void StoreReturnedLocations(
     IROLinear* nd, PartialTransferFunction* ptf, ParamMappingFunction* map
 ) {
@@ -1437,7 +1505,15 @@ static void StoreReturnedLocations(
     ExpandLocationSetSetToActuals(&stCallingContextStack, map, retLocs);
     LocationSetSet_ForEach(retLocs, StoreReturnedLocationsAction, nd);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void FillInAppropriateMappingsWithExtParamAction(Object* obj, void* refcon) {
     EPParams* params;
     ParamMapping* mapping;
@@ -1477,7 +1553,15 @@ static void FillInAppropriateMappingsWithExtParamAction(Object* obj, void* refco
         params->foundVar = TRUE;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean FillInAppropriateMappingsWithExtParam(
     ParamMappingFunction* map, Object* var, ExtendedParam* ep, Object* proc
 ) {
@@ -1510,7 +1594,15 @@ static Boolean FillInAppropriateMappingsWithExtParam(
 
     return params.result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void MatchPTFHelper(
     LocationSet* loc,
     LocationSetSet* locs,
@@ -1587,7 +1679,15 @@ static void MatchPTFHelper(
         PointsToEntry_Delete(pte);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void MatchPTFAction1(PointsToEntry* tgtPTE, void* refcon) {
     MatchPTFActionParams* params;
     LocationSet* loc;
@@ -1615,7 +1715,15 @@ static void MatchPTFAction1(PointsToEntry* tgtPTE, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void MatchPTFAction2(PointsToEntry* tgtPTE, void* refcon) {
     MatchPTFActionParams* params;
     LocationSet* loc;
@@ -1641,7 +1749,15 @@ static void MatchPTFAction2(PointsToEntry* tgtPTE, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean MatchPTF(
     PartialTransferFunction* tgtPTF,
     Object* proc,
@@ -1696,7 +1812,15 @@ static Boolean MatchPTF(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void FindCallTargetsAction2(Object* obj, void* refcon) {
     ObjectSet* procList;
 
@@ -1709,7 +1833,15 @@ static void FindCallTargetsAction2(Object* obj, void* refcon) {
         ObjectSet_Add(procList, obj);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void FindCallTargetsAction(LocationSet* ls, void* refcon) {
     ObjectSet* procList;
 
@@ -1729,7 +1861,15 @@ static void FindCallTargetsAction(LocationSet* ls, void* refcon) {
         FindCallTargetsAction2(&stUnknown, procList);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean FindCallTargets(
     ObjectSet* procList,
     Object* proc,
@@ -1757,7 +1897,15 @@ static Boolean FindCallTargets(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean LookupParam(
     LocationSetSet* set,
     LocationSet* ls,
@@ -1851,7 +1999,15 @@ static Boolean LookupParam(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean GetActualLocsOfExtendedParam(
     LocationSetSet* set,
     LocationSet* ls,
@@ -2028,7 +2184,15 @@ static Boolean GetActualLocsOfExtendedParam(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void ExpandLocationSetSetToActualsAction(LocationSet* ls, void* refcon) {
     ExpandLocationSetSetActionParams* params;
 
@@ -2061,7 +2225,15 @@ static void ExpandLocationSetSetToActualsAction(LocationSet* ls, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean ExpandLocationSetSetToActuals(
     Stack** stackPtr, ParamMappingFunction* map, LocationSetSet* thingsPointedTo
 ) {
@@ -2101,7 +2273,15 @@ static Boolean ExpandLocationSetSetToActuals(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvaluatePartialAbsolute(
     LocationSetSet* set, LocationSetSet* thingsPointedTo, LocationSet* dst, Type* indRtype
 ) {
@@ -2126,7 +2306,15 @@ static void EvaluatePartialAbsolute(
         LocationSetSet_AddUnknown(set, indRtype, NULL, NULL);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean AddToInitialPointsToFunc(
     Boolean recordInputs, PartialTransferFunction* ptf, LocationSet* dst, LocationSetSet* set
 ) {
@@ -2158,7 +2346,15 @@ static Boolean AddToInitialPointsToFunc(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean Lookup(
     LocationSetSet* set,
     Stack** stackPtr,
@@ -2315,7 +2511,15 @@ static Boolean Lookup(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean InputsHaveNewPointerValues(
     PartialTransferFunction* tgtPTF, PartialTransferFunction* ptf
 ) {
@@ -2324,7 +2528,15 @@ static Boolean InputsHaveNewPointerValues(
 
     return FALSE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void CreateExtendedParamAction(ParamMapping* mapping, void* refcon) {
     CreateEPActionParams* params;
     ExtendedParam* ep;
@@ -2369,7 +2581,15 @@ static void CreateExtendedParamAction(ParamMapping* mapping, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static ExtendedParam* FindMatchingExtendedParam(
     Stack** stackPtr,
     ParamMappingFunction* map,
@@ -2415,7 +2635,15 @@ static ExtendedParam* FindMatchingExtendedParam(
 
     return ep;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static ExtendedParam* CreateExtendedParam(
     Stack** stackPtr, ParamMappingFunction* map, Object* var, Boolean* result
 ) {
@@ -2477,10 +2705,18 @@ static ExtendedParam* CreateExtendedParam(
 
     return ep;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -1
+#define CError_LINE_SHIFT (-1 + CError_LINE_DELTA)
+#endif
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
 #endif
 static void RecordActuals(IROLinear* nd, Object* proc, ParamMappingFunction* map) {
     IRO_ASSERT(3629, nd != NULL);
@@ -2522,7 +2758,15 @@ static void RecordActuals(IROLinear* nd, Object* proc, ParamMappingFunction* map
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean IsAddressableLocation(
     LocationSet* loc, Object* proc, IRONode* fnode, IROLinear* nd
 ) {
@@ -2559,7 +2803,15 @@ static Boolean IsAddressableLocation(
 
     return TRUE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean LocationSetsAlias(LocationSet* ls1, LocationSet* ls2) {
     IRO_ASSERT(3720, ls1 != NULL);
     IRO_ASSERT(3721, ls2 != NULL);
@@ -2572,6 +2824,10 @@ static Boolean LocationSetsAlias(LocationSet* ls1, LocationSet* ls2) {
           CInt64_Equal(LocationSet_field(ls1), LocationSet_field(ls2))) &&
          MemoryBlocks_Equal(LocationSet_block(ls1), LocationSet_block(ls2)));
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void FindAliasingAction2(LocationSet* ls, void* refcon) {
     FindAliasingParams* params;
@@ -2585,6 +2841,10 @@ static void FindAliasingAction2(LocationSet* ls, void* refcon) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void FindAliasingAction(LocationSet* loc, void* refcon) {
     FindAliasingParams* params;
 
@@ -2598,7 +2858,15 @@ static void FindAliasingAction(LocationSet* loc, void* refcon) {
         LocationSetSet_ForEach(params->set, FindAliasingAction2, params);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void KillAllAddressableLocationsAction(PointsToEntry* pte, void* refcon) {
     KillLocationParams* params;
     LocationSet* loc;
@@ -2624,7 +2892,15 @@ static void KillAllAddressableLocationsAction(PointsToEntry* pte, void* refcon) 
         PointsToFunction_Add(toBeKilled, pte);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void KillAllAliasingExtParamLocsAction(PointsToEntry* pte, void* refcon) {
     KillLocationParams* params;
     LocationSet* loc;
@@ -2702,7 +2978,15 @@ static void KillAllAliasingExtParamLocsAction(PointsToEntry* pte, void* refcon) 
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void KillLocationsAction(PointsToEntry* pte, void* refcon) {
     KillLocationParams* params;
     LocationSet* loc;
@@ -2733,7 +3017,15 @@ static void KillLocationsAction(PointsToEntry* pte, void* refcon) {
     LocationSetSet_Term(lss);
     LocationSetSet_Delete(lss);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean KillAllAddressableLocations(
     Object* proc, IRONode* fnode, IROLinear* nd, PartialTransferFunction* ptf
 ) {
@@ -2788,7 +3080,15 @@ static Boolean KillAllAddressableLocations(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void KillAllAliasingExtParamLocs(
     Object* proc, IRONode* fnode, IROLinear* nd, PartialTransferFunction* ptf, LocationSet* dst
 ) {
@@ -2832,7 +3132,15 @@ static void KillAllAliasingExtParamLocs(
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean Assign(
     PartialTransferFunction* ptf,
     LocationSet* dst,
@@ -2905,7 +3213,15 @@ static Boolean Assign(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalMeetAction(PointsToEntry* pte, void* refcon) {
     EvalMeetActionParams* params;
     LocationSet* loc;
@@ -2950,7 +3266,15 @@ static void EvalMeetAction(PointsToEntry* pte, void* refcon) {
     LocationSetSet_Term(set);
     LocationSetSet_Delete(set);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean EvalMeet(Object* proc, IRONode* fnode, IROLinear* nd, PartialTransferFunction* ptf) {
     PointsToFunction* pointsToFunc;
     EvalMeetActionParams params;
@@ -2996,7 +3320,15 @@ static Boolean EvalMeet(Object* proc, IRONode* fnode, IROLinear* nd, PartialTran
 
     return params.result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static PartialTransferFunction* AllocatePTF(
     Object* proc, IROLinear* nd, PartialTransferFunction* ptf
 ) {
@@ -3012,13 +3344,29 @@ static PartialTransferFunction* AllocatePTF(
     PTFList_Add(proc->u.func.ptfList, newPTF);
     return newPTF;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Object* FindMainEntryPoint(Object* function) {
     IRO_ASSERT(4230, function != NULL);
 
     return function;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static ObjectList* FunctionArguments(Object* proc) {
     ObjectList* prev;
     Object* search;
@@ -3124,7 +3472,15 @@ static ObjectList* FunctionArguments(Object* proc) {
 
     return proc->u.func.argList;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static IRONode** FunctionNodeTable(Object* proc) {
     IRO_ASSERT(4384, proc != NULL);
 
@@ -3132,7 +3488,15 @@ static IRONode** FunctionNodeTable(Object* proc) {
 
     return IRO_NodeTable;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static IRONode* FunctionFirstNode(Object* proc) {
     IRO_ASSERT(4402, proc != NULL);
 
@@ -3140,11 +3504,19 @@ static IRONode* FunctionFirstNode(Object* proc) {
 
     return IRO_FirstNode;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void UpdatePTFDomain(void* home) {
     IRO_ASSERT(4420, home != NULL);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalCallAction(Object* proc, void* refcon) {
     ParamMappingFunction* pmf;
     PartialTransferFunction* tgtPTF;
@@ -3224,7 +3596,15 @@ static void EvalCallAction(Object* proc, void* refcon) {
         ParamMappingFunction_Delete(pmf);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean EvalCall(
     Object* proc,
     IRONode* fnode,
@@ -3263,7 +3643,15 @@ static Boolean EvalCall(
 
     return params.result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void AdjustTypesForVolatilityAction(LocationSet* ls, void* refcon) {
     Type* type;
     Type* newtype;
@@ -3306,6 +3694,10 @@ static void AdjustTypesForVolatilityAction(LocationSet* ls, void* refcon) {
         LocationSet_SetRtype(ls, newtype);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void AdjustTypesForVolatility(LocationSetSet* set, Object* proc, IROLinear* nd) {
     if (nd->rtype && CParser_IsVolatile(nd->rtype, nd->nodeflags & 3)) {
@@ -3313,6 +3705,10 @@ static void AdjustTypesForVolatility(LocationSetSet* set, Object* proc, IROLinea
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalAssignAction2(LocationSet* ls, void* refcon) {
     EvalAssignAction2Params* params;
     CInt64 value;
@@ -3444,7 +3840,15 @@ static void EvalAssignAction2(LocationSet* ls, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalAssignAction(LocationSet* dst, void* refcon) {
     EvalAssignActionParams* params;
     LocationSetSet* srcs;
@@ -3486,7 +3890,15 @@ static void EvalAssignAction(LocationSet* dst, void* refcon) {
     params->assignChanged |=
         Assign(params->ptf, dst, srcs, params->proc, params->nd, params->fnode);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean EvalAssign(
     Object* proc,
     IROLinear* nd,
@@ -3696,7 +4108,15 @@ static Boolean EvalAssign(
 
     return params.result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean EvalReturn(
     Object* proc,
     IROLinear* nd,
@@ -3742,7 +4162,15 @@ static Boolean EvalReturn(
 
     return params.result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void ApplySummaryAction2(ParamMapping* mapping, void* refcon) {
     ApplySummaryActionParams* params;
     PAMemoryBlock* block;
@@ -3810,7 +4238,15 @@ static void ApplySummaryAction2(ParamMapping* mapping, void* refcon) {
         params->assignChanged |= assignParams.assignChanged;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void ApplySummaryAction(PointsToEntry* pte, void* refcon) {
     ApplySummaryActionParams* params;
     LocationSet* loc;
@@ -3841,7 +4277,15 @@ static void ApplySummaryAction(PointsToEntry* pte, void* refcon) {
         ParamMappingFunction_ForEach(params->tgtMap, ApplySummaryAction2, params);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean ApplySummary(
     PartialTransferFunction* tgtPTF,
     ParamMappingFunction* tgtMap,
@@ -3905,7 +4349,15 @@ static Boolean ApplySummary(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void GetPTFAction2(ParamMapping* mapping, void* refcon) {
     IRO_ASSERT(5332, mapping != NULL);
 
@@ -3913,7 +4365,15 @@ static void GetPTFAction2(ParamMapping* mapping, void* refcon) {
         ParamMapping_SetExtended(mapping, NULL);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void GetPTFAction(PartialTransferFunction* tgtPTF, void* refcon) {
     GetPTFActionParams* params;
 
@@ -3945,7 +4405,15 @@ static void GetPTFAction(PartialTransferFunction* tgtPTF, void* refcon) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static PartialTransferFunction* GetPTF(
     ParamMappingFunction* map,
     Object* proc,
@@ -3997,18 +4465,34 @@ static PartialTransferFunction* GetPTF(
 
     return result;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static Boolean IsMeetNode(IRONode* fnode, IROLinear* nd) {
     return (fnode->numpred > 1) && (fnode->first == nd);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean IsExitNode(Object* proc, IRONode* fnode) {
     IRO_ASSERT(5468, proc != NULL);
     IRO_ASSERT(5469, fnode != NULL);
 
     return (fnode->numsucc == 0) && Bv_IsBitSet(FunctionFirstNode(proc)->index, fnode->dom);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean SomePredecessorHasBeenVisited(Object* proc, IRONode* fnode) {
     UInt16 i;
 
@@ -4023,6 +4507,10 @@ static Boolean SomePredecessorHasBeenVisited(Object* proc, IRONode* fnode) {
 
     return FALSE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static Boolean AllPredecessorsHaveBeenVisited(Object* proc, IRONode* fnode) {
     UInt16 i;
@@ -4039,6 +4527,10 @@ static Boolean AllPredecessorsHaveBeenVisited(Object* proc, IRONode* fnode) {
     return TRUE;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalProcAction2(PointsToEntry* pte, void* refcon) {
     EvalProcActionParams* params;
     LocationSet* dst;
@@ -4091,7 +4583,15 @@ static void EvalProcAction2(PointsToEntry* pte, void* refcon) {
         LocationSetSet_Delete(set);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void AssignEachInPointsToFunctionAction(PointsToEntry* pte, void* refcon) {
     AssignEachInPointsToFunctionActionParams* params;
     LocationSet* dst;
@@ -4116,7 +4616,15 @@ static void AssignEachInPointsToFunctionAction(PointsToEntry* pte, void* refcon)
     LocationSetSet_Term(srcs);
     LocationSetSet_Delete(srcs);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void AssignEachInPointsToFunction(PointsToFunction* pointsTo, void* refcon) {
     AssignEachInPointsToFunctionActionParams* params;
     PointsToFunction* pointsToFunc;
@@ -4159,7 +4667,15 @@ static void AssignEachInPointsToFunction(PointsToFunction* pointsTo, void* refco
     PointsToFunction_Term(pointsToFunc);
     PointsToFunction_Delete(pointsToFunc);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean ObjectIsAFunctionArgument(Object* proc, Object* obj) {
     ObjectList* list;
 
@@ -4177,7 +4693,15 @@ static Boolean ObjectIsAFunctionArgument(Object* proc, Object* obj) {
 
     return FALSE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean ObjectIsARealFunctionArgument(Object* proc, Object* obj) {
     ObjectList* list;
 
@@ -4195,7 +4719,15 @@ static Boolean ObjectIsARealFunctionArgument(Object* proc, Object* obj) {
 
     return FALSE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void AddLocalVarsAddressedByExceptionUses(Object* var) {
     IRO_ASSERT(5700, var != NULL);
     IRO_ASSERT(5701, stExceptionFNode != NULL);
@@ -4205,6 +4737,10 @@ static void AddLocalVarsAddressedByExceptionUses(Object* var) {
         ObjectSet_Add(stExceptionFNode->addressed, var);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static Boolean LinearNodeIsInFlowgraphNode(IROLinear* nd, IRONode* fnode) {
     IROLinear* first;
@@ -4222,6 +4758,10 @@ static Boolean LinearNodeIsInFlowgraphNode(IROLinear* nd, IRONode* fnode) {
     return FALSE;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void EvalProcAction(IROLinear* Int, Boolean isFirst) {
 #if VERSION < VERSION_GC_2_5
     ParamMappingFunction* map;
@@ -4334,7 +4874,7 @@ static void EvalProcAction(IROLinear* Int, Boolean isFirst) {
                    obj->datatype == DLOCAL) {
             ObjectSet_Add(fnode->addressed, obj);
         } else if (Int->type == IROLinearAsm) {
-#if VERSION < VERSION_GC_2_5
+#if VERSION >= VERSION_GC_2_0 && VERSION < VERSION_GC_2_5
             IAEffects effects;
             int i;
             CodeGen_GetAsmEffects(Int->u.asm_stmt, &effects);
@@ -4378,10 +4918,18 @@ static void EvalProcAction(IROLinear* Int, Boolean isFirst) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT 9
+#define CError_LINE_SHIFT (9 + CError_LINE_DELTA)
+#endif
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
 #endif
 static void EvalProc(Object* proc, ParamMappingFunction* map, PartialTransferFunction* ptf) {
     IRONode* fnode;
@@ -4488,6 +5036,10 @@ static void EvalProc(Object* proc, ParamMappingFunction* map, PartialTransferFun
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void PointerAnalysis_Init(void) {
     stCallingContextStack = Stack_New();
@@ -4503,6 +5055,10 @@ static void PointerAnalysis_Init(void) {
     PTFList_Init(stPTFList);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CleanseLocationSet(LocationSet* loc, void* refcon) {
     PAMemoryBlock* block;
     PALocalVar* local;
@@ -4517,6 +5073,10 @@ static void CleanseLocationSet(LocationSet* loc, void* refcon) {
         PALocalVar_SetObject(local, NULL);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 
 static void CleansePointsToEntry(PointsToEntry* pte, void* refcon) {
     IRO_ASSERT(6168, pte != NULL);
@@ -4526,6 +5086,10 @@ static void CleansePointsToEntry(PointsToEntry* pte, void* refcon) {
     LocationSetSet_ForEach(PointsToEntry_locs(pte), CleanseLocationSet, NULL);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void PointerAnalysis_TermAction4(PartialTransferFunction* ptf, void* refcon) {
     IRO_ASSERT(6178, ptf != NULL);
     IRO_ASSERT(6179, refcon == NULL);
@@ -4539,6 +5103,10 @@ static void PointerAnalysis_TermAction4(PartialTransferFunction* ptf, void* refc
         );
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void PointerAnalysis_TermAction3(ExtendedParam* ep) {
     ExtendedParam_Term(ep);
@@ -4619,6 +5187,10 @@ static void PointerAnalysis_Term(void) {
     stCallingContextStack = NULL;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void InvalidatePointsToFunctions(Object* proc) {
     IRONode* fnode;
     IROLinear* nd;
@@ -4643,6 +5215,10 @@ static void InvalidatePointsToFunctions(Object* proc) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void InitialSetup(void) {}
 
@@ -4670,6 +5246,10 @@ void PointerAnalysis_Cleanup(void) {
     IRO_TerminateAllocator();
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void IRO_AnalyzePointers(Object* function) {
     EvalCallActionParams params;
     IROLinear nd;
@@ -4714,6 +5294,10 @@ void IRO_AnalyzePointers(Object* function) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void RemoveRestrictedExtendedParamsAction(LocationSet* ls, void* refcon) {
     LocationSetSet* locs;
@@ -4974,6 +5558,10 @@ static void FindGlobalObjectAction(Object* object, void* refcon) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void GetDefiniteObjectOfExtendedParamLoc(
     LocationSet* loc, Object** resultObj, CInt64* resultField
 ) {
@@ -5030,7 +5618,15 @@ static void GetDefiniteObjectOfExtendedParamLoc(
     *resultObj = obj;
     *resultField = field;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void CreateExpressionForLocationSet(
     LocationSet* loc, IROList* list, Type* rtype, Object* proc
 ) {
@@ -5106,7 +5702,15 @@ static void CreateExpressionForLocationSet(
         IRO_AddToList(sumNd, list);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void LookupLinearExprAction(LocationSet* loc, void* refcon) {
     LookupLinearExprActionParams* params;
     IROListNode* list;
@@ -5130,7 +5734,15 @@ static void LookupLinearExprAction(LocationSet* loc, void* refcon) {
 
     params->list = &list->nextList;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void PointerAnalysis_LookupLinearNodePointerExpr(
     Object* proc, IROLinear* indirect, IROListNode** list
 ) {
@@ -5156,6 +5768,10 @@ void PointerAnalysis_LookupLinearNodePointerExpr(
     LocationSetSet_Term(set);
     LocationSetSet_Delete(set);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CreateENodeForLocationSet(
     LocationSet* loc, ENode** enodePtr, Type* rtype, Object* proc
@@ -5327,6 +5943,10 @@ void PointerAnalysis_LookupVariableIntoENodeExprs(
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void GetFunctionDepsOrKillsAction(LocationSet* ls, void* refcon) {
     GetFunctionDepsOrKillsActionParams* params;
     ObjectList* list;
@@ -5377,7 +5997,15 @@ static void GetFunctionDepsOrKillsAction(LocationSet* ls, void* refcon) {
 
     params->list = &list->next;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void GetFunctionDepsOrKillsAction2(PointsToEntry* pte, void* refcon) {
     GetFunctionDepsOrKillsActionParams* params;
     LocationSet* loc;
@@ -5409,6 +6037,10 @@ static void GetFunctionDepsOrKillsAction2(PointsToEntry* pte, void* refcon) {
         LocationSetSet_Delete(set);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CreateFalseContext(
     Object* proc,
@@ -5495,6 +6127,10 @@ static inline int NoPTF(Object* proc, PartialTransferFunction** ptf) {
     return fail;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void PointerAnalysis_GetFunctionKills(Object* proc, IROLinear* funccall, ObjectList** list) {
     Boolean fail;
     PartialTransferFunction* ptf;
@@ -5530,6 +6166,10 @@ void PointerAnalysis_GetFunctionKills(Object* proc, IROLinear* funccall, ObjectL
         (*list)->next = NULL;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static inline int NoPTFList(Object* proc) {
     int fail = 1;
@@ -5539,6 +6179,10 @@ static inline int NoPTFList(Object* proc) {
     return fail;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void PointerAnalysis_GetFunctionDependencies(Object* proc, IROLinear* funccall, ObjectList** list) {
     Boolean fail;
     PointsToFunction* finalPointsTo;
@@ -5583,6 +6227,10 @@ void PointerAnalysis_GetFunctionDependencies(Object* proc, IROLinear* funccall, 
         (*list)->next = NULL;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void PointerAnalysis_PragmaMode(void) {
     if (cparamblkptr->preprocess) {
@@ -5618,6 +6266,10 @@ void PointerAnalysis_PragmaMode(void) {
 }
 
 #pragma sym off
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void ParseLocationSet(
     LocationSet* loc,
     Type* rtype,
@@ -5899,8 +6551,16 @@ static void ParseLocationSet(
     *resultIsReturnValue = isReturnValue;
     *resultFailed = failed;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 #pragma sym reset
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static void ParseLocationSetSet(
     LocationSetSet* locs,
     Type* rtype,
@@ -5966,7 +6626,15 @@ static void ParseLocationSetSet(
 
     *resultFailed = failed;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 static Object* GetFunctionObjectFromDeclInfo(DeclInfo* di) {
     Object* proc;
 
@@ -5984,7 +6652,15 @@ static Object* GetFunctionObjectFromDeclInfo(DeclInfo* di) {
 
     return proc;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void PointerAnalysis_ParseEntryPointsToSpecifier(DeclInfo* di) {
     Object* proc;
     Boolean failed;
@@ -6074,7 +6750,15 @@ void PointerAnalysis_ParseEntryPointsToSpecifier(DeclInfo* di) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void PointerAnalysis_ParseExitPointsToSpecifier(DeclInfo* di) {
     Object* proc;
     Boolean failed;
@@ -6168,7 +6852,15 @@ void PointerAnalysis_ParseExitPointsToSpecifier(DeclInfo* di) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -11
+#endif
 void PointerAnalysis_ParseFunctionModifiesSpecifier(DeclInfo* di) {
     Object* proc;
     Boolean failed;
@@ -6210,5 +6902,9 @@ void PointerAnalysis_ParseFunctionModifiesSpecifier(DeclInfo* di) {
         LocationSetSet_Delete(lss);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 #pragma pack(2)

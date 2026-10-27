@@ -3267,7 +3267,11 @@ PooledString* CInit_DeclarePooledString(char* data, SInt32 size, Boolean ispasca
             0,
             GetHashNameNodeExport("@stringBase0")
         );
+#if VERSION < VERSION_GC_2_0
+        PPC_EABI_SetSection(obj, 0, copts.readonly_strings);
+#else
         PPC_EABI_SetSection(obj, 0, copts.readonly_strings, TRUE);
+#endif
         offset = 0;
     }
 
@@ -3320,6 +3324,10 @@ PooledString* CInit_DeclarePooledWString(char* data, SInt32 size) {
     return str;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -6
+#endif
 void CInit_RewriteString(ENode* expr, Boolean unused) {
     PooledString* str;
     Boolean is_wide;
@@ -3356,6 +3364,10 @@ void CInit_RewriteString(ENode* expr, Boolean unused) {
         );
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CInit_DeclarePooledStrings(void) {
     SInt32 size;

@@ -1697,7 +1697,7 @@ SInt32 CMach_StructLayoutBitfield(TypeBitfield* tbitfield, UInt32 qual) {
 #else
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -105
+#define CError_LINE_SHIFT (-105 + CError_LINE_DELTA)
 #endif
 SInt32 CMach_StructLayoutBitfield(TypeBitfield* tbitfield, UInt32 qual) {
     SInt16 align;
@@ -2017,7 +2017,7 @@ Type* CMach_GetCustomType(short token, short size, short signedness) {
 #if VERSION < VERSION_GC_2_6
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -110
+#define CError_LINE_SHIFT (-110 + CError_LINE_DELTA)
 #endif
 CInt64 CMach_CustomIntConvert(Type* type, Type* oldtype, CInt64 value) {
     CInt64 result;
@@ -2245,11 +2245,11 @@ void CMach_ReInitRuntimeObjects(void) {
 #pragma sym off
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -68
+#define CError_LINE_SHIFT (-68 + CError_LINE_DELTA)
 #endif
 #if VERSION == VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT 42
+#define CError_LINE_SHIFT (42 + CError_LINE_DELTA)
 #endif
 void CMach_ParseGlobalRegisterVariable(DeclInfo* declinfo) {
     ObjRegInfo reginfo;
@@ -2460,7 +2460,9 @@ void CMach_GetBackEndOptions(struct CInlineBackendOptions* options) {
     options->gen_isel = copts.gen_isel;
     options->gen_fsel = copts.gen_fsel;
     options->gecko_float_typecons = copts.gecko_float_typecons;
+#if VERSION >= VERSION_GC_2_0
     options->disable_vector_frame = copts.disable_vector_frame;
+#endif
     options->opt_bcc_lr_ctr = copts.opt_bcc_lr_ctr;
     options->optimizationlevel = copts.optimizationlevel;
     options->optimizesize = copts.optimizesize;
@@ -2517,7 +2519,9 @@ void CMach_SetBackEndOptions(struct CInlineBackendOptions* options) {
     copts.gen_isel = options->gen_isel;
     copts.gen_fsel = options->gen_fsel;
     copts.gecko_float_typecons = options->gecko_float_typecons;
+#if VERSION >= VERSION_GC_2_0
     copts.disable_vector_frame = options->disable_vector_frame;
+#endif
     copts.opt_bcc_lr_ctr = options->opt_bcc_lr_ctr;
     copts.optimizationlevel = options->optimizationlevel;
     copts.optimizesize = options->optimizesize;

@@ -224,6 +224,7 @@ def deferred(args):
 
 def main():
     if hasattr(signal, "SIGPIPE"):
+        if hasattr(signal, "SIGPIPE"):
         signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     parser = argparse.ArgumentParser(
         description="How each unit was built, from trial compiles.",

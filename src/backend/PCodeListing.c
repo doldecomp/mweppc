@@ -276,13 +276,21 @@ void pclistblocks_start_scheduler(char* str1, char* str2) {}
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -141
+#define CError_LINE_SHIFT (-141 + CError_LINE_DELTA)
+#endif
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -3
 #endif
 void pclistblocks_end_scheduler(void) {
     if (pclist_bad_operand) {
         CError_FATAL(1525);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void printheapsize(void) {}
 

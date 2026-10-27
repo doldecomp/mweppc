@@ -382,6 +382,10 @@ static void CPrec_SetupBuiltIn(void) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CPrec_NewPointerPatch(void* src, void* ptr) {
     if (cprec_dowrite) {
         Patch* patch = lalloc(sizeof(Patch));
@@ -405,7 +409,15 @@ static void CPrec_NewPointerPatch(void* src, void* ptr) {
         *((void**)(*cprec_glist.data + (SInt32)src)) = ptr;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CPrec_ExistingPointerPatch(void* src, void* ptr) {
     SInt32 key = (SInt32)ptr;
     if (cprec_dowrite) {
@@ -426,6 +438,10 @@ static void CPrec_ExistingPointerPatch(void* src, void* ptr) {
         *((void**)(*cprec_glist.data + (SInt32)src)) = addrPatch->value;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CPrec_NamePatch(void* src, HashNameNode* name) {
     name->id = 1;
@@ -480,6 +496,10 @@ static UInt32 CPrec_AppendPointer(void* v) {
     return offset;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static UInt32 CPrec_AppendPointerPatch(void* v) {
     AddrPatch* addrPatch;
 
@@ -499,6 +519,10 @@ static UInt32 CPrec_AppendPointerPatch(void* v) {
         return CPrec_AppendPointer(NULL);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CPrec_AppendNamePatch(HashNameNode* name) {
     if (name) {
@@ -886,6 +910,10 @@ static ExceptSpecList* CPrec_GetExceptSpecPatch(ExceptSpecList* exspec) {
     return first;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static FuncArg* CPrec_GetArgListPatch(FuncArg* lst, Boolean includeNames) {
     SInt32 first;
     SInt32 current;
@@ -937,6 +965,10 @@ static FuncArg* CPrec_GetArgListPatch(FuncArg* lst, Boolean includeNames) {
 
     return (FuncArg*)first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static TypeFunc* CPrec_GetTypeFuncPatch(TypeFunc* type) {
     SInt32 p;
@@ -984,6 +1016,10 @@ static TypeMemberPointer* CPrec_GetTypeMemberPointerPatch(TypeMemberPointer* typ
     return (TypeMemberPointer*)p;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static TypeTemplDep* CPrec_GetTypeTemplDepPatch(TypeTemplDep* type) {
     SInt32 p;
 
@@ -1046,6 +1082,10 @@ static TypeTemplDep* CPrec_GetTypeTemplDepPatch(TypeTemplDep* type) {
 
     return (TypeTemplDep*)p;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ClassList* CPrec_GetClassListPatch(ClassList* cl) {
     AddrPatch* addrPatch;
@@ -1551,6 +1591,10 @@ static ObjCInfo* CPrec_GetObjCInfoPatch(ObjCInfo* info) {
     return p;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static TemplArg* CPrec_GetTemplateArgPatch(TemplArg* arg) {
     TemplArg* first;
     TemplArg* current;
@@ -1598,7 +1642,15 @@ static TemplArg* CPrec_GetTemplateArgPatch(TemplArg* arg) {
 
     return first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static TemplParam* CPrec_GetTemplateParamPatch(TemplParam* param) {
     SInt32 first;
     SInt32 current;
@@ -1657,7 +1709,15 @@ static TemplParam* CPrec_GetTemplateParamPatch(TemplParam* param) {
 
     return (TemplParam*)first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static TStreamElement* CPrec_GetTStreamPatch(TStreamElement* tokens, SInt32 count) {
     TStreamElement elem;
     SInt32 first;
@@ -1739,6 +1799,10 @@ static TStreamElement* CPrec_GetTStreamPatch(TStreamElement* tokens, SInt32 coun
 
     return (TStreamElement*)first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static TemplFuncInstance* CPrec_GetTemplFuncInstancePatch(TemplFuncInstance* inst) {
     AddrPatch* addrPatch;
@@ -1880,6 +1944,10 @@ static TemplateFriend* CPrec_GetTemplateFriendPatch(TemplateFriend* frnd) {
     return p;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static TemplateAction* CPrec_GetTemplateActionPatch(TemplateAction* act) {
     SInt32 first;
     SInt32 current;
@@ -1969,6 +2037,10 @@ static TemplateAction* CPrec_GetTemplateActionPatch(TemplateAction* act) {
     }
     return (TemplateAction*)first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static TemplateFunction* CPrec_GetTemplateFunctionPatch(TemplateFunction* tf) {
     AddrPatch* addrPatch;
@@ -2226,6 +2298,10 @@ static TypeClass* CPrec_GetTypeClassPatch(TypeClass* tclass) {
     return (TypeClass*)first;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static Type* CPrec_GetTypePatch(Type* type) {
     AddrPatch* addrPatch;
 
@@ -2262,7 +2338,15 @@ static Type* CPrec_GetTypePatch(Type* type) {
             return NULL;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ExceptionAction* CPrec_GetExceptionPatch(ExceptionAction* exc) {
     SInt32 first;
     SInt32 current;
@@ -2390,6 +2474,10 @@ static ExceptionAction* CPrec_GetExceptionPatch(ExceptionAction* exc) {
     }
     return (ExceptionAction*)first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ENodeList* CPrec_GetExpressionListPatch(ENodeList* lst) {
     SInt32 first;
@@ -2416,6 +2504,10 @@ static ENodeList* CPrec_GetExpressionListPatch(ENodeList* lst) {
     return (ENodeList*)first;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static EMemberInfo* CPrec_GetEMemberInfoPatch(EMemberInfo* emember) {
     EMemberInfo* p;
 
@@ -2435,7 +2527,15 @@ static EMemberInfo* CPrec_GetEMemberInfoPatch(EMemberInfo* emember) {
 
     return p;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ENode* CPrec_GetExpressionPatch(ENode* expr) {
     SInt32 p;
 
@@ -2670,6 +2770,10 @@ static ENode* CPrec_GetExpressionPatch(ENode* expr) {
 
     return (ENode*)p;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static CI_Switch* CPrec_GetSwitchInfoPatch(CI_Switch* si) {
     SInt32 p = CPrec_AppendAlign();
@@ -2705,9 +2809,13 @@ static InlineAsm* CPrec_GetInlineAsmPatch(InlineAsm* ia, SInt32 size) {
     return (InlineAsm*)p;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -51
+#define CError_LINE_SHIFT (-51 + CError_LINE_DELTA)
 #endif
 static CI_Statement* CPrec_GetStatementPatch(CI_Statement* stmt, short count) {
     short i;
@@ -2833,6 +2941,10 @@ static CI_FuncData* CPrec_GetInlineFuncPatch(CI_FuncData* ifunc) {
     return p;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ObjEnumConst* CPrec_GetObjEnumConstPatch(ObjEnumConst* obj) {
     AddrPatch* addrPatch;
     SInt32 first;
@@ -2876,6 +2988,10 @@ static ObjEnumConst* CPrec_GetObjEnumConstPatch(ObjEnumConst* obj) {
 
     return (ObjEnumConst*)first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static ObjType* CPrec_GetObjTypePatch(ObjType* obj) {
     AddrPatch* addrPatch;
@@ -2992,6 +3108,10 @@ static InlineXRef* CPrec_GetInlineXRefPatch(InlineXRef* ix) {
     return (InlineXRef*)first;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static Object* CPrec_GetObjectPatch(Object* obj) {
     AddrPatch* addrPatch;
     SInt32 p;
@@ -3130,7 +3250,15 @@ static Object* CPrec_GetObjectPatch(Object* obj) {
 
     return (Object*)p;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static ObjBase* CPrec_GetObjBasePatch(ObjBase* obj) {
     switch (obj->otype) {
         default:
@@ -3164,6 +3292,10 @@ static ObjBase* CPrec_GetObjBasePatch(ObjBase* obj) {
             return (ObjBase*)CPrec_GetObjectPatch((Object*)obj);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static NameSpaceObjectList* CPrec_GetNameSpaceObjectListPatch(NameSpaceObjectList* nsol) {
     AddrPatch* addrPatch;
@@ -3333,6 +3465,10 @@ static NameSpace* CPrec_GetNameSpacePatch(NameSpace* nspace) {
     return (NameSpace*)p;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static void CPrec_DumpRootNameSpace(void) {
     NameSpaceList* nslist;
     NameSpaceName* nsname;
@@ -3363,6 +3499,10 @@ static void CPrec_DumpRootNameSpace(void) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static CSOMStub* CPrec_GetSOMPatch(CSOMStub* stub) {
     CSOMStub* first;
@@ -3525,6 +3665,10 @@ static InitExpr* CPrec_GetIExpressionPatch(InitExpr* initexpr) {
     return first;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static CI_Action* CPrec_GetInlineActionPatch(CI_Action* act) {
     CI_Action* first;
     SInt32 next;
@@ -3602,6 +3746,10 @@ static CI_Action* CPrec_GetInlineActionPatch(CI_Action* act) {
 
     return first;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void CPrec_GenerateBuiltinPatches(void) {
     Patch* scan;
@@ -3730,6 +3878,10 @@ static void CPrec_AppendBigEndianWord32(SInt32 v) {
     CPrec_AppendByte(u.b[0]);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 static int CPrec_CompressPatches(void) {
     Patch* scan;
     int count;
@@ -3759,6 +3911,10 @@ static int CPrec_CompressPatches(void) {
 
     return count;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static OSErr CPrec_DumpColorSymbolTable(Boolean doWrite) {
     OSErr err;
@@ -3981,7 +4137,11 @@ static OSErr CPrec_WriteFile(void) {
     memclrw(cprec_header, sizeof(Header));
 
     cprec_header->magic = 0xBEEFFACE;
+    #if VERSION < VERSION_GC_2_0
+    cprec_header->version = 1047;
+#else
     cprec_header->version = 5145;
+#endif
     cprec_header->target = 2;
     cprec_header->check_header_flags = copts.checkprecompflags;
     cprec_header->cplusplus = copts.cplusplus;
@@ -4290,6 +4450,10 @@ static void CPrec_RelocateMacroTable(void) {
     } while (++i < 0x800);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -7
+#endif
 void PrecompilerRead(short refnum, void* buffer) {
     Header* header;
     SInt32 offset;
@@ -4323,7 +4487,11 @@ void PrecompilerRead(short refnum, void* buffer) {
     if (cprec_header->magic != 0xBEEFFACE) {
         CError_ErrorTerm(ERR_ILLEGAL_DATA_PRECOMPILED_HEADER);
     }
+    #if VERSION < VERSION_GC_2_0
+    if (cprec_header->version != 1047) {
+#else
     if (cprec_header->version != 5145) {
+#endif
         CError_ErrorTerm(ERR_ILLEGAL_PRECOMPILED_HEADER_VERSION);
     }
     if (cprec_header->target != 2) {
@@ -4506,5 +4674,9 @@ void PrecompilerRead(short refnum, void* buffer) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 #pragma pack(2)

@@ -233,7 +233,11 @@ void init_stack_globals(Object* funcobj) {
     }
 
     if (funcobj->qual & Q_INTERRUPT) {
+#if VERSION < VERSION_GC_2_0
+        PPC_EABI_SetSection(funcobj, 0, FALSE);
+#else
         PPC_EABI_SetSection(funcobj, 0, FALSE, TRUE);
+#endif
         interrupt_routine_flags = GetInterruptRoutineFlags(funcobj);
     }
 }

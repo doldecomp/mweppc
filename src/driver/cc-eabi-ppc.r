@@ -574,6 +574,8 @@ static const char *STR11001[] = {
     "In the .lcf file, please specify an uncompressed TEXT section with the same name as the section of your entry point.",
     "In the .lcf file, please specify an uncompressed TEXT section in ROM with the same name as the section of your entry point.",
     "referencing file may have been compiled with different small data thresholds than the symbol definition file\nor the extern declaration for symbol is inconsistent with the symbol's definition.",
+#if VERSION >= VERSION_GC_2_0
     "Section '%s' in '%c'%c%c%c\nhas alignment which isn't a power of 2 (%n).  Alignment of 4 is assumed.",
+#endif
     NULL
 };

@@ -119,7 +119,7 @@ Type stvoid = {TYPEVOID, 0};
 TypePointer void_ptr = {TYPEPOINTER, 0, &stvoid, 0};
 TypeFunc rt_func = {TYPEFUNC, 0, NULL, NULL, &stvoid, 0, 0};
 
-#ifndef __MWERKS__
+#if !defined(__MWERKS__) || defined(NONMATCHING)
 extern TypeIntegral stcustomtype113;
 extern TypeIntegral stcustomtype114;
 
@@ -2263,7 +2263,7 @@ static void CParser_ParseAttributeFunctionSummary(DeclInfo* declinfo) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -48
+#define CError_LINE_SHIFT (-48 + CError_LINE_DELTA)
 #endif
 void CParser_ParseAttribute(Type* type, DeclInfo* declinfo) {
     CInt64 val64;

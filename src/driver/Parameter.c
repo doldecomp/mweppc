@@ -807,7 +807,7 @@ static void DescHelpParam_SetString(
     *defaul = 0;
 }
 
-static int CompareParam_SetString(SETSTRING_T* p, int flags) {
+static int CompareParam_SetString(SETSTRING_T* p) {
     if (p->pstring) {
         return !pstrcmp((const unsigned char*)p->var, (const unsigned char*)p->value);
     } else {

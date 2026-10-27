@@ -1287,6 +1287,14 @@ static int L_S(PCode* instr, UInt32* masks) {
 #endif
     SInt32 storeSize;
 
+#if defined(__MWERKS__) && defined(NONMATCHING)
+    /* For a store to another object, the original compares both offsets uninitialized: the stack slots as earlier
+       calls left them. The scan offset's slot then holds a pointer (computeinstructionpredecessors leaves it), so
+       the offsets never overlap. Without the clang build's ls_frame emulation, give them those values. */
+    defInstrOffset = 0;
+    scanOffset = 0x7FFFFFFF;
+#endif
+
     if (PCODE_FLAG_SET_F(instr) & (fIsVolatile | fSideEffects | fUpdatesPtr)) {
         return FALSE;
     }

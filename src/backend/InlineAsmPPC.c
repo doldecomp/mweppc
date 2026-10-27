@@ -662,7 +662,11 @@ static inline Object* isvariableoperand(void) {
     if (tk == TK_IDENTIFIER) {
         InlineAsm_LookupSymbol(tkidentifier, &result);
         if ((obj = result.object)) {
+#if VERSION < VERSION_GC_2_0
+            PPC_EABI_SetSection(obj, obj->type->size, FALSE);
+#else
             PPC_EABI_SetSection(obj, obj->type->size, FALSE, FALSE);
+#endif
             if (obj->datatype == DLOCAL) {
                 if (OBJECT_REG(obj)) {
                     obj = NULL;
@@ -1317,7 +1321,7 @@ static InlineAsm* InlineAsm_ScanAssemblyOperands(IAMnemonic* mnemonic) {
                     } else {
 #if VERSION < VERSION_GC_2_6
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -3
+#define CError_LINE_SHIFT (-3 + CError_LINE_DELTA)
 #endif
                         CError_FATAL(1822);
                     }

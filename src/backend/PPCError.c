@@ -49,7 +49,11 @@ void PPCError_Warning(int code, ...) {
 void PPCError_Message(char* format, ...) {
     va_list list;
 
+#if VERSION < VERSION_GC_2_0
+    if (trychain) {
+#else
     if (trychain || copts.supress_warnings) {
+#endif
         return;
     }
 

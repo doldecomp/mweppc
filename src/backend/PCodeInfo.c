@@ -311,7 +311,7 @@ PCode* vformatpcode(short opcode, va_list argList) {
                 } else {
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -4
+#define CError_LINE_SHIFT (-4 + CError_LINE_DELTA)
 #endif
                     CError_FATAL(331);
                 }
@@ -1299,7 +1299,7 @@ void formatoperands(PCode* pcode, char* buf, int showBasicBlocks) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -8
+#define CError_LINE_SHIFT (-8 + CError_LINE_DELTA)
 #endif
 PCode* makecopyinstruction(PCodeArg* src, PCodeArg* dst) {
     if (dst->kind == PCOp_REGISTER) {
@@ -1442,9 +1442,14 @@ int can_reuse_stored_value(PCode* store, PCode* load) {
             switch (store->op) {
                 case PC_PSQ_ST:
                 case PC_PSQ_STX:
+#if VERSION < VERSION_GC_2_0
+                    if (store->args[4].data.reg.reg == SPR_GQR0 &&
+                        load->args[4].data.reg.reg == SPR_GQR0) {
+#else
                     if (store->args[4].data.reg.reg == SPR_GQR0 &&
                         load->args[4].data.reg.reg == SPR_GQR0 &&
                         store->args[3].data.imm.value == load->args[3].data.imm.value) {
+#endif
                         return 1;
                     }
             }
@@ -1454,6 +1459,10 @@ int can_reuse_stored_value(PCode* store, PCode* load) {
     return 0;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -3
+#endif
 PCode* makecopyforload(int kind, PCodeArg* src, PCodeArg* dst) {
     switch (kind) {
         case 1:
@@ -1471,7 +1480,15 @@ PCode* makecopyforload(int kind, PCodeArg* src, PCodeArg* dst) {
             return NULL;
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -17
+#endif
 int nbytes_loaded_or_stored_by(PCode* pcode) {
     OpcodeInfo* oinfo = opcodeinfo + pcode->op;
     if (oinfo->flags & (fIsRead | fIsWrite)) {
@@ -1572,10 +1589,14 @@ int nbytes_loaded_or_stored_by(PCode* pcode) {
             case PC_PSQ_STU:
             case PC_PSQ_STX:
             case PC_PSQ_STUX:
+#if VERSION < VERSION_GC_2_0
+                return 8;
+#else
                 if (pcode->args[4].data.reg.reg == SPR_GQR0 && pcode->args[3].data.imm.value == 1) {
                     return 4;
                 }
                 return 8;
+#endif
             default:
                 CError_FATAL(2135);
         }
@@ -1584,7 +1605,15 @@ int nbytes_loaded_or_stored_by(PCode* pcode) {
     CError_FATAL(2138);
     return 0;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -17
+#endif
 void change_num_operands(PCode* pcode, int newNum) {
     int i;
 
@@ -1596,6 +1625,10 @@ void change_num_operands(PCode* pcode, int newNum) {
 
     pcode->argCount = newNum;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void change_opcode(PCode* pcode, short opcode) {
     UInt32 flags;

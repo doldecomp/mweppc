@@ -62,13 +62,17 @@ static Macro longI;
 static Macro IEEED;
 Macro vecM;
 Macro altivecM;
+#if VERSION >= VERSION_GC_2_0
 static Macro optM;
 static Macro cpuM;
+#endif
 static Macro eabiM;
 Object* gFunction;
 static ObjectList* temps;
+#if VERSION >= VERSION_GC_2_0
 static char target_cpu[38];
 static char optimization_level[8];
+#endif
 CLabel* returnlabel;
 CLabel* cleanreturnlabel;
 Boolean needs_cleanup;
@@ -203,6 +207,10 @@ static void free_temporaries(void) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 void process_arguments(ArgumentProcessor func, Boolean hasVarargs) {
     short gpr = 3;
     short fpr = 1;
@@ -256,7 +264,15 @@ void process_arguments(ArgumentProcessor func, Boolean hasVarargs) {
         move_varargs_to_memory();
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void retain_argument_register(Object* obj, short reg) {
     VarInfo* vi = Registers_GetVarInfo(obj);
     Type* type = obj->type;
@@ -287,6 +303,10 @@ static void retain_argument_register(Object* obj, short reg) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void allocate_local_vregs(void) {
     ObjectList* list;
@@ -355,6 +375,10 @@ static void allocate_local_vregs(void) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void allocate_local_GPRs(void) {
     ObjectList* list;
     Object* obj;
@@ -430,7 +454,15 @@ static void allocate_local_GPRs(void) {
         CError_ASSERT(701, Registers_GetVarInfo(winning_obj)->flags & VarInfoFlag_InReg);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void allocate_local_FPRs(void) {
     ObjectList* list;
     Object* obj;
@@ -493,7 +525,15 @@ static void allocate_local_FPRs(void) {
         CError_ASSERT(785, Registers_GetVarInfo(winning_obj)->flags & VarInfoFlag_InReg);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void allocate_local_VRs(void) {
     ObjectList* list;
     Object* obj;
@@ -551,6 +591,10 @@ static void allocate_local_VRs(void) {
         CError_ASSERT(849, Registers_GetVarInfo(winning_obj)->flags & VarInfoFlag_InReg);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void allocate_locals(void) {
     has_altivec_arrays = FALSE;
@@ -573,10 +617,18 @@ static void allocate_locals(void) {
 }
 
 #if VERSION < VERSION_GC_2_5
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static Boolean is_pointer_to_const(Object* obj) {
     CError_ASSERT(895, IS_TYPE_POINTER(obj->type));
     return CParser_IsConst(TPTR_TARGET(obj->type), obj->qual);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static Boolean is_unique_pointer(Object* obj) {
     return (CParser_GetTypeQualifiers(obj->type, obj->qual) & Q_RESTRICT) != 0 ||
@@ -586,7 +638,11 @@ static Boolean is_unique_pointer(Object* obj) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT 8
+#define CError_LINE_SHIFT (8 + CError_LINE_DELTA)
+#endif
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
 #endif
 void move_assigned_argument(Object* obj, short reg) {
     VarInfo* vi;
@@ -679,7 +735,7 @@ void move_assigned_argument(Object* obj, short reg) {
                         break;
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT 9
+#define CError_LINE_SHIFT (9 + CError_LINE_DELTA)
 #endif
                     default:
                         CError_FATAL(1020);
@@ -768,7 +824,15 @@ void move_assigned_argument(Object* obj, short reg) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void load_TOC_pointers(void) {
     Object* obj;
     VarInfo* vi;
@@ -826,6 +890,10 @@ static void load_TOC_pointers(void) {
         }
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static int has_vararglist(Object* funcobj) {
     FuncArg* arg;
@@ -929,6 +997,10 @@ static void gotostatement(CLabel* label) {
     free_temporaries();
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void gotoexpression(ENode* expr) {
     Operand opnd;
     CodeLabelList* list;
@@ -948,6 +1020,10 @@ static void gotoexpression(ENode* expr) {
     emitpcode(PC_MTCTR, opnd.reg);
     branch_indirect(NULL);
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static void conditionalstatement(ENode* cond, CLabel* label, short truthy) {
     Operand opnd;
@@ -1065,6 +1141,10 @@ static void returnstatement(ENode* expr, Boolean dont_branch) {
     }
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void capturestackpointer(Object* obj) {
     branch_label(makepclabel());
     CError_ASSERT(1621, obj->datatype == DLOCAL);
@@ -1072,7 +1152,15 @@ static void capturestackpointer(Object* obj) {
     load_store_register(PC_STW, 1, local_base_register(obj), obj, 20);
     branch_label(makepclabel());
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 static void resetstackpointer(Object* obj) {
     PCode* pc;
 
@@ -1090,6 +1178,10 @@ static void resetstackpointer(Object* obj) {
 
     branch_label(makepclabel());
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 
 static void callprofiler(char* name) {
     UInt32 masks[RegClassMax] = {0, 0, 0, 0, 0};
@@ -1181,6 +1273,10 @@ static inline UInt32 paired_single_mask(PCodeArg* op, UInt32* gprs, UInt32* fprs
     return 0;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -1
+#endif
 Boolean set_vr_reg_flags(void) {
     UInt32* gprs;
     int i;
@@ -1258,12 +1354,22 @@ Boolean set_vr_reg_flags(void) {
         }
     }
 
+#if VERSION >= VERSION_GC_2_0
     if (copts.disable_vector_frame) {
         return FALSE;
     }
+#endif
     return (count || other) ? TRUE : FALSE;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -4
+#endif
 void CodeGen_Generator(
     Statement* statements, Object* func, UInt8 oldStyleParameters, Boolean callOnModuleBind
 ) {
@@ -1560,6 +1666,10 @@ void CodeGen_Generator(
         setheaperror(saveheaperror);
     }
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 static SInt8 thunk_this_register(Type* functype) {
     if (Type_RequiresMemoryReturn(functype)) {
@@ -1568,6 +1678,10 @@ static SInt8 thunk_this_register(Type* functype) {
     return 3;
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -4
+#endif
 void CodeGen_GenVDispatchThunk(
     Object* thunkobj, Object* func, SInt32 this_delta, SInt32 returnDelta, SInt32 ctoroffset
 ) {
@@ -1623,6 +1737,10 @@ void CodeGen_GenVDispatchThunk(
     copts.peephole = save_peephole;
     copts.traceback = save_traceback;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CodeGen_SetupRuntimeObjects(void) {
     setupaddressing();
@@ -1751,6 +1869,10 @@ Boolean CodeGen_IsPublicRuntimeObject(Object* obj) {
     return Intrinsics_IsPublicRuntimeObject(obj);
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -4
+#endif
 void CodeGen_SOMStub(Object* stub, Object* glue, Object* classdata, SInt32 offset) {
     Boolean save_debug;
     Boolean save_peephole;
@@ -1805,6 +1927,10 @@ void CodeGen_SOMStub(Object* stub, Object* glue, Object* classdata, SInt32 offse
     copts.peephole = save_peephole;
     copts.traceback = save_traceback;
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 void CodeGen_ParseDeclSpec(HashNameNode* identifier, DeclInfo* declinfo) {
     if (!strcmp(identifier->name, "section")) {
@@ -3452,7 +3578,9 @@ void CodeGen_InsertSpecialMacros(void) {
     CPrep_InsertSpecialMacro(&__powcM, "__powerc");
     CPrep_InsertSpecialMacro(&hostM, "__POWERPC__");
     CPrep_InsertSpecialMacro(&_ppc_M, "__ppc__");
+#if VERSION >= VERSION_GC_2_0
     CPrep_InsertSpecialMacro(&cpuM, "__TARGET_CPU__");
+#endif
 
     if (!copts.littleendian) {
         CPrep_InsertSpecialMacro(&bendM, "__BIG_ENDIAN__");
@@ -3468,13 +3596,19 @@ void CodeGen_InsertSpecialMacros(void) {
     CPrep_InsertSpecialMacro(&longI, "__fourbyteints__");
     CPrep_InsertSpecialMacro(&IEEED, "__IEEEdoubles__");
 
+#if VERSION >= VERSION_GC_2_0
     if (copts.optimizationlevel > 0) {
         CPrep_InsertSpecialMacro(&optM, "__OPTIMIZE__");
     }
+#endif
 
     CPrep_InsertSpecialMacro(&eabiM, "__PPC_EABI__");
 }
 
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA -15
+#endif
 char* CodeGen_ExpandSpecialMacro(Macro* macro) {
     const char* cpu;
     char* p;
@@ -3503,6 +3637,7 @@ char* CodeGen_ExpandSpecialMacro(Macro* macro) {
     if (CMach_GetCPU() && macro == &ppc_cpu) {
         return "1";
     }
+#if VERSION >= VERSION_GC_2_0
     if (macro == &cpuM) {
         cpu = CMach_GetCPU();
         p = target_cpu;
@@ -3520,6 +3655,7 @@ char* CodeGen_ExpandSpecialMacro(Macro* macro) {
         p[1] = 0;
         return target_cpu;
     }
+#endif
     if (macro == &profM) {
         return copts.profile ? "1" : "0";
     }
@@ -3529,10 +3665,12 @@ char* CodeGen_ExpandSpecialMacro(Macro* macro) {
     if (macro == &IEEED) {
         return "1";
     }
+#if VERSION >= VERSION_GC_2_0
     if (macro == &optM) {
         sprintf(optimization_level, "%d", copts.optimizationlevel);
         return optimization_level;
     }
+#endif
 
     if (macro == &eabiM) {
         return "1";
@@ -3540,6 +3678,10 @@ char* CodeGen_ExpandSpecialMacro(Macro* macro) {
     CError_FATAL(5079);
     return "0";
 }
+#if VERSION == VERSION_GC_1_3_2
+#undef CError_LINE_DELTA
+#define CError_LINE_DELTA 0
+#endif
 
 ENode* CodeGen_CheckExpr(ENode* expr) {
     ENode* right;

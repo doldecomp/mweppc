@@ -132,7 +132,7 @@ def dtk_corpus(root, mw_version, output):
     jobs, edge = [], None
 
     def flush():
-        if edge and edge["vars"].get("mw_version") == mw_version:
+        if edge and mw_version in ("all", edge["vars"].get("mw_version")):
             job = dict(source=edge["source"], cflags=shlex.split(edge["vars"]["cflags"]), sjis="sjis" in edge["rule"])
             if edge["vars"].get("extab_padding"):
                 job["extab_padding"] = extab.parse_padding(edge["vars"]["extab_padding"]).hex()
@@ -171,7 +171,7 @@ def main():
         parser = argparse.ArgumentParser(
             prog="tools/equivalence.py",
             usage="%(prog)s CORPUS.json OUTDIR [--version V | ORIGINAL CANDIDATE]\n"
-            "       %(prog)s corpus PROJECT MW_VERSION OUT.json",
+            "       %(prog)s corpus PROJECT MW_VERSION|all OUT.json",
             description="Compile a corpus with the original compiler and a candidate, and compare the objects byte for byte.",
             formatter_class=argparse.RawDescriptionHelpFormatter,
         )

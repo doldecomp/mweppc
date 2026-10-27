@@ -4,7 +4,8 @@
 #include <stdarg.h>
 #include "compiler/common.h"
 
-#define CError_LINE_SHIFT 0
+#define CError_LINE_DELTA 0
+#define CError_LINE_SHIFT CError_LINE_DELTA
 
 #define CError_ASSERT(line, cond) \
     do { \

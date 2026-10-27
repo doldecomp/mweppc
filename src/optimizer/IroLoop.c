@@ -219,7 +219,7 @@ static Boolean TreeContains(IROLinear* tree, IROLinear* target) {
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -26
+#define CError_LINE_SHIFT (-26 + CError_LINE_DELTA)
 #endif
 static int Reducable(
     IROLinear* nd, IROLinear** resultNd1, IROLinear** resultNd2, VarRecord** resultVar
@@ -516,7 +516,7 @@ static int Reducable(
         }
 
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -22
+#define CError_LINE_SHIFT (-22 + CError_LINE_DELTA)
         CError_ASSERT(873, ind != NULL);
 #endif
 
@@ -741,7 +741,7 @@ static IROExpr* CreateRIS(
 
 #if VERSION < VERSION_GC_2_5
 #undef CError_LINE_SHIFT
-#define CError_LINE_SHIFT -53
+#define CError_LINE_SHIFT (-53 + CError_LINE_DELTA)
 #endif
 static IRONode* CreatePreHeader(IRONode* fnode1, IRONode* fnode2) {
     IROLinear* labelnode;

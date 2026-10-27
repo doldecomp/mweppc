@@ -14,6 +14,7 @@
 #include "driver/CodeGenOptPPC.h"
 #include "driver/COSToolsCLT.h"
 #include "driver/oslib.h"
+#include "driver/TextUtils.h"
 #include <string.h>
 
 ElfFile ELFfile;
@@ -472,14 +473,25 @@ void DoParseDeclSpec(char* name, DeclInfo* declinfo) {
     PPCError_Error(PPCERR_UNKNOWN_SECTION_NAME, name);
 }
 
+#if VERSION < VERSION_GC_2_0
+static char init_elf_filename[256];
+#endif
+
 void InitElfFile(void) {
+#if VERSION >= VERSION_GC_2_0
     char filename[257];
     SInt32 length;
+#endif
     BE_SymNode* sym;
 
     SpecificNum = 1;
     memset(&ELFfile, 0, sizeof(ELFfile));
     InitElfSections();
+#if VERSION < VERSION_GC_2_0
+    COS_FileGetFSSpecInfo(&cparamblkptr->sourcefile, NULL, NULL, (StringPtr)init_elf_filename);
+    p2cstr((StringPtr)init_elf_filename);
+    sym = AddSymbolTableEntry(GetHashNameNode(init_elf_filename));
+#else
     COS_FileGetFSSpecInfo(&cparamblkptr->sourcefile, NULL, NULL, (StringPtr)filename);
     length = filename[0];
     if (length > 255) {
@@ -488,6 +500,7 @@ void InitElfFile(void) {
     filename[length + 1] = 0;
 
     sym = AddSymbolTableEntry(GetHashNameNode(&filename[1]));
+#endif
     sym->elf.st_info = ELF32_ST_INFO(STB_LOCAL, STT_FILE);
     sym->section = ELFfile.abs_section;
     sym->alignment = 1;
@@ -675,7 +688,11 @@ static void write_codewarrior_version_record(void) {
 #endif
     record.minorVersion = 2;
     record.patchVersion = 4;
+#if VERSION < VERSION_GC_2_0
+    record.reservedVersion = 2;
+#else
     record.reservedVersion = 7;
+#endif
     record.versionFormat = 1;
 
     record.abiOption = copts.pool_data ? 1 : 0;
@@ -856,9 +873,15 @@ void BackEnd_WriteElf(void) {
 }
 
 #pragma sym reset
+#if VERSION < VERSION_GC_2_0
+ObjGenRelocation* WriteDebugRelocation(
+    ObjGenSection* context, int offset, Object* symbol, void* source, int value, int adjustment
+) {
+#else
 ObjGenRelocation* WriteDebugRelocation(
     ObjGenSection* context, int offset, BE_SymNode* symbol, void* source, int value, int adjustment
 ) {
+#endif
     ObjGenSection* section;
     ObjGenRelocation* reloc;
     int kind;
@@ -875,9 +898,16 @@ ObjGenRelocation* WriteDebugRelocation(
         reloc = galloc(sizeof(ObjGenRelocation));
         reloc->symbol = NULL;
         reloc->source = NULL;
+#if VERSION < VERSION_GC_2_0
+        if (symbol != NULL) {
+            reloc->symbol = MakeSymbolTableEntry(symbol);
+        } else
+#else
         if (symbol != NULL) {
             reloc->symbol = symbol;
-        } else {
+        } else
+#endif
+        {
             reloc->source = source;
         }
         offset += adjustment;
@@ -899,10 +929,15 @@ ObjGenRelocation* WriteDebugRelocation(
     return reloc;
 }
 
+#if VERSION < VERSION_GC_2_0
+void BackPatchRelocationAddend(ObjGenRelocation* reloc, unsigned int value) {
+#else
 void BackPatchRelocationAddend(ObjGenRelocation* reloc, unsigned int value, BE_SymNode* symbol) {
+#endif
     Elf32_Rela* rela = (Elf32_Rela*)*reloc->section->buffer.data;
     rela += reloc->index;
     rela->r_addend = value;
+#if VERSION >= VERSION_GC_2_0
     if (symbol) {
 #if VERSION < VERSION_GC_2_7
         CError_FATAL(1025);
@@ -910,4 +945,5 @@ void BackPatchRelocationAddend(ObjGenRelocation* reloc, unsigned int value, BE_S
         reloc->symbol = symbol;
         reloc->source = NULL;
     }
+#endif
 }

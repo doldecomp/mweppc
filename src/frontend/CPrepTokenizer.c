@@ -1158,11 +1158,11 @@ void CPrep_SkipAsmComment(void) {
     macrocheck = save_macrocheck;
 }
 
-static short tille(void) {
+static short tille(short c) {
     return TK_ILLEGAL;
 }
 
-static short tcret(void) {
+static short tcret(short c) {
     newline();
     if (cprep_eoltokens) {
         return TK_EOL;
@@ -1374,7 +1374,7 @@ static short tquot(short t) {
     return (short)c;
 }
 
-static short thash(void) {
+static short thash(short c) {
     if (at_linestart) {
         preprocessor();
         return 0;
@@ -1382,7 +1382,7 @@ static short thash(void) {
     return '#';
 }
 
-static short tmult(void) {
+static short tmult(short c) {
     at_linestart = FALSE;
     if (prepcurchar() == '=') {
         pos = nextcharpos;
@@ -1391,7 +1391,7 @@ static short tmult(void) {
     return '*';
 }
 
-static short tcolo(void) {
+static short tcolo(short c) {
     char t2;
     at_linestart = FALSE;
     if (copts.cplusplus) {
@@ -1534,7 +1534,7 @@ static short tperc(short t) {
     return '%';
 }
 
-static short texcl(void) {
+static short texcl(short c) {
     at_linestart = FALSE;
     if (prepcurchar() == '=') {
         pos = nextcharpos;
@@ -1737,7 +1737,7 @@ static short tnumb(short t) {
     return TK_INTCONST;
 }
 
-static short tiden(void) {
+static short tiden(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1776,7 +1776,7 @@ static short tchrL(short t) {
     return TK_IDENTIFIER;
 }
 
-static short tchra(void) {
+static short tchra(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1799,7 +1799,7 @@ static short tchra(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrb(void) {
+static short tchrb(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1832,7 +1832,7 @@ static short tchrb(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrc(void) {
+static short tchrc(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1875,7 +1875,7 @@ static short tchrc(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrd(void) {
+static short tchrd(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1904,7 +1904,7 @@ static short tchrd(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchre(void) {
+static short tchre(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1930,7 +1930,7 @@ static short tchre(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrf(void) {
+static short tchrf(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1953,7 +1953,7 @@ static short tchrf(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrg(void) {
+static short tchrg(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1965,7 +1965,7 @@ static short tchrg(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchri(void) {
+static short tchri(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -1997,7 +1997,7 @@ static short tchri(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrl(void) {
+static short tchrl(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2009,7 +2009,7 @@ static short tchrl(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrm(void) {
+static short tchrm(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2052,7 +2052,7 @@ static short tchrn(short t) {
     return TK_IDENTIFIER;
 }
 
-static short tchro(void) {
+static short tchro(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2105,7 +2105,7 @@ static short tchrp(short t) {
     return TK_IDENTIFIER;
 }
 
-static short tchrr(void) {
+static short tchrr(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2129,7 +2129,7 @@ static short tchrr(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrs(void) {
+static short tchrs(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2162,7 +2162,7 @@ static short tchrs(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrt(void) {
+static short tchrt(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2215,7 +2215,7 @@ static short tchrt(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchru(void) {
+static short tchru(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2236,7 +2236,7 @@ static short tchru(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrv(void) {
+static short tchrv(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2254,7 +2254,7 @@ static short tchrv(void) {
     return TK_IDENTIFIER;
 }
 
-static short tchrw(void) {
+static short tchrw(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2288,7 +2288,7 @@ static short tchrx(short t) {
     return TK_IDENTIFIER;
 }
 
-static short tchr_(void) {
+static short tchr_(short c) {
     at_linestart = FALSE;
     pos = ReadIdentifier(pos - 1);
     if (macrocheck && macrotest()) {
@@ -2367,7 +2367,7 @@ static short tdoll(short t) {
     return t;
 }
 
-static short tisid(void) {
+static short tisid(short c) {
     if (!tokenstacklevel) {
         CError_Error(ERR_ILLEGAL_TOKEN);
     }
@@ -2384,7 +2384,7 @@ static short tnull(short t) {
     }
 }
 
-static short t0x1a(void) {
+static short t0x1a(short c) {
     if (*pos == 0) {
         return 0;
     } else {

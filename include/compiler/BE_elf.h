@@ -49,12 +49,19 @@ extern ObjGenRelocation* allrelocations;
 extern SInt32 previous_ps_ID;
 extern InterruptGenerationRecord* interrupt_generation_records;
 
+#if VERSION < VERSION_GC_2_0
+extern void BackPatchRelocationAddend(ObjGenRelocation* reloc, unsigned int value);
+extern ObjGenRelocation* WriteDebugRelocation(
+    ObjGenSection* context, int offset, Object* object, void* source, int value, int adjustment
+);
+#else
 extern void BackPatchRelocationAddend(
     ObjGenRelocation* reloc, unsigned int value, BE_SymNode* symbol
 );
 extern ObjGenRelocation* WriteDebugRelocation(
     ObjGenSection* context, int offset, BE_SymNode* symbol, void* source, int value, int adjustment
 );
+#endif
 extern void BackEnd_WriteElf(void);
 extern void TransferSectionData(GList* dst, GList* src);
 extern void CleanupElfSections(void);

@@ -191,7 +191,11 @@ extern int ObjGen_GetAddressing(Object* obj);
 extern int base_register(Object* obj);
 extern Boolean is_16bitdata(Object* obj);
 extern void ObjGen_BestSection(Object* func);
+#if VERSION < VERSION_GC_2_0
+extern void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst);
+#else
 extern void PPC_EABI_SetSection(Object* object, SInt32 size, Boolean isConst, Boolean allowSmall);
+#endif
 extern short GetCurrentSection(short kind);
 extern short pseudo_section_index(short key);
 extern SInt16 update_section(Object* func);

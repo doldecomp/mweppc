@@ -11,6 +11,9 @@ struct SwitchCase {
     struct SwitchCase* next;
     struct CLabel* label;
     CInt64 min;
+#if VERSION < VERSION_GC_2_0
+    CInt64 max; // (a GNU case range's last value)
+#endif
 };
 
 struct SwitchInfo {

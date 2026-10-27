@@ -403,7 +403,9 @@ void CodeGen_InitBackEndOptions(void) {
     if (copts.processor == CPU_PPCGEKKO) {
         copts.ibm_stackframe = TRUE;
         copts.gecko_float_typecons = FALSE;
+#if VERSION >= VERSION_GC_2_0
         copts.disable_vector_frame = FALSE;
+#endif
     } else {
         copts.ibm_stackframe = FALSE;
     }

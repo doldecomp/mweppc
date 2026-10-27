@@ -149,7 +149,8 @@ def hexadecimal(text):
 
 
 def main():
-    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+    if hasattr(signal, "SIGPIPE"):
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     parser = argparse.ArgumentParser(
         description="Each translation unit of the version, in link order, with where it stands.",
         formatter_class=argparse.RawDescriptionHelpFormatter,

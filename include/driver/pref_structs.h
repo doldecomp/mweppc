@@ -189,7 +189,11 @@ typedef struct PBackEnd {
     Boolean fp_contract;
     UInt8 altivec;
     Boolean vrsave;
+#if VERSION < VERSION_GC_2_0
+    UInt8 unknown16[6];
+#else
     UInt8 unknown16[22];
+#endif
 } PBackEnd;
 
 typedef struct PLinker {
