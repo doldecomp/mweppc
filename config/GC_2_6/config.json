@@ -74,35 +74,35 @@
   "original": "build/compilers/GC/2.6/mwcceppc.exe",
   "sha1": "1110a7a9924a09a608967efdf79ecf09900344e7",
   "data_at": {
+    "src/compiler/backend/BitVectors.c": {
+      ".data": "0x005d7d60"
+    },
     "src/compiler/backend/DumpIR.c": {
       ".data": "0x005bc698",
       ".data_end": "0x005bcfc8"
-    },
-    "src/msl/file_io.c": {
-      ".data": "0x00597c10"
-    },
-    "src/msl/string_io.c": {
-      ".data": "0x00597c08"
-    },
-    "src/driver/Memory.c": {
-      ".data": "0x005a15d8"
-    },
-    "src/msl/locale.c": {
-      ".data": "0x005c02a0",
-      ".bss": "0x005e30b0"
-    },
-    "src/msl/float.c": {
-      ".data": "0x005c02e0"
-    },
-    "src/runtime/throwsbad.cpp": {
-      ".data": "0x005a9008"
     },
     "src/driver/DateTimeUtils.c": {
       ".data": "0x005a8d20",
       ".data_end": "0x005a8eb0"
     },
-    "src/compiler/backend/BitVectors.c": {
-      ".data": "0x005d7d60"
+    "src/driver/Memory.c": {
+      ".data": "0x005a15d8"
+    },
+    "src/msl/file_io.c": {
+      ".data": "0x00597c10"
+    },
+    "src/msl/float.c": {
+      ".data": "0x005c02e0"
+    },
+    "src/msl/locale.c": {
+      ".data": "0x005c02a0",
+      ".bss": "0x005e30b0"
+    },
+    "src/msl/string_io.c": {
+      ".data": "0x00597c08"
+    },
+    "src/runtime/throwsbad.cpp": {
+      ".data": "0x005a9008"
     }
   },
   "data_units": {

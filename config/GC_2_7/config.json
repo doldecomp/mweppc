@@ -67,21 +67,21 @@
       ".data": "0x005bc698",
       ".data_end": "0x005bcfc8"
     },
+    "src/driver/Memory.c": {
+      ".data": "0x005a15d8"
+    },
     "src/msl/file_io.c": {
       ".data": "0x00597c10"
     },
-    "src/msl/string_io.c": {
-      ".data": "0x00597c08"
-    },
-    "src/driver/Memory.c": {
-      ".data": "0x005a15d8"
+    "src/msl/float.c": {
+      ".data": "0x005c02e0"
     },
     "src/msl/locale.c": {
       ".data": "0x005c02a0",
       ".bss": "0x005e30b0"
     },
-    "src/msl/float.c": {
-      ".data": "0x005c02e0"
+    "src/msl/string_io.c": {
+      ".data": "0x00597c08"
     },
     "src/runtime/throwsbad.cpp": {
       ".data": "0x005a9008"

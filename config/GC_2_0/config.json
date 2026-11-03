@@ -63,21 +63,21 @@
   "original": "build/compilers/GC/2.0/mwcceppc.exe",
   "sha1": "ef148743ee72be15f64926ac18c3aadc9cca2b47",
   "data_at": {
+    "src/driver/Memory.c": {
+      ".data": "0x005a05d8"
+    },
     "src/msl/file_io.c": {
       ".data": "0x00596c10"
     },
-    "src/msl/string_io.c": {
-      ".data": "0x00596c08"
-    },
-    "src/driver/Memory.c": {
-      ".data": "0x005a05d8"
+    "src/msl/float.c": {
+      ".data": "0x005bf280"
     },
     "src/msl/locale.c": {
       ".data": "0x005bf240",
       ".bss": "0x005e20a8"
     },
-    "src/msl/float.c": {
-      ".data": "0x005bf280"
+    "src/msl/string_io.c": {
+      ".data": "0x00596c08"
     },
     "src/runtime/throwsbad.cpp": {
       ".data": "0x005a7fe8"
