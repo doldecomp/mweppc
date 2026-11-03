@@ -1,5 +1,5 @@
 {
-  "src/backend/BE_elf.c": {
+  "src/compiler/backend/BE_elf.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -11,10 +11,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/BE_symbol.c": {
+  "src/compiler/backend/BE_symbol.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -26,7 +26,7 @@
       "off"
     ]
   },
-  "src/backend/BitVectors.c": {
+  "src/compiler/backend/BitVectors.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -38,12 +38,12 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend",
+      "src/compiler/backend",
       "include",
       "include/libc"
     ]
   },
-  "src/backend/CMachine.c": {
+  "src/compiler/backend/CMachine.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -55,10 +55,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/CodeGen.c": {
+  "src/compiler/backend/CodeGen.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -70,10 +70,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/Coloring.c": {
+  "src/compiler/backend/Coloring.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -85,10 +85,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/DWARF.c": {
+  "src/compiler/backend/DWARF.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -100,10 +100,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/DumpIR.c": {
+  "src/compiler/backend/DumpIR.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -115,7 +115,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
   "src/backend/ELF_Endian.c": {
@@ -133,7 +133,7 @@
       "src/backend"
     ]
   },
-  "src/backend/Exceptions.c": {
+  "src/compiler/backend/Exceptions.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -145,10 +145,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/FuncLevelAsmPPC.c": {
+  "src/compiler/backend/FuncLevelAsmPPC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -160,10 +160,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/GCCInlineAsm.c": {
+  "src/compiler/backend/GCCInlineAsm.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -175,10 +175,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InlineAsm.c": {
+  "src/compiler/backend/InlineAsm.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -190,10 +190,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InlineAsmMnemonicsPPC.c": {
+  "src/compiler/backend/InlineAsmMnemonicsPPC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -205,10 +205,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InlineAsmPPC.c": {
+  "src/compiler/backend/InlineAsmPPC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -220,10 +220,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InlineAsmRegisters.c": {
+  "src/compiler/backend/InlineAsmRegisters.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -235,10 +235,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InlineAsmRegistersPPC.c": {
+  "src/compiler/backend/InlineAsmRegistersPPC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -250,10 +250,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InstrSelection.c": {
+  "src/compiler/backend/InstrSelection.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -265,10 +265,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/InterferenceGraph.c": {
+  "src/compiler/backend/InterferenceGraph.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -280,10 +280,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/Intrinsics.c": {
+  "src/compiler/backend/Intrinsics.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -295,10 +295,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/LiveVariables.c": {
+  "src/compiler/backend/LiveVariables.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -310,10 +310,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/MachineSimulation601.c": {
+  "src/compiler/backend/MachineSimulation601.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -325,7 +325,7 @@
       "off"
     ]
   },
-  "src/backend/MachineSimulation603.c": {
+  "src/compiler/backend/MachineSimulation603.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -337,7 +337,7 @@
       "off"
     ]
   },
-  "src/backend/MachineSimulation603e.c": {
+  "src/compiler/backend/MachineSimulation603e.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -349,7 +349,7 @@
       "off"
     ]
   },
-  "src/backend/MachineSimulation604.c": {
+  "src/compiler/backend/MachineSimulation604.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -361,7 +361,7 @@
       "off"
     ]
   },
-  "src/backend/MachineSimulation7400.c": {
+  "src/compiler/backend/MachineSimulation7400.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -373,10 +373,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/MachineSimulation750.c": {
+  "src/compiler/backend/MachineSimulation750.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -388,7 +388,7 @@
       "off"
     ]
   },
-  "src/backend/MachineSimulation821.c": {
+  "src/compiler/backend/MachineSimulation821.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -400,7 +400,7 @@
       "off"
     ]
   },
-  "src/backend/MachineSimulationAltiVec.c": {
+  "src/compiler/backend/MachineSimulationAltiVec.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -412,10 +412,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/ObjGen_PPC_EABI.c": {
+  "src/compiler/backend/ObjGen_PPC_EABI.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -427,10 +427,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/Operands.c": {
+  "src/compiler/backend/Operands.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -442,10 +442,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/PCode.c": {
+  "src/compiler/backend/PCode.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -457,10 +457,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/PCodeAssembly.c": {
+  "src/compiler/backend/PCodeAssembly.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -472,10 +472,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/OpcodeInfo.c": {
+  "src/compiler/backend/OpcodeInfo.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -487,10 +487,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/PCodeInfo.c": {
+  "src/compiler/backend/PCodeInfo.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -502,10 +502,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/PCodeListing.c": {
+  "src/compiler/backend/PCodeListing.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -517,10 +517,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/PCodeUtilities.c": {
+  "src/compiler/backend/PCodeUtilities.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -532,10 +532,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/PPCError.c": {
+  "src/compiler/backend/PPCError.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -547,10 +547,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/Peephole.c": {
+  "src/compiler/backend/Peephole.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -562,10 +562,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/RegisterInfo.c": {
+  "src/compiler/backend/RegisterInfo.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -577,10 +577,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/Registers.c": {
+  "src/compiler/backend/Registers.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -592,10 +592,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/SFPE_PPC_EABI.c": {
+  "src/compiler/backend/SFPE_PPC_EABI.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -607,11 +607,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend",
+      "src/compiler/backend",
       "include"
     ]
   },
-  "src/backend/Scheduler.c": {
+  "src/compiler/backend/Scheduler.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -623,7 +623,7 @@
       "off"
     ]
   },
-  "src/backend/SpillCode.c": {
+  "src/compiler/backend/SpillCode.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -635,10 +635,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/StackFrame.c": {
+  "src/compiler/backend/StackFrame.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -650,10 +650,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/backend/Switch.c": {
+  "src/compiler/backend/Switch.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -665,13 +665,13 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend",
+      "src/compiler/backend",
       "include/compiler",
       "include",
       "include/libc"
     ]
   },
-  "src/backend/TOC.c": {
+  "src/compiler/backend/TOC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -683,7 +683,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
   "src/driver/Arguments.c": {
@@ -701,7 +701,7 @@
       "src/driver"
     ]
   },
-  "src/driver/CCompiler.c": {
+  "src/compiler/driver/CCompiler.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -713,7 +713,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/CLAccessPaths.c": {
@@ -1233,7 +1233,7 @@
       "src/driver"
     ]
   },
-  "src/driver/OptimizerHelpers.c": {
+  "src/compiler/driver/OptimizerHelpers.c": {
     "compiler": "pro53",
     "flags": [
       "-O2,p",
@@ -1243,7 +1243,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/Option.c": {
@@ -1306,7 +1306,7 @@
       "src/driver"
     ]
   },
-  "src/driver/ParserGlue-eabi-ppc-cc.c": {
+  "src/compiler/driver/ParserGlue-eabi-ppc-cc.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1318,10 +1318,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
-  "src/driver/ParserHelpers-cc.c": {
+  "src/compiler/driver/ParserHelpers-cc.c": {
     "compiler": "pro53",
     "flags": [
       "-O1",
@@ -1333,7 +1333,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/ParserHelpers.c": {
@@ -1407,7 +1407,7 @@
       "src/driver"
     ]
   },
-  "src/driver/StdTargetWarningHelpers-cc.c": {
+  "src/compiler/driver/StdTargetWarningHelpers-cc.c": {
     "compiler": "pro53",
     "flags": [
       "-O2,p",
@@ -1419,7 +1419,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/StringExtras.c": {
@@ -1450,7 +1450,7 @@
       "src/driver"
     ]
   },
-  "src/driver/CodeGenOptPPC.c": {
+  "src/compiler/driver/CodeGenOptPPC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1462,7 +1462,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/Targets.c": {
@@ -1480,7 +1480,7 @@
       "src/driver"
     ]
   },
-  "src/driver/ToolHelpers-cc.c": {
+  "src/compiler/driver/ToolHelpers-cc.c": {
     "compiler": "pro53",
     "flags": [
       "-O1",
@@ -1492,7 +1492,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/ToolHelpers.c": {
@@ -1540,7 +1540,7 @@
       "src/driver"
     ]
   },
-  "src/driver/cc-eabi-ppc-mw.c": {
+  "src/compiler/driver/cc-eabi-ppc-mw.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1550,10 +1550,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
-  "src/driver/cc-eabi-ppc.c": {
+  "src/compiler/driver/cc-eabi-ppc.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1563,7 +1563,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/libimp-eabi-ppc.c": {
@@ -1579,7 +1579,7 @@
       "src/driver"
     ]
   },
-  "src/frontend/CABI.c": {
+  "src/compiler/frontend/CABI.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1591,10 +1591,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CBrowse.c": {
+  "src/compiler/frontend/CBrowse.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1606,10 +1606,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CClass.c": {
+  "src/compiler/frontend/CClass.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1621,10 +1621,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CDecl.c": {
+  "src/compiler/frontend/CDecl.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1636,10 +1636,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CError.c": {
+  "src/compiler/frontend/CError.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1651,10 +1651,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CException.c": {
+  "src/compiler/frontend/CException.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1666,10 +1666,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CExpr.c": {
+  "src/compiler/frontend/CExpr.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1681,10 +1681,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CExpr2.c": {
+  "src/compiler/frontend/CExpr2.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1696,10 +1696,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CExprConvMatch.c": {
+  "src/compiler/frontend/CExprConvMatch.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1711,10 +1711,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CFunc.c": {
+  "src/compiler/frontend/CFunc.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1726,10 +1726,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CInit.c": {
+  "src/compiler/frontend/CInit.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1742,10 +1742,10 @@
     ],
     "include_dirs": [
       "include",
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CInline.c": {
+  "src/compiler/frontend/CInline.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1757,11 +1757,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend",
+      "src/compiler/frontend",
       "include"
     ]
   },
-  "src/frontend/CInt64.c": {
+  "src/compiler/frontend/CInt64.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1773,10 +1773,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CMangler.c": {
+  "src/compiler/frontend/CMangler.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1788,10 +1788,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CObjC.c": {
+  "src/compiler/frontend/CObjC.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1803,10 +1803,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CParser.c": {
+  "src/compiler/frontend/CParser.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1818,10 +1818,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CPrec.c": {
+  "src/compiler/frontend/CPrec.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1833,10 +1833,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CPrep.c": {
+  "src/compiler/frontend/CPrep.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1848,10 +1848,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CPrepTokenizer.c": {
+  "src/compiler/frontend/CPrepTokenizer.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1863,10 +1863,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CPreprocess.c": {
+  "src/compiler/frontend/CPreprocess.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1878,10 +1878,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CRTTI.c": {
+  "src/compiler/frontend/CRTTI.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1893,11 +1893,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend",
+      "src/compiler/frontend",
       "include"
     ]
   },
-  "src/frontend/CSOM.c": {
+  "src/compiler/frontend/CSOM.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1909,10 +1909,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CScope.c": {
+  "src/compiler/frontend/CScope.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1924,10 +1924,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CTemplateClass.c": {
+  "src/compiler/frontend/CTemplateClass.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1939,10 +1939,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CTemplateFunc.c": {
+  "src/compiler/frontend/CTemplateFunc.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1954,10 +1954,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CTemplateNew.c": {
+  "src/compiler/frontend/CTemplateNew.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1969,10 +1969,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
-  "src/frontend/CTemplateTools.c": {
+  "src/compiler/frontend/CTemplateTools.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -1984,7 +1984,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend",
+      "src/compiler/frontend",
       "include"
     ]
   },
@@ -2937,7 +2937,7 @@
       "lib/msl/win32sdk/sys"
     ]
   },
-  "src/optimizer/AddPropagation.c": {
+  "src/compiler/optimizer/AddPropagation.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -2949,10 +2949,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/Alias.c": {
+  "src/compiler/optimizer/Alias.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -2964,11 +2964,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer",
+      "src/compiler/optimizer",
       "include"
     ]
   },
-  "src/optimizer/CIRTransform.c": {
+  "src/compiler/optimizer/CIRTransform.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -2980,10 +2980,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/COptimizer.c": {
+  "src/compiler/optimizer/COptimizer.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -2995,10 +2995,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/CodeMotion.c": {
+  "src/compiler/optimizer/CodeMotion.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3010,10 +3010,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/ConstantPropagation.c": {
+  "src/compiler/optimizer/ConstantPropagation.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3025,10 +3025,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/CopyPropagation.c": {
+  "src/compiler/optimizer/CopyPropagation.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3043,7 +3043,7 @@
       "include"
     ]
   },
-  "src/optimizer/FunctionCalls.c": {
+  "src/compiler/optimizer/FunctionCalls.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3055,10 +3055,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/GlobalOptimizer.c": {
+  "src/compiler/optimizer/GlobalOptimizer.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3070,10 +3070,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IROUseDef.c": {
+  "src/compiler/optimizer/IROUseDef.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3085,10 +3085,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IrOptimizer.c": {
+  "src/compiler/optimizer/IrOptimizer.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3100,10 +3100,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroBitVect.c": {
+  "src/compiler/optimizer/IroBitVect.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3115,10 +3115,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroCSE.c": {
+  "src/compiler/optimizer/IroCSE.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3130,10 +3130,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroDump.c": {
+  "src/compiler/optimizer/IroDump.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3145,10 +3145,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroEmptyLoop.c": {
+  "src/compiler/optimizer/IroEmptyLoop.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3160,10 +3160,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroEval.c": {
+  "src/compiler/optimizer/IroEval.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3175,10 +3175,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroExprRegeneration.c": {
+  "src/compiler/optimizer/IroExprRegeneration.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3190,10 +3190,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroFlowgraph.c": {
+  "src/compiler/optimizer/IroFlowgraph.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3205,10 +3205,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroJump.c": {
+  "src/compiler/optimizer/IroJump.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3220,10 +3220,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroLinearForm.c": {
+  "src/compiler/optimizer/IroLinearForm.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3235,10 +3235,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroLoop.c": {
+  "src/compiler/optimizer/IroLoop.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3250,11 +3250,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer",
+      "src/compiler/optimizer",
       "include"
     ]
   },
-  "src/optimizer/IroMalloc.c": {
+  "src/compiler/optimizer/IroMalloc.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3266,10 +3266,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroPointerAnalysis.c": {
+  "src/compiler/optimizer/IroPointerAnalysis.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3281,10 +3281,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroPropagate.c": {
+  "src/compiler/optimizer/IroPropagate.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3296,10 +3296,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroRangePropagation.c": {
+  "src/compiler/optimizer/IroRangePropagation.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3311,10 +3311,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroSubable.c": {
+  "src/compiler/optimizer/IroSubable.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3326,10 +3326,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroTransform.c": {
+  "src/compiler/optimizer/IroTransform.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3341,12 +3341,12 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer",
+      "src/compiler/optimizer",
       "include",
       "include/libc"
     ]
   },
-  "src/optimizer/IroUnrollLoop.c": {
+  "src/compiler/optimizer/IroUnrollLoop.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3358,11 +3358,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer",
+      "src/compiler/optimizer",
       "include"
     ]
   },
-  "src/optimizer/IroUtil.c": {
+  "src/compiler/optimizer/IroUtil.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3374,10 +3374,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/IroVars.c": {
+  "src/compiler/optimizer/IroVars.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3389,11 +3389,11 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer",
+      "src/compiler/optimizer",
       "include"
     ]
   },
-  "src/optimizer/LoadDeletion.c": {
+  "src/compiler/optimizer/LoadDeletion.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3405,10 +3405,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/LoopDetection.c": {
+  "src/compiler/optimizer/LoopDetection.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3420,10 +3420,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/LoopOptimization.c": {
+  "src/compiler/optimizer/LoopOptimization.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3435,10 +3435,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/StrengthReduction.c": {
+  "src/compiler/optimizer/StrengthReduction.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3450,10 +3450,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/StructMoves.c": {
+  "src/compiler/optimizer/StructMoves.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3465,10 +3465,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/ValueNumbering.c": {
+  "src/compiler/optimizer/ValueNumbering.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3480,10 +3480,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
-  "src/optimizer/VectorArraysToRegs.c": {
+  "src/compiler/optimizer/VectorArraysToRegs.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3946,7 +3946,7 @@
       "src/driver"
     ]
   },
-  "src/optimizer/UseDefChains.c": {
+  "src/compiler/optimizer/UseDefChains.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -3958,7 +3958,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/optimizer"
+      "src/compiler/optimizer"
     ]
   },
   "src/msl/locale.c": {
@@ -4001,7 +4001,7 @@
       "lib/msl/MSL_Win32/Src"
     ]
   },
-  "src/backend/ScanFloatX86.c": {
+  "src/compiler/backend/ScanFloatX86.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -4013,10 +4013,10 @@
       "off"
     ],
     "include_dirs": [
-      "src/backend"
+      "src/compiler/backend"
     ]
   },
-  "src/frontend/CObjCModern.c": {
+  "src/compiler/frontend/CObjCModern.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -4028,7 +4028,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/frontend"
+      "src/compiler/frontend"
     ]
   },
   "src/driver/CWSecretPluginCallbacks.cpp": {
@@ -4044,7 +4044,7 @@
       "src/driver"
     ]
   },
-  "src/driver/TargetOptimizerHelpers-eabi-ppc.c": {
+  "src/compiler/driver/TargetOptimizerHelpers-eabi-ppc.c": {
     "compiler": "pro53",
     "flags": [
       "-O4,p",
@@ -4056,7 +4056,7 @@
       "off"
     ],
     "include_dirs": [
-      "src/driver"
+      "src/compiler/driver"
     ]
   },
   "src/driver/DateTimeUtils.c": {

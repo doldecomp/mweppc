@@ -1624,7 +1624,7 @@
     "0x0042fb30": {
       "name": "CodeGen_ParsePragma",
       "note": "Pro7 strings; no source, between CodeGen.c's two runs",
-      "unit": "src/backend/CodeGen.c",
+      "unit": "src/compiler/backend/CodeGen.c",
       "was": "fn_0042fde0"
     },
     "0x00431460": {
@@ -1745,7 +1745,7 @@
     "0x00436340": {
       "name": "CodeGen_GetNewVarInfo",
       "note": "Pro7 CodeGen.c's first function, last in the reversed unit (Wii's CodeGen ends with it too): CPrep starts at 0x436380",
-      "unit": "src/backend/CodeGen.c",
+      "unit": "src/compiler/backend/CodeGen.c",
       "was": "CPrep_AllocateVarInfo"
     },
     "0x00436380": {
@@ -2881,7 +2881,7 @@
     "0x00471e90": {
       "name": "PointerAnalysis_ParseFunctionModifiesSpecifier",
       "was": "PointerAnalysis_ParseFunctionModifiesSpecifier",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x00477af0": {
       "name": "CInt64_SetLong",
@@ -2901,12 +2901,12 @@
     "0x00479490": {
       "name": "PointerAnalysis_ParseEntryPointsToSpecifier",
       "was": "PointerAnalysis_ParseEntryPointsToSpecifier",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x00479d00": {
       "name": "ParseLocationSetSet",
       "was": "ParseLocationSetSet",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x0047f2f0": {
       "name": "Stack_Pop",
@@ -2936,12 +2936,12 @@
     "0x00484f90": {
       "name": "AssignEachInPointsToFunctionAction",
       "was": "AssignEachInPointsToFunctionAction",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x00485c20": {
       "name": "GetPTF",
       "was": "GetPTF",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x004892d0": {
       "name": "EvalAssignAction",
@@ -2951,17 +2951,17 @@
     "0x004898c0": {
       "name": "EvalAssignAction2",
       "was": "EvalAssignAction2",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x00497ff0": {
       "name": "FillInAppropriateMappingsWithExtParamAction",
       "was": "FillInAppropriateMappingsWithExtParamAction",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x00498470": {
       "name": "StoreReturnedLocations",
       "was": "StoreReturnedLocations",
-      "unit": "src/optimizer/IroPointerAnalysis.c"
+      "unit": "src/compiler/optimizer/IroPointerAnalysis.c"
     },
     "0x004a0260": {
       "name": "ChangeInductionReference",
@@ -3016,7 +3016,7 @@
     "0x004a2350": {
       "name": "UnrollForLoop",
       "was": "UnrollForLoop",
-      "unit": "src/optimizer/IroUnrollLoop.c"
+      "unit": "src/compiler/optimizer/IroUnrollLoop.c"
     },
     "0x004a2b40": {
       "name": "IRO_IterateForLoopBody",
@@ -3026,13 +3026,13 @@
     "0x004a2c60": {
       "name": "UnrollWhileLoop",
       "was": "UnrollWhileLoop",
-      "unit": "src/optimizer/IroUnrollLoop.c"
+      "unit": "src/compiler/optimizer/IroUnrollLoop.c"
     },
     "0x004a3910": {
       "name": "PatternMatchLoop",
       "note": "Pro7 reverse order between UnrollWhileLoop and UnrollWhileLoopBody; pattern-matches variables and constants",
       "was": "fn_004a2db0",
-      "unit": "src/optimizer/IroUnrollLoop.c"
+      "unit": "src/compiler/optimizer/IroUnrollLoop.c"
     },
     "0x004a7f40": {
       "name": "Reducable",
@@ -3108,7 +3108,7 @@
       "name": "InlineAsm_ScanAssemblyOperands",
       "note": "asserts 1673/1822 = Pro7 1664/1804 + 9/18; not cr0_operand",
       "was": "fn_004adf90",
-      "unit": "src/backend/InlineAsmPPC.c"
+      "unit": "src/compiler/backend/InlineAsmPPC.c"
     },
     "0x004b0310": {
       "name": "imm_or_labeldiff_operand",
@@ -3398,7 +3398,7 @@
     "0x004b5910": {
       "name": "SymContainedVars",
       "was": "fn_004b4740",
-      "unit": "src/backend/ObjGen_PPC_EABI.c",
+      "unit": "src/compiler/backend/ObjGen_PPC_EABI.c",
       "note": "OPEN: unnamed ObjGen_PPC_EABI static (Wii module ObjGen_PPC_EABI)"
     },
     "0x004b5d70": {
@@ -3585,7 +3585,7 @@
       "name": "CMach_ParseGlobalRegisterVariable",
       "note": "Wii (strings)",
       "was": "fn_004be0c0",
-      "unit": "src/backend/CMachine.c"
+      "unit": "src/compiler/backend/CMachine.c"
     },
     "0x004bfa90": {
       "name": "CMach_ReInitRuntimeObjects",
@@ -3685,7 +3685,7 @@
     "0x004c45b0": {
       "name": "va_info_intrinsic",
       "note": "__va_setup/__builtin_va_info's code (EABI only: Pro7 lacks it, Wii leaves it unnamed): invented name with a TODO; Intrinsics' last function (deferred)",
-      "unit": "src/backend/Intrinsics.c",
+      "unit": "src/compiler/backend/Intrinsics.c",
       "was": "fn_004c45b0"
     },
     "0x004d03f0": {
@@ -4212,37 +4212,37 @@
       "name": "CScope_SetClassDefScope",
       "note": "Pro7 and Wii; was misnamed BE_elf_*",
       "was": "BE_elf_SaveAndSetClassScope",
-      "unit": "src/frontend/CScope.c"
+      "unit": "src/compiler/frontend/CScope.c"
     },
     "0x004db600": {
       "name": "CScope_SetClassScope",
       "note": "Pro7 CScope.c reverse order (deferred); Wii CScope",
       "was": "BE_elf_SaveScopeAndEnterClass",
-      "unit": "src/frontend/CScope.c"
+      "unit": "src/compiler/frontend/CScope.c"
     },
     "0x004db650": {
       "name": "CScope_SetNameSpaceScope",
       "note": "Pro7 CScope.c reverse order (deferred); Wii CScope",
       "was": "BE_elf_SaveAndSetScope",
-      "unit": "src/frontend/CScope.c"
+      "unit": "src/compiler/frontend/CScope.c"
     },
     "0x004db6a0": {
       "name": "CScope_GetScope",
       "note": "Pro7 CScope.c reverse order (deferred); Wii CScope",
       "was": "BE_elf_SaveScope",
-      "unit": "src/frontend/CScope.c"
+      "unit": "src/compiler/frontend/CScope.c"
     },
     "0x004db6d0": {
       "name": "CScope_Cleanup",
       "note": "Pro7's empty function",
       "was": "fn_0049b7b0",
-      "unit": "src/frontend/CScope.c"
+      "unit": "src/compiler/frontend/CScope.c"
     },
     "0x004db6e0": {
       "name": "CScope_Setup",
       "note": "Pro7 and Wii",
       "was": "BE_elf_CreateGlobalNameSpace",
-      "unit": "src/frontend/CScope.c"
+      "unit": "src/compiler/frontend/CScope.c"
     },
     "0x004db750": {
       "name": "BackPatchRelocationAddend",
@@ -5492,19 +5492,19 @@
     "0x004f6490": {
       "name": "fn_004f4b60",
       "note": "OPEN: a StackFrame static Pro7 lacks (Wii's StackFrame has it unnamed); no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f4b60"
     },
     "0x004f6820": {
       "name": "fn_004f4ef0",
       "note": "OPEN: a StackFrame static Pro7 lacks (Wii's has it unnamed); no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f4ef0"
     },
     "0x004f6bc0": {
       "name": "fn_004f5290",
       "note": "OPEN: a StackFrame static Pro7 lacks (Wii's has it unnamed); no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f5290"
     },
     "0x004f70e0": {
@@ -5575,7 +5575,7 @@
     "0x004f7830": {
       "name": "local_offset_32",
       "note": "Pro7 StackFrame.c order; Wii names it; no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f5f00"
     },
     "0x004f7980": {
@@ -5661,7 +5661,7 @@
     "0x004f8da0": {
       "name": "generate_epilogue",
       "note": "Pro7 StackFrame.c order; Wii names it; no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f7470"
     },
     "0x004f91f0": {
@@ -5682,25 +5682,25 @@
     "0x004f9ce0": {
       "name": "assign_locals_to_memory",
       "note": "Pro7 StackFrame.c order; Wii names it; no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f83b0"
     },
     "0x004f9dc0": {
       "name": "assign_local_memory",
       "note": "Pro7 StackFrame.c order; Wii names it; no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f8490"
     },
     "0x004f9fe0": {
       "name": "init_frame_sizes",
       "note": "Pro7 StackFrame.c order; Wii names it; no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f86b0"
     },
     "0x004fa160": {
       "name": "init_stack_globals",
       "note": "Pro7 StackFrame.c order; Wii names it; no source",
-      "unit": "src/backend/StackFrame.c",
+      "unit": "src/compiler/backend/StackFrame.c",
       "was": "fn_004f8830"
     },
     "0x004fb890": {
@@ -6076,13 +6076,13 @@
     "0x00507ba0": {
       "name": "default_uses_vpermute_unit",
       "was": "default_uses_vpermute_unit",
-      "unit": "src/backend/Scheduler.c",
+      "unit": "src/compiler/backend/Scheduler.c",
       "note": "Scheduler (Pro7 and Wii), filed under Peephole"
     },
     "0x00507bb0": {
       "name": "uses_vpermute_unit",
       "was": "uses_vpermute_unit",
-      "unit": "src/backend/Scheduler.c",
+      "unit": "src/compiler/backend/Scheduler.c",
       "note": "Scheduler (Pro7 and Wii), filed under Peephole"
     },
     "0x00507c70": {
@@ -6109,19 +6109,19 @@
       "name": "serialize_store",
       "note": "Pro7 Scheduler slot after findsuccessors (deferred); calls may_alias (0x511cc0) and addsuccessor; makedglistnode inlined (oalloc); row has no source",
       "was": "fn_005069a0",
-      "unit": "src/backend/Scheduler.c"
+      "unit": "src/compiler/backend/Scheduler.c"
     },
     "0x00508390": {
       "name": "serializeregister",
       "note": "Pro7 slot (addsuccessor, oalloc from makedglistnode); serializelist/serializeall/serialize_load inlined; no source",
       "was": "fn_00506a50",
-      "unit": "src/backend/Scheduler.c"
+      "unit": "src/compiler/backend/Scheduler.c"
     },
     "0x00508480": {
       "name": "addsuccessor",
       "note": "Pro7 static (oalloc of a DGSuccessor); no source",
       "was": "fn_00506b40",
-      "unit": "src/backend/Scheduler.c"
+      "unit": "src/compiler/backend/Scheduler.c"
     },
     "0x00508550": {
       "name": "initresources",
@@ -6157,7 +6157,7 @@
       "name": "removecommonsubexpressions",
       "note": "Pro7 ValueNumbering.c's last (first, deferred); Wii LocalCSE",
       "was": "fn_005073f0",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00508dd0": {
       "name": "removecsesfromextendedbasicblock",
@@ -6178,60 +6178,60 @@
       "name": "functioncall",
       "note": "Pro7 ValueNumbering slot after removecsesfrombasicblock (called by it; update_all_alias_values, update_alias_value; killallCSEs/killregisters inlined); no source",
       "was": "fn_00507bc0",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00509730": {
       "name": "pointerload",
       "note": "Pro7 slot (called by removecsesfrombasicblock; findavailablevalue, addavailablevalue, copyregister, insertpcodebefore)",
       "was": "fn_00507df0",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00509900": {
       "name": "simpleload",
       "note": "Pro7 slot (the larger load case; pointerload/pointerstore/simplestore inlined): or pointerload",
       "was": "fn_00507fc0",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00509be0": {
       "name": "isCSEop",
       "note": "Pro7 static, no calls (220 tokens / 228 bytes); isCSEload/recentlystored/registercopy inlined",
       "was": "fn_005082a0",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00509cd0": {
       "name": "addavailablevalue",
       "note": "Pro7 static (oalloc of an AvailableValue)",
       "was": "fn_00508390",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00509e70": {
       "name": "findavailablevalue",
       "note": "Pro7 static (calls matchvalues)",
       "was": "fn_00508530",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x00509f80": {
       "name": "matchvalues",
       "note": "Pro7 static, no calls (2.6's lacks Pro7's CError_FATAL(572) default)",
       "was": "fn_00508640",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x0050a110": {
       "name": "copyregister",
       "note": "Pro7 ValueNumbering static (oalloc via stackregistervalue; called by arithmeticop and simpleload); was Coloring_SetupGPRs, filed under Coloring",
       "was": "Coloring_SetupGPRs",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x0050a250": {
       "name": "killmemory",
       "was": "killmemory",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x0050a2e0": {
       "name": "initializecsedatastructures",
       "note": "Pro7 static (initialize_alias_values; called by removecommonsubexpressions, which inlines allocatecsedatastructures)",
       "was": "fn_005089a0",
-      "unit": "src/optimizer/ValueNumbering.c"
+      "unit": "src/compiler/optimizer/ValueNumbering.c"
     },
     "0x0050a440": {
       "name": "CInit_DeclareReadOnlyData",
@@ -6477,19 +6477,19 @@
       "name": "store_small_block_from_reg_pair",
       "note": "Pro7 StructMoves.c reverse order; Wii",
       "was": "fn_0050e2a0",
-      "unit": "src/optimizer/StructMoves.c"
+      "unit": "src/compiler/optimizer/StructMoves.c"
     },
     "0x0050fc90": {
       "name": "store_small_block_from_reg",
       "note": "Pro7 StructMoves.c reverse order; Wii",
       "was": "fn_0050e350",
-      "unit": "src/optimizer/StructMoves.c"
+      "unit": "src/compiler/optimizer/StructMoves.c"
     },
     "0x0050fd10": {
       "name": "store_word_of_small_struct",
       "note": "Pro7 reverse order (598 tokens, 848 bytes)",
       "was": "fn_0050e3d0",
-      "unit": "src/optimizer/StructMoves.c"
+      "unit": "src/compiler/optimizer/StructMoves.c"
     },
     "0x00510af0": {
       "name": "move_block",
@@ -6505,7 +6505,7 @@
       "name": "move_block_via_load_store_sequence",
       "note": "Pro7 reverse order between move_block_via_inline_loop and move_block_via_load_store",
       "was": "emit_unrolled_copy",
-      "unit": "src/optimizer/StructMoves.c"
+      "unit": "src/compiler/optimizer/StructMoves.c"
     },
     "0x005114a0": {
       "name": "move_block_via_load_store",
@@ -6526,31 +6526,31 @@
       "name": "update_all_alias_values",
       "note": "Wii's Alias names (Pro7 Alias.c)",
       "was": "fn_00510050",
-      "unit": "src/optimizer/Alias.c"
+      "unit": "src/compiler/optimizer/Alias.c"
     },
     "0x00511c10": {
       "name": "initialize_alias_values",
       "note": "Wii's Alias names (Pro7 Alias.c)",
       "was": "fn_005102d0",
-      "unit": "src/optimizer/Alias.c"
+      "unit": "src/compiler/optimizer/Alias.c"
     },
     "0x00511c40": {
       "name": "must_alias_object",
       "note": "Wii's Alias names (Pro7 Alias.c)",
       "was": "fn_00510300",
-      "unit": "src/optimizer/Alias.c"
+      "unit": "src/compiler/optimizer/Alias.c"
     },
     "0x00511c90": {
       "name": "may_alias_object",
       "note": "Wii's Alias names (Pro7 Alias.c)",
       "was": "fn_00510460",
-      "unit": "src/optimizer/Alias.c"
+      "unit": "src/compiler/optimizer/Alias.c"
     },
     "0x00511cc0": {
       "name": "may_alias",
       "note": "Wii's Alias names (Pro7 Alias.c)",
       "was": "fn_00510610",
-      "unit": "src/optimizer/Alias.c"
+      "unit": "src/compiler/optimizer/Alias.c"
     },
     "0x005121e0": {
       "name": "gather_instruction_alias",
@@ -6590,7 +6590,7 @@
     "0x00513350": {
       "name": "is_safe_const",
       "was": "is_safe_const",
-      "unit": "src/optimizer/Alias.c"
+      "unit": "src/compiler/optimizer/Alias.c"
     },
     "0x00514c50": {
       "name": "CPrep_Preprocess",
@@ -7452,7 +7452,7 @@
     "0x005266a0": {
       "name": "assign_local_addresses",
       "note": "Pro7 FuncLevelAsmPPC.c reverse order between FuncAsm_PreScanDirectives and setup_assembly_argument (gc1 AllocateLocals); no source",
-      "unit": "src/backend/FuncLevelAsmPPC.c",
+      "unit": "src/compiler/backend/FuncLevelAsmPPC.c",
       "was": "FuncLevelAsmPPC_AllocateLocals"
     },
     "0x00528290": {
@@ -7959,7 +7959,7 @@
       "name": "isbaseclassmember",
       "note": "OPEN: a 2.6 addition between isclassmember and InlineAsm_LookupSymbol (no source)",
       "was": "fn_0052ecf0",
-      "unit": "src/backend/InlineAsm.c"
+      "unit": "src/compiler/backend/InlineAsm.c"
     },
     "0x005309c0": {
       "name": "InlineAsm_LookupSymbol",
@@ -9024,57 +9024,57 @@
     "0x0054d4a0": {
       "name": "CExpr_MatchOperands",
       "was": "CExpr_MatchOperands",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x0054d6b0": {
       "name": "CExpr_CheckBinaryBuiltin",
       "was": "CExpr_CheckBinaryBuiltin",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x0054dba0": {
       "name": "CExpr_CheckUnaryBuiltin",
       "was": "CExpr_CheckUnaryBuiltin",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x0054dd70": {
       "name": "CExpr_CheckIncDecBuiltin",
       "was": "CExpr_CheckIncDecBuiltin",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x0054de40": {
       "name": "CExpr_MatchBuiltin",
       "was": "CExpr_MatchBuiltin",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x0054e160": {
       "name": "CExpr_BuildConversionTypeList",
       "was": "CExpr_BuildConversionTypeList",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x0054e230": {
       "name": "CExpr_FuncArgMatch",
       "was": "CExpr_FuncArgMatch",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x005512c0": {
       "name": "CExpr_IsBetterStandardConv",
       "was": "CExpr_IsBetterStandardConv",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x00551600": {
       "name": "CExpr_IsBetterClassConversion",
       "was": "CExpr_IsBetterClassConversion",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x00551640": {
       "name": "CExpr_IsBaseOf",
       "was": "CExpr_IsBaseOf",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x00551780": {
       "name": "CExpr_TypeCompare",
       "was": "CExpr_TypeCompare",
-      "unit": "src/frontend/CExprConvMatch.c"
+      "unit": "src/compiler/frontend/CExprConvMatch.c"
     },
     "0x005518b0": {
       "name": "CObjC_ParseSelectorExpression",
@@ -9444,7 +9444,7 @@
     "0x0055b9f0": {
       "name": "CABI_GetStructResultArgumentIndex",
       "note": "Pro7 CABI.c's first function (5 tokens), last in the reversed unit; filed under CInline",
-      "unit": "src/frontend/CABI.c",
+      "unit": "src/compiler/frontend/CABI.c",
       "was": "CInline_ReturnZero"
     },
     "0x0055ba00": {
@@ -9730,7 +9730,7 @@
     "0x00562350": {
       "name": "CInline_Init",
       "note": "Pro7 CInline.c's first function (18 tokens), last in the reversed unit: medium",
-      "unit": "src/frontend/CInline.c",
+      "unit": "src/compiler/frontend/CInline.c",
       "was": "fn_00514220"
     },
     "0x00562380": {
@@ -10066,7 +10066,7 @@
     "0x00567da0": {
       "name": "CTempl_CanDeduceFunc",
       "note": "Pro7 CTemplateFunc.c slot after CTempl_GetCreateFuncInstance (gc1 MatchTypeAndCheck); filed under CTemplateTools: medium",
-      "unit": "src/frontend/CTemplateFunc.c",
+      "unit": "src/compiler/frontend/CTemplateFunc.c",
       "was": "CTemplateTools_MatchTypeAndCheckBoundSlots"
     },
     "0x00567e40": {
@@ -10312,31 +10312,31 @@
     "0x0056e010": {
       "name": "canidate_reaches_use",
       "note": "Wii UseDefChains' first (its spelling); 2.6 addition to Pro7's file",
-      "unit": "src/optimizer/UseDefChains.c",
+      "unit": "src/compiler/optimizer/UseDefChains.c",
       "was": "fn_0056e010"
     },
     "0x0056e130": {
       "name": "precedes",
       "was": "precedes",
-      "unit": "src/optimizer/UseDefChains.c",
+      "unit": "src/compiler/optimizer/UseDefChains.c",
       "note": "Wii UseDefChains"
     },
     "0x0056e160": {
       "name": "computeusedefchains",
       "note": "Pro7 UseDefChains.c's last (first, deferred); Wii order",
-      "unit": "src/optimizer/UseDefChains.c",
+      "unit": "src/compiler/optimizer/UseDefChains.c",
       "was": "COpt_SetLoopCodeMotionMode"
     },
     "0x0056e2a0": {
       "name": "computeglobaldefuseinfo",
       "note": "twin of the next (Pro7 258/260 tokens; Wii's two 223-byte statics)",
-      "unit": "src/optimizer/UseDefChains.c",
+      "unit": "src/compiler/optimizer/UseDefChains.c",
       "was": "fn_0056e2a0"
     },
     "0x0056e380": {
       "name": "computeglobalusedefinfo",
       "note": "Pro7 UseDefChains.c / Wii UseDefChains",
-      "unit": "src/optimizer/UseDefChains.c",
+      "unit": "src/compiler/optimizer/UseDefChains.c",
       "was": "fn_0056e380"
     },
     "0x0056e460": {
@@ -10377,7 +10377,7 @@
     "0x0056f4e0": {
       "name": "findobjectusedef",
       "note": "Pro7 UseDefChains.c's first; Wii",
-      "unit": "src/optimizer/UseDefChains.c",
+      "unit": "src/compiler/optimizer/UseDefChains.c",
       "was": "find_object_node"
     },
     "0x0056f520": {
@@ -10558,19 +10558,19 @@
     "0x00577120": {
       "name": "deleteload",
       "was": "deleteload",
-      "unit": "src/optimizer/LoadDeletion.c",
+      "unit": "src/compiler/optimizer/LoadDeletion.c",
       "note": "Pro7 LoadDeletion (Wii LoadDeletion module)"
     },
     "0x00577170": {
       "name": "loadpropagatestouse",
       "was": "loadpropagatestouse",
-      "unit": "src/optimizer/LoadDeletion.c",
+      "unit": "src/compiler/optimizer/LoadDeletion.c",
       "note": "Pro7 LoadDeletion (Wii LoadDeletion module)"
     },
     "0x00577180": {
       "name": "is_load",
       "was": "is_load",
-      "unit": "src/optimizer/LoadDeletion.c",
+      "unit": "src/compiler/optimizer/LoadDeletion.c",
       "note": "Pro7 LoadDeletion (Wii LoadDeletion module)"
     },
     "0x005775f0": {
@@ -10857,25 +10857,25 @@
       "name": "dead",
       "note": "Pro7 LiveVariables dead (eliminatedeadcode calls it); unit LiveVariables",
       "was": "fn_00578a00",
-      "unit": "src/backend/LiveVariables.c"
+      "unit": "src/compiler/backend/LiveVariables.c"
     },
     "0x0057af60": {
       "name": "computelivevariables",
       "note": "Pro7 LiveVariables (allocateliveinfo inlined: oalloc, bitvectorinitialize; computedepthfirstordering); unit LiveVariables",
       "was": "fn_00578aa0",
-      "unit": "src/backend/LiveVariables.c"
+      "unit": "src/compiler/backend/LiveVariables.c"
     },
     "0x0057b270": {
       "name": "computeglobalinout",
       "note": "Pro7 LiveVariables static (bitvectorunion); unit LiveVariables",
       "was": "fn_00578db0",
-      "unit": "src/backend/LiveVariables.c"
+      "unit": "src/compiler/backend/LiveVariables.c"
     },
     "0x0057b3a0": {
       "name": "computelocalusedef",
       "note": "Pro7 LiveVariables static; unit LiveVariables",
       "was": "fn_00578ee0",
-      "unit": "src/backend/LiveVariables.c"
+      "unit": "src/compiler/backend/LiveVariables.c"
     },
     "0x0057b4b0": {
       "name": "buildinterferencegraph",
@@ -10906,7 +10906,7 @@
       "name": "insertspillcode",
       "note": "Pro7 SpillCode (deferred: first); calls assign_spill_locations, spillcopy, spillcall, spillinstruction; unit SpillCode",
       "was": "InterferenceGraph_SpillRegisters",
-      "unit": "src/backend/SpillCode.c"
+      "unit": "src/compiler/backend/SpillCode.c"
     },
     "0x0057c5c0": {
       "name": "assign_spill_locations",
@@ -10942,25 +10942,25 @@
       "name": "estimatespillcosts",
       "note": "Pro7 SpillCode's first function (deferred: last), no calls; row has no source",
       "was": "fn_0057ab40",
-      "unit": "src/backend/SpillCode.c"
+      "unit": "src/compiler/backend/SpillCode.c"
     },
     "0x0057d150": {
       "name": "bitvector_compress",
       "note": "Wii BitVectors; 2.6 addition beyond Pro7; unit BitVectors (filed under SpillCode's range)",
       "was": "fn_0057d150",
-      "unit": "src/backend/BitVectors.c"
+      "unit": "src/compiler/backend/BitVectors.c"
     },
     "0x0057d2f0": {
       "name": "bitvector_empty_compressed",
       "note": "Wii BitVectors; unit BitVectors",
       "was": "fn_0057d2f0",
-      "unit": "src/backend/BitVectors.c"
+      "unit": "src/compiler/backend/BitVectors.c"
     },
     "0x0057d300": {
       "name": "init_compressed_bitvectors",
       "note": "Wii BitVectors; unit BitVectors",
       "was": "fn_0057d300",
-      "unit": "src/backend/BitVectors.c"
+      "unit": "src/compiler/backend/BitVectors.c"
     },
     "0x0057d470": {
       "name": "bitvectorinitialize_range",
@@ -11049,28 +11049,28 @@
     "src/driver/ELF_Lib_Import.c": "one object in 2.6 holding what Wii splits into ELF_Lib_Import and EPPC_LinkUtilities (2.6 interleaves their functions in one range)",
     "src/driver/CLDropinCallbacks_V10.cpp": "starts at 0x424660 (ANSI_To_Mac_GMT_Time, Mac_To_ANSI_Time were filed under CLOverlays); the implicit OSSpec/OSNameSpec operator= at 0x426290/0x4262c0 (no source) are its copies (-inline off)",
     "src/driver/CLBrowser.c": "two objects: CLBrowser (0x429d10-0x42a220) and Pro7's CLIncludeFileCache.c (0x42a220-0x42a4ed, Wii's CLIncludeFileCache module); 0x429c20 is CLWriteObjectFile's WriteBrowseData",
-    "src/frontend/CPrep.c": "starts at 0x436380: 0x436340 is CodeGen's CodeGen_GetNewVarInfo",
+    "src/compiler/frontend/CPrep.c": "starts at 0x436380: 0x436340 is CodeGen's CodeGen_GetNewVarInfo",
     "src/driver/COSToolsCLT.c": "0x442480 (TickCount) is Wii's DateTimeUtils module: possibly its own object after COSToolsCLT",
-    "src/backend/Operands.c": "0x4e0d70 is at the TOC/Operands boundary (TOC's setupaddressing by size?); 0x4e0df0 and 0x4e1000 are 2.6 additions at the file's end",
-    "src/backend/StackFrame.c": "the rows with no source between StackFrame's runs (0x4f6490-0x4f70e0, 0x4f7830, 0x4f8da0, 0x4f9ce0-0x4fa3d6) are StackFrame's (Wii's module, Pro7's order)",
-    "src/optimizer/ValueNumbering.c": "0x508d30-0x50a3eb (Wii LocalCSE): Pro7's file, deferred; most rows have no source, copyregister (0x50a110) is filed under Coloring",
-    "src/backend/Scheduler.c": "ends at 0x508610 (serialize_store, serializeregister, addsuccessor, makedgnode have no source); default_uses_vpermute_unit and uses_vpermute_unit (0x507ba0, 0x507bb0) are its first rows, filed under Peephole",
-    "src/backend/InlineAsm.c": "0x530810 (no source) sits between its two runs: InlineAsm.c's",
-    "src/backend/DWARF.c": "its other functions are statics Wii's DWARF module has unnamed: gc1's names stand, unconfirmed",
-    "src/frontend/CABI.c": "ends at 0x55b9f3: 0x55b9f0 (CABI_GetStructResultArgumentIndex, Pro7 CABI.c's first function) is filed under CInline",
-    "src/optimizer/UseDefChains.c": "a unit the repo lacks: 0x56e010-0x56f520 is Pro7's UseDefChains.c (Wii's UseDefChains module), deferred; its rows have no source (0x56e130 precedes is filed elsewhere)",
-    "src/backend/MachineSimulation7400.c": "rows are Pro7's statics with an m7400_ prefix, by design (unique global row names)",
-    "src/optimizer/VectorArraysToRegs.c": "0x577fe0 uses_vpermute_unit_altivec is MachineSimulationAltiVec's first function (deferred), not VectorArraysToRegs'",
-    "src/backend/MachineSimulationAltiVec.c": "starts at 0x577fe0 (uses_vpermute_unit_altivec, filed under VectorArraysToRegs); Pro7's file, deferred; data sits in VectorArraysToRegs' range",
-    "src/backend/LiveVariables.c": "0x57aec0-0x57b4a6 (dead, computelivevariables, computeglobalinout, computelocalusedef: Pro7's file, deferred), filed under InterferenceGraph; the repo's LiveVariables.c has no rows (its SpillCode_* functions are 1.x stand-ins). Wii rewrote it as LiveRegisters",
-    "src/backend/InterferenceGraph.c": "0x57b4b0-0x57c390 (Pro7's file, deferred); its first four rows are LiveVariables', its last (0x57c390 insertspillcode) SpillCode's",
-    "src/backend/SpillCode.c": "0x57c390-0x57d150 (Pro7's file, deferred): starts with insertspillcode (filed under InterferenceGraph), ends with estimatespillcosts at 0x57d030 (no source)",
-    "src/backend/BitVectors.c": "starts at 0x57d150 (bitvector_compress, bitvector_empty_compressed, init_compressed_bitvectors: Wii's, filed in SpillCode's range); deferred",
-    "src/backend/GCCInlineAsm.c": "Pro7's file, deferred (InlineAsm_gcc_parse, gcc_replace_arg_st_asm, gcc_parse_name); SkipComment/parse_attribute/expression/input/output/killed and replace_arg inlined",
-    "src/frontend/CRTTI.c": "Pro7's file, deferred; 14 rows for Pro7's 18 (IsSameType, IncompleteCheck, ConstCastQualCheck, FindTypeInfoType inlined)",
-    "src/frontend/CScope.c": "ends at 0x4db74a: CScope_SetClassDefScope .. CScope_Setup (0x4db5c0-0x4db6e0) are filed under BE_elf as BE_elf_*",
-    "src/optimizer/Alias.c": "0x511990-0x5133f0: update_all_alias_values and initialize_alias_values filed under StructMoves, must/may_alias rows and the tail without source; 2.6's Alias.c is larger than Pro7's (assert lines +450..570) with helpers Pro7 lacks",
+    "src/compiler/backend/Operands.c": "0x4e0d70 is at the TOC/Operands boundary (TOC's setupaddressing by size?); 0x4e0df0 and 0x4e1000 are 2.6 additions at the file's end",
+    "src/compiler/backend/StackFrame.c": "the rows with no source between StackFrame's runs (0x4f6490-0x4f70e0, 0x4f7830, 0x4f8da0, 0x4f9ce0-0x4fa3d6) are StackFrame's (Wii's module, Pro7's order)",
+    "src/compiler/optimizer/ValueNumbering.c": "0x508d30-0x50a3eb (Wii LocalCSE): Pro7's file, deferred; most rows have no source, copyregister (0x50a110) is filed under Coloring",
+    "src/compiler/backend/Scheduler.c": "ends at 0x508610 (serialize_store, serializeregister, addsuccessor, makedgnode have no source); default_uses_vpermute_unit and uses_vpermute_unit (0x507ba0, 0x507bb0) are its first rows, filed under Peephole",
+    "src/compiler/backend/InlineAsm.c": "0x530810 (no source) sits between its two runs: InlineAsm.c's",
+    "src/compiler/backend/DWARF.c": "its other functions are statics Wii's DWARF module has unnamed: gc1's names stand, unconfirmed",
+    "src/compiler/frontend/CABI.c": "ends at 0x55b9f3: 0x55b9f0 (CABI_GetStructResultArgumentIndex, Pro7 CABI.c's first function) is filed under CInline",
+    "src/compiler/optimizer/UseDefChains.c": "a unit the repo lacks: 0x56e010-0x56f520 is Pro7's UseDefChains.c (Wii's UseDefChains module), deferred; its rows have no source (0x56e130 precedes is filed elsewhere)",
+    "src/compiler/backend/MachineSimulation7400.c": "rows are Pro7's statics with an m7400_ prefix, by design (unique global row names)",
+    "src/compiler/optimizer/VectorArraysToRegs.c": "0x577fe0 uses_vpermute_unit_altivec is MachineSimulationAltiVec's first function (deferred), not VectorArraysToRegs'",
+    "src/compiler/backend/MachineSimulationAltiVec.c": "starts at 0x577fe0 (uses_vpermute_unit_altivec, filed under VectorArraysToRegs); Pro7's file, deferred; data sits in VectorArraysToRegs' range",
+    "src/compiler/backend/LiveVariables.c": "0x57aec0-0x57b4a6 (dead, computelivevariables, computeglobalinout, computelocalusedef: Pro7's file, deferred), filed under InterferenceGraph; the repo's LiveVariables.c has no rows (its SpillCode_* functions are 1.x stand-ins). Wii rewrote it as LiveRegisters",
+    "src/compiler/backend/InterferenceGraph.c": "0x57b4b0-0x57c390 (Pro7's file, deferred); its first four rows are LiveVariables', its last (0x57c390 insertspillcode) SpillCode's",
+    "src/compiler/backend/SpillCode.c": "0x57c390-0x57d150 (Pro7's file, deferred): starts with insertspillcode (filed under InterferenceGraph), ends with estimatespillcosts at 0x57d030 (no source)",
+    "src/compiler/backend/BitVectors.c": "starts at 0x57d150 (bitvector_compress, bitvector_empty_compressed, init_compressed_bitvectors: Wii's, filed in SpillCode's range); deferred",
+    "src/compiler/backend/GCCInlineAsm.c": "Pro7's file, deferred (InlineAsm_gcc_parse, gcc_replace_arg_st_asm, gcc_parse_name); SkipComment/parse_attribute/expression/input/output/killed and replace_arg inlined",
+    "src/compiler/frontend/CRTTI.c": "Pro7's file, deferred; 14 rows for Pro7's 18 (IsSameType, IncompleteCheck, ConstCastQualCheck, FindTypeInfoType inlined)",
+    "src/compiler/frontend/CScope.c": "ends at 0x4db74a: CScope_SetClassDefScope .. CScope_Setup (0x4db5c0-0x4db6e0) are filed under BE_elf as BE_elf_*",
+    "src/compiler/optimizer/Alias.c": "0x511990-0x5133f0: update_all_alias_values and initialize_alias_values filed under StructMoves, must/may_alias rows and the tail without source; 2.6's Alias.c is larger than Pro7's (assert lines +450..570) with helpers Pro7 lacks",
     "(import thunks)": "0x41720e, 0x417270, 0x417276: version.dll thunks (Wii's VERSION module), no source needed beyond bindings",
-    "src/backend/Intrinsics.c": "starts at 0x4c45b0 (va_info_intrinsic, the old Unit_004c45b0.c): the file's last function, deferred"
+    "src/compiler/backend/Intrinsics.c": "starts at 0x4c45b0 (va_info_intrinsic, the old Unit_004c45b0.c): the file's last function, deferred"
   }
 }

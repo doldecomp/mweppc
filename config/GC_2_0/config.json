@@ -87,6 +87,6 @@
     "src/msl/locale.c": "src/frontend/Unmangle.c",
     "src/msl/float.c": "src/msl/locale.c",
     "src/runtime/throwsbad.cpp": "src/runtime/NewHand.cpp",
-    "src/backend/OpcodeInfo.c": "src/frontend/CDecl.c"
+    "src/compiler/backend/OpcodeInfo.c": "src/compiler/frontend/CDecl.c"
   }
 }

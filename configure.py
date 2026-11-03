@@ -65,7 +65,7 @@ def pool(source):
     return "stem_" + "".join(ch if ch.isalnum() else "_" for ch in Path(source).stem)
 
 
-RESOURCES = "src/driver/mwcceppc.rc"
+RESOURCES = "src/compiler/driver/mwcceppc.rc"
 
 
 def version_edges(version, objects, objdiff, report=True):

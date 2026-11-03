@@ -19,10 +19,10 @@ from mw.names import c_name, is_mangled
 LICENSING = project.ROOT / "tools/lmgr_stub/lmgr326b.dll"
 ALIGN_8 = 0x00400000
 UD2 = b"\x0f\x0b"
-MODELS = "src/backend/MachineSimulation"
+MODELS = "src/compiler/backend/MachineSimulation"
 STAND_INS = {
-    "src/backend/MachineSimulationAltiVec.c": "src/backend/MachineSimulation7400.c",
-    "src/backend/MachineSimulation821.c": 16,
+    "src/compiler/backend/MachineSimulationAltiVec.c": "src/compiler/backend/MachineSimulation7400.c",
+    "src/compiler/backend/MachineSimulation821.c": 16,
 }
 
 

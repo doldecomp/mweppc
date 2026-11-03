@@ -126,7 +126,7 @@ src/driver/StaticParserGlue.c:
 	.text       start:0x0040532E end:0x00405360 align:2
 	.data       start:0x005827B8 end:0x005836EC
 
-src/driver/cc-eabi-ppc-mw.c:
+src/compiler/driver/cc-eabi-ppc-mw.c:
 	.text       start:0x00405360 end:0x004053F0
 
 src/msl/ansi_files.c:
@@ -134,7 +134,7 @@ src/msl/ansi_files.c:
 	.data       start:0x005836F0 end:0x00583840
 	.bss        start:0x005DC2C8 end:0x005DC5C8
 
-src/driver/ParserGlue-eabi-ppc-cc.c:
+src/compiler/driver/ParserGlue-eabi-ppc-cc.c:
 	.text       start:0x00405650 end:0x00405830
 	.data       start:0x00583840 end:0x0058D29C
 
@@ -206,7 +206,7 @@ src/driver/ParserFace.c:
 	.text       start:0x0040B958 end:0x0040BFB0 align:1
 	.data       start:0x0058F880 end:0x0058F938
 
-src/driver/cc-eabi-ppc.c:
+src/compiler/driver/cc-eabi-ppc.c:
 	.text       start:0x0040BFB0 end:0x0040C190
 	.data       start:0x0058F938 end:0x005979FC
 
@@ -241,15 +241,15 @@ src/driver/ToolHelpers.c:
 	.data       start:0x00597C58 end:0x00597CA0
 	.bss        start:0x005DCC20 end:0x005DCC21
 
-src/driver/ParserHelpers-cc.c:
+src/compiler/driver/ParserHelpers-cc.c:
 	.text       start:0x0040D717 end:0x0040DA8D align:1
 	.data       start:0x00597CA0 end:0x00597E0C
 
-src/driver/ToolHelpers-cc.c:
+src/compiler/driver/ToolHelpers-cc.c:
 	.text       start:0x0040DA8D end:0x0040DB40 align:1
 	.data       start:0x00597E10 end:0x00597E5C
 
-src/driver/OptimizerHelpers.c:
+src/compiler/driver/OptimizerHelpers.c:
 	.text       start:0x0040DB40 end:0x0040E080
 	.data       start:0x00597E60 end:0x00598114
 
@@ -257,7 +257,7 @@ src/driver/WarningHelpers.c:
 	.text       start:0x0040E080 end:0x0040E250
 	.data       start:0x00598118 end:0x005981E4
 
-src/driver/StdTargetWarningHelpers-cc.c:
+src/compiler/driver/StdTargetWarningHelpers-cc.c:
 	.text       start:0x0040E250 end:0x0040E5F7
 	.data       start:0x005981E8 end:0x00598508
 
@@ -418,7 +418,7 @@ src/driver/Option.c:
 src/driver/CWPluginsPrivate.cpp:
 	.text       start:0x0041E8A0 end:0x0041F1D0
 
-src/driver/CCompiler.c:
+src/compiler/driver/CCompiler.c:
 	.text       start:0x0041F1D0 end:0x0041FA60
 	.data       start:0x005A2190 end:0x005A2250
 	.bss        start:0x005DE8E0 end:0x005DE9A0
@@ -439,7 +439,7 @@ src/msl/strtoul.c:
 	.text       start:0x00421040 end:0x004216F0
 	.data       start:0x005A22D8 end:0x005A2358
 
-src/driver/TargetOptimizerHelpers-eabi-ppc.c:
+src/compiler/driver/TargetOptimizerHelpers-eabi-ppc.c:
 	.text       start:0x004216F0 end:0x00421950
 	.data       start:0x005A2358 end:0x005A2448
 
@@ -526,22 +526,22 @@ src/driver/Help.c:
 	.data       start:0x005A5B20 end:0x005A6628
 	.bss        start:0x005DEAD8 end:0x005DEC18
 
-src/driver/CodeGenOptPPC.c:
+src/compiler/driver/CodeGenOptPPC.c:
 	.text       start:0x0042D580 end:0x0042DD20
 	.data       start:0x005A6628 end:0x005A6824
 	.bss        start:0x005DEC18 end:0x005DEC1A
 
-src/optimizer/IrOptimizer.c:
+src/compiler/optimizer/IrOptimizer.c:
 	.text       start:0x0042DD20 end:0x0042E9B0
 	.data       start:0x005A6828 end:0x005A6C44
 	.bss        start:0x005DEC20 end:0x005DEC22
 
-src/backend/CodeGen.c:
+src/compiler/backend/CodeGen.c:
 	.text       start:0x0042E9B0 end:0x00436380
 	.data       start:0x005A6C48 end:0x005A76F0
 	.bss        start:0x005DEC28 end:0x005DED8C
 
-src/frontend/CPrep.c:
+src/compiler/frontend/CPrep.c:
 	.text       start:0x00436380 end:0x0043FFE0
 	.data       start:0x005A76F0 end:0x005A8BD8
 	.bss        start:0x005DED90 end:0x005DF566
@@ -599,293 +599,293 @@ src/driver/ErrMgr.c:
 	.text       start:0x004440D0 end:0x00444370
 	.data       start:0x005A9010 end:0x005A942C
 
-src/backend/InstrSelection.c:
+src/compiler/backend/InstrSelection.c:
 	.text       start:0x00444370 end:0x00454A50
 	.data       start:0x005A9430 end:0x005A9838
 
-src/optimizer/IroDump.c:
+src/compiler/optimizer/IroDump.c:
 	.text       start:0x00454A50 end:0x00455850
 	.data       start:0x005A9838 end:0x005AA1D0
 	.bss        start:0x005DFDE0 end:0x005DFF18
 
-src/optimizer/IroEval.c:
+src/compiler/optimizer/IroEval.c:
 	.text       start:0x00455850 end:0x00457500
 	.data       start:0x005AA1D0 end:0x005AA350
 	.bss        start:0x005DFF18 end:0x005DFF65
 
-src/optimizer/IroSubable.c:
+src/compiler/optimizer/IroSubable.c:
 	.text       start:0x00457500 end:0x004578D0
 	.data       start:0x005AA350 end:0x005AA35C
 	.bss        start:0x005DFF68 end:0x005DFFB5
 
-src/optimizer/IroTransform.c:
+src/compiler/optimizer/IroTransform.c:
 	.text       start:0x004578D0 end:0x0045DC70
 	.data       start:0x005AA35C end:0x005AB080 align:4
 	.bss        start:0x005DFFB8 end:0x005E009F
 
-src/optimizer/IROUseDef.c:
+src/compiler/optimizer/IROUseDef.c:
 	.text       start:0x0045DC70 end:0x00461090
 	.data       start:0x005AB080 end:0x005AB2E0
 	.bss        start:0x005E00A0 end:0x005E01FC
 
-src/optimizer/IroVars.c:
+src/compiler/optimizer/IroVars.c:
 	.text       start:0x00461090 end:0x00463710
 	.data       start:0x005AB2E0 end:0x005AB4B0
 	.bss        start:0x005E0200 end:0x005E020C
 
-src/frontend/CError.c:
+src/compiler/frontend/CError.c:
 	.text       start:0x00463710 end:0x00468130
 	.data       start:0x005AB4B0 end:0x005AB89C
 	.bss        start:0x005E0210 end:0x005E021A
 
-src/optimizer/IroUtil.c:
+src/compiler/optimizer/IroUtil.c:
 	.text       start:0x00468130 end:0x0046A5D0
 	.data       start:0x005AB89C end:0x005ABE28 align:4
 	.bss        start:0x005E0220 end:0x005E0234
 
-src/optimizer/IroCSE.c:
+src/compiler/optimizer/IroCSE.c:
 	.text       start:0x0046A5D0 end:0x0046C0A0
 	.data       start:0x005ABE28 end:0x005ABF24
 	.bss        start:0x005E0238 end:0x005E0239
 
-src/optimizer/IroLinearForm.c:
+src/compiler/optimizer/IroLinearForm.c:
 	.text       start:0x0046C0A0 end:0x0046FC40
 	.data       start:0x005ABF28 end:0x005AC534
 	.bss        start:0x005E0240 end:0x005E024C
 
-src/optimizer/IroPropagate.c:
+src/compiler/optimizer/IroPropagate.c:
 	.text       start:0x0046FC40 end:0x004712A0
 	.data       start:0x005AC538 end:0x005AC624
 
-src/optimizer/IroFlowgraph.c:
+src/compiler/optimizer/IroFlowgraph.c:
 	.text       start:0x004712A0 end:0x00471E90
 	.data       start:0x005AC624 end:0x005AC6D0 align:4
 
-src/optimizer/IroPointerAnalysis.c:
+src/compiler/optimizer/IroPointerAnalysis.c:
 	.text       start:0x00471E90 end:0x0049CF80
 	.data       start:0x005AC6D0 end:0x005AE898
 	.bss        start:0x005E0250 end:0x005E032C
 
-src/optimizer/IroJump.c:
+src/compiler/optimizer/IroJump.c:
 	.text       start:0x0049CF80 end:0x0049D4F0
 	.data       start:0x005AE898 end:0x005AE984
 
-src/optimizer/IroRangePropagation.c:
+src/compiler/optimizer/IroRangePropagation.c:
 	.text       start:0x0049D4F0 end:0x0049EE70
 	.data       start:0x005AE984 end:0x005AEBC0 align:4
 	.bss        start:0x005E0330 end:0x005E0338
 
-src/optimizer/IroEmptyLoop.c:
+src/compiler/optimizer/IroEmptyLoop.c:
 	.text       start:0x0049EE70 end:0x004A00C0
 	.data       start:0x005AEBC0 end:0x005AF540
 
-src/optimizer/IroUnrollLoop.c:
+src/compiler/optimizer/IroUnrollLoop.c:
 	.text       start:0x004A00C0 end:0x004A4580
 	.data       start:0x005AF540 end:0x005AFD0C
 
-src/optimizer/IroLoop.c:
+src/compiler/optimizer/IroLoop.c:
 	.text       start:0x004A4580 end:0x004A8E50
 	.data       start:0x005AFD10 end:0x005B0080
 	.bss        start:0x005E0338 end:0x005E035C
 
-src/optimizer/IroExprRegeneration.c:
+src/compiler/optimizer/IroExprRegeneration.c:
 	.text       start:0x004A8E50 end:0x004AC980
 	.data       start:0x005B0080 end:0x005B01E4
 	.bss        start:0x005E0360 end:0x005E03B6
 
-src/backend/InlineAsmPPC.c:
+src/compiler/backend/InlineAsmPPC.c:
 	.text       start:0x004AC980 end:0x004B26A0
 	.data       start:0x005B01E8 end:0x005B0748
 	.bss        start:0x005E03B8 end:0x005E03BE
 
-src/backend/ObjGen_PPC_EABI.c:
+src/compiler/backend/ObjGen_PPC_EABI.c:
 	.text       start:0x004B26A0 end:0x004B5AE0
 	.data       start:0x005B0748 end:0x005B09AC
 	.bss        start:0x005E03C0 end:0x005E03FF
 
-src/backend/PPCError.c:
+src/compiler/backend/PPCError.c:
 	.text       start:0x004B5AE0 end:0x004B5D70
 	.data       start:0x005B09B0 end:0x005B09BC
 
-src/frontend/CExpr2.c:
+src/compiler/frontend/CExpr2.c:
 	.text       start:0x004B5D70 end:0x004BEEB0
 	.data       start:0x005B09C0 end:0x005B0E90
 	.bss        start:0x005E0400 end:0x005E04BE
 
-src/backend/CMachine.c:
+src/compiler/backend/CMachine.c:
 	.text       start:0x004BEEB0 end:0x004C2920
 	.data       start:0x005B0E90 end:0x005B1CA4
 	.bss        start:0x005E04C0 end:0x005E04CE
 
-src/frontend/CInt64.c:
+src/compiler/frontend/CInt64.c:
 	.text       start:0x004C2920 end:0x004C45B0
 	.data       start:0x005B1CA8 end:0x005B1D64
 	.bss        start:0x005E04D0 end:0x005E05D9
 
-src/backend/Intrinsics.c:
+src/compiler/backend/Intrinsics.c:
 	.text       start:0x004C45B0 end:0x004CFDE0
 	.data       start:0x005B1D68 end:0x005B9A50
 	.bss        start:0x005E05E0 end:0x005E0AD0
 
-src/backend/RegisterInfo.c:
+src/compiler/backend/RegisterInfo.c:
 	.text       start:0x004CFDE0 end:0x004D1040
 	.data       start:0x005B9A50 end:0x005B9BC0
 	.bss        start:0x005E0AD0 end:0x005E0AF2
 
-src/backend/BE_symbol.c:
+src/compiler/backend/BE_symbol.c:
 	.text       start:0x004D1040 end:0x004D1D70
 	.data       start:0x005B9BC0 end:0x005B9BD4
 	.bss        start:0x005E0AF8 end:0x005E0AFC
 
-src/frontend/CPrepTokenizer.c:
+src/compiler/frontend/CPrepTokenizer.c:
 	.text       start:0x004D1D70 end:0x004D6C90
 	.data       start:0x005B9BD8 end:0x005BA86C
 	.bss        start:0x005E0B00 end:0x005E0B01
 
-src/frontend/CScope.c:
+src/compiler/frontend/CScope.c:
 	.text       start:0x004D6C90 end:0x004DB600
 	.data       start:0x005BA870 end:0x005BA948
 	.bss        start:0x005E0B08 end:0x005E0B1E
 
-src/backend/BE_elf.c:
+src/compiler/backend/BE_elf.c:
 	.text       start:0x004DB600 end:0x004DCC40
 	.data       start:0x005BA948 end:0x005BA9B4
 	.bss        start:0x005E0B20 end:0x005E0BB0
 
-src/backend/PCode.c:
+src/compiler/backend/PCode.c:
 	.text       start:0x004DCC40 end:0x004DD270
 	.bss        start:0x005E0BB0 end:0x005E0BB6
 
-src/backend/TOC.c:
+src/compiler/backend/TOC.c:
 	.text       start:0x004DD270 end:0x004E0C70
 	.data       start:0x005BA9B8 end:0x005BB14C
 
-src/backend/Operands.c:
+src/compiler/backend/Operands.c:
 	.text       start:0x004E0C70 end:0x004E3C90
 	.data       start:0x005BB150 end:0x005BB3D4
 
-src/frontend/CParser.c:
+src/compiler/frontend/CParser.c:
 	.text       start:0x004E3C90 end:0x004EA390
 	.data       start:0x005BB3D8 end:0x005BB9E0
 	.bss        start:0x005E0BB8 end:0x005E0BCC
 
-src/backend/PCodeUtilities.c:
+src/compiler/backend/PCodeUtilities.c:
 	.text       start:0x004EA390 end:0x004EB020
 	.data       start:0x005BB9E0 end:0x005BBA0C
 
-src/backend/PCodeAssembly.c:
+src/compiler/backend/PCodeAssembly.c:
 	.text       start:0x004EB020 end:0x004ED1F0
 	.data       start:0x005BBA10 end:0x005BC2D4
 	.bss        start:0x005E0BD0 end:0x005E0BD4
 
-src/backend/SFPE_PPC_EABI.c:
+src/compiler/backend/SFPE_PPC_EABI.c:
 	.text       start:0x004ED1F0 end:0x004EF360
 	.data       start:0x005BC2D8 end:0x005BC33C
 
-src/frontend/CFunc.c:
+src/compiler/frontend/CFunc.c:
 	.text       start:0x004EF360 end:0x004F63B0
 	.data       start:0x005BC340 end:0x005BC520
 	.bss        start:0x005E0BD8 end:0x005E0C04
 
-src/backend/StackFrame.c:
+src/compiler/backend/StackFrame.c:
 	.text       start:0x004F63B0 end:0x004FA300
 	.data       start:0x005BC520 end:0x005BC5A4
 	.bss        start:0x005E0C08 end:0x005E0D08
 
-src/backend/Switch.c:
+src/compiler/backend/Switch.c:
 	.text       start:0x004FA300 end:0x004FB7B0
 	.data       start:0x005BC5A8 end:0x005BC5BC
 	.bss        start:0x005E0D08 end:0x005E0D44
 
-src/backend/Exceptions.c:
+src/compiler/backend/Exceptions.c:
 	.text       start:0x004FB7B0 end:0x004FD7C0
 	.data       start:0x005BC5C0 end:0x005BC698
 	.bss        start:0x005E0D48 end:0x005E0D68
 
-src/backend/DumpIR.c:
+src/compiler/backend/DumpIR.c:
 	.text       start:0x004FD7C0 end:0x004FD7E0
 	.data       start:0x005BC698 end:0x005BCFC4
 	.bss        start:0x005E0D68 end:0x005E0D7C
 
-src/optimizer/COptimizer.c:
+src/compiler/optimizer/COptimizer.c:
 	.text       start:0x004FD7E0 end:0x004FE230
 	.data       start:0x005BCFC8 end:0x005BD1C8
 	.bss        start:0x005E0D80 end:0x005E0ECB
 
-src/backend/Registers.c:
+src/compiler/backend/Registers.c:
 	.text       start:0x004FE230 end:0x004FE5C0
 
-src/frontend/CMangler.c:
+src/compiler/frontend/CMangler.c:
 	.text       start:0x004FE5C0 end:0x00500420
 	.data       start:0x005BD1C8 end:0x005BD820
 
-src/optimizer/GlobalOptimizer.c:
+src/compiler/optimizer/GlobalOptimizer.c:
 	.text       start:0x00500420 end:0x00500AF0
 	.data       start:0x005BD820 end:0x005BD9BC
 
-src/backend/PCodeListing.c:
+src/compiler/backend/PCodeListing.c:
 	.text       start:0x00500AF0 end:0x00500B50
 	.data       start:0x005BD9C0 end:0x005BDC64
 
-src/backend/Peephole.c:
+src/compiler/backend/Peephole.c:
 	.text       start:0x00500B50 end:0x00507AC0
 	.bss        start:0x005E0ECB end:0x005E1858 align:1
 
-src/backend/Scheduler.c:
+src/compiler/backend/Scheduler.c:
 	.text       start:0x00507AC0 end:0x00508530
 	.data       start:0x005BDC68 end:0x005BDC84
 	.bss        start:0x005E1858 end:0x005E189A
 
-src/backend/Coloring.c:
+src/compiler/backend/Coloring.c:
 	.text       start:0x00508530 end:0x00508C50
 	.data       start:0x005BDC88 end:0x005BDC98
 	.bss        start:0x005E18A0 end:0x005E18A2
 
-src/optimizer/ValueNumbering.c:
+src/compiler/optimizer/ValueNumbering.c:
 	.text       start:0x00508C50 end:0x0050A310
 	.data       start:0x005BDC98 end:0x005BDCC0
 	.bss        start:0x005E18A8 end:0x005E201C
 
-src/frontend/CInit.c:
+src/compiler/frontend/CInit.c:
 	.text       start:0x0050A310 end:0x0050FB00
 	.data       start:0x005BDCC0 end:0x005BE024
 	.bss        start:0x005E2020 end:0x005E203A
 
-src/optimizer/StructMoves.c:
+src/compiler/optimizer/StructMoves.c:
 	.text       start:0x0050FB00 end:0x005118B0
 	.data       start:0x005BE024 end:0x005BE0A8 align:4
 
-src/optimizer/Alias.c:
+src/compiler/optimizer/Alias.c:
 	.text       start:0x005118B0 end:0x00513310
 	.data       start:0x005BE0A8 end:0x005BE334
 	.bss        start:0x005E2040 end:0x005E2FE4
 
-src/frontend/CBrowse.c:
+src/compiler/frontend/CBrowse.c:
 	.text       start:0x00513310 end:0x00514B70
 	.data       start:0x005BE338 end:0x005BE348
 	.bss        start:0x005E2FE8 end:0x005E301C
 
-src/frontend/CPreprocess.c:
+src/compiler/frontend/CPreprocess.c:
 	.text       start:0x00514B70 end:0x00516150
 	.data       start:0x005BE348 end:0x005BEE68
 	.bss        start:0x005E3020 end:0x005E3028
 
-src/frontend/CPrec.c:
+src/compiler/frontend/CPrec.c:
 	.text       start:0x00516150 end:0x0051FE60
 	.data       start:0x005BEE68 end:0x005BF21C
 	.bss        start:0x005E3028 end:0x005E3076
 
-src/frontend/CException.c:
+src/compiler/frontend/CException.c:
 	.text       start:0x0051FE60 end:0x00522EE0
 	.data       start:0x005BF220 end:0x005BF6C8
 	.bss        start:0x005E3078 end:0x005E3092
 
-src/frontend/CSOM.c:
+src/compiler/frontend/CSOM.c:
 	.text       start:0x00522EE0 end:0x00525DD0
 	.data       start:0x005BF6C8 end:0x005BF91C
 	.bss        start:0x005E3098 end:0x005E30A8
 
-src/backend/FuncLevelAsmPPC.c:
+src/compiler/backend/FuncLevelAsmPPC.c:
 	.text       start:0x00525DD0 end:0x005268A0
 	.data       start:0x005BF920 end:0x005BF9E8
 	.bss        start:0x005E30A8 end:0x005E30B0
@@ -901,224 +901,224 @@ src/msl/locale.c:
 src/msl/float.c:
 	.data       start:0x005C02E0 end:0x005C034C
 
-src/optimizer/FunctionCalls.c:
+src/compiler/optimizer/FunctionCalls.c:
 	.text       start:0x005281B0 end:0x00529A20
 	.data       start:0x005C0350 end:0x005C0360
 	.bss        start:0x005E30E0 end:0x005E3100
 
-src/backend/PCodeInfo.c:
+src/compiler/backend/PCodeInfo.c:
 	.text       start:0x00529A20 end:0x0052B140
 	.data       start:0x005C0360 end:0x005C082C
 
-src/optimizer/IroMalloc.c:
+src/compiler/optimizer/IroMalloc.c:
 	.text       start:0x0052B140 end:0x0052B990
 	.data       start:0x005C0830 end:0x005C0840
 	.bss        start:0x005E3100 end:0x005E3138
 
-src/optimizer/CIRTransform.c:
+src/compiler/optimizer/CIRTransform.c:
 	.text       start:0x0052B990 end:0x0052BBE0
 	.data       start:0x005C0840 end:0x005C08D8
 	.bss        start:0x005E3138 end:0x005E313C
 
-src/optimizer/IroBitVect.c:
+src/compiler/optimizer/IroBitVect.c:
 	.text       start:0x0052BBE0 end:0x0052BE90
 	.data       start:0x005C08D8 end:0x005C08E8
 
-src/frontend/CClass.c:
+src/compiler/frontend/CClass.c:
 	.text       start:0x0052BE90 end:0x0052F660
 	.data       start:0x005C08E8 end:0x005C0AFC
 	.bss        start:0x005E3140 end:0x005E318A
 
-src/backend/InlineAsm.c:
+src/compiler/backend/InlineAsm.c:
 	.text       start:0x0052F660 end:0x00530AB0
 	.data       start:0x005C0B00 end:0x005C0BF0
 	.bss        start:0x005E3190 end:0x005E3594
 
-src/frontend/CTemplateNew.c:
+src/compiler/frontend/CTemplateNew.c:
 	.text       start:0x00530AB0 end:0x005338C0
 	.data       start:0x005C0BF0 end:0x005C0CBC
 	.bss        start:0x005E3598 end:0x005E35C2
 
-src/frontend/CDecl.c:
+src/compiler/frontend/CDecl.c:
 	.text       start:0x005338C0 end:0x0053C200
 	.data       start:0x005C0CC0 end:0x005C0FA8
 
-src/backend/OpcodeInfo.c:
+src/compiler/backend/OpcodeInfo.c:
 	.data       start:0x005C0FA8 end:0x005C40CF
 
-src/backend/InlineAsmMnemonicsPPC.c:
+src/compiler/backend/InlineAsmMnemonicsPPC.c:
 	.text       start:0x0053C200 end:0x0053C310
 	.data       start:0x005C40D0 end:0x005CBEC1
 
-src/backend/InlineAsmRegisters.c:
+src/compiler/backend/InlineAsmRegisters.c:
 	.text       start:0x0053C310 end:0x0053C420
 	.bss        start:0x005E35C8 end:0x005E36C8
 
-src/backend/InlineAsmRegistersPPC.c:
+src/compiler/backend/InlineAsmRegistersPPC.c:
 	.text       start:0x0053C420 end:0x0053CB30
 	.data       start:0x005CBEC8 end:0x005CEE70
 	.bss        start:0x005E36C8 end:0x005E3900
 
-src/frontend/CExpr.c:
+src/compiler/frontend/CExpr.c:
 	.text       start:0x0053CB30 end:0x005479F0
 	.data       start:0x005CEE70 end:0x005CF738
 
-src/backend/DWARF.c:
+src/compiler/backend/DWARF.c:
 	.text       start:0x005479F0 end:0x0054D5B0
 	.data       start:0x005CF738 end:0x005CF94C
 	.bss        start:0x005E3900 end:0x005E3AB8
 
-src/frontend/CExprConvMatch.c:
+src/compiler/frontend/CExprConvMatch.c:
 	.text       start:0x0054D5B0 end:0x005523B0
 	.data       start:0x005CF950 end:0x005CFBC8
 
-src/frontend/CObjC.c:
+src/compiler/frontend/CObjC.c:
 	.text       start:0x005523B0 end:0x00557820
 	.data       start:0x005CFBC8 end:0x005CFEF0
 	.bss        start:0x005E3AB8 end:0x005E3AC0
 
-src/frontend/CObjCModern.c:
+src/compiler/frontend/CObjCModern.c:
 	.text       start:0x00557820 end:0x00557BE0
 	.data       start:0x005CFEF0 end:0x005CFF18
 
-src/frontend/CABI.c:
+src/compiler/frontend/CABI.c:
 	.text       start:0x00557BE0 end:0x0055C500
 	.data       start:0x005CFF18 end:0x005CFFD4
 	.bss        start:0x005E3AC0 end:0x005E3AD6
 
-src/frontend/CInline.c:
+src/compiler/frontend/CInline.c:
 	.text       start:0x0055C500 end:0x00562E80
 	.data       start:0x005CFFD8 end:0x005D12C0
 	.bss        start:0x005E3AD8 end:0x005E3B66
 
-src/frontend/CTemplateTools.c:
+src/compiler/frontend/CTemplateTools.c:
 	.text       start:0x00562E80 end:0x00566350
 	.data       start:0x005D12C0 end:0x005D16FC
 
-src/frontend/CTemplateFunc.c:
+src/compiler/frontend/CTemplateFunc.c:
 	.text       start:0x00566350 end:0x00568940
 	.data       start:0x005D1700 end:0x005D17F0
 	.bss        start:0x005E3B68 end:0x005E3B70
 
-src/backend/ScanFloatX86.c:
+src/compiler/backend/ScanFloatX86.c:
 	.text       start:0x00568940 end:0x00568990
 
-src/frontend/CTemplateClass.c:
+src/compiler/frontend/CTemplateClass.c:
 	.text       start:0x00568990 end:0x0056B530
 	.data       start:0x005D17F0 end:0x005D18B4
 
 src/msl/qsort_g.c:
 	.text       start:0x0056B530 end:0x0056B690
 
-src/optimizer/CopyPropagation.c:
+src/compiler/optimizer/CopyPropagation.c:
 	.text       start:0x0056B690 end:0x0056C480
 	.data       start:0x005D18B8 end:0x005D1908
 	.bss        start:0x005E3B70 end:0x005E3B84
 
-src/optimizer/AddPropagation.c:
+src/compiler/optimizer/AddPropagation.c:
 	.text       start:0x0056C480 end:0x0056CC80
 	.data       start:0x005D1908 end:0x005D1968
 
-src/optimizer/LoopDetection.c:
+src/compiler/optimizer/LoopDetection.c:
 	.text       start:0x0056CC80 end:0x0056EB10
 	.data       start:0x005D1968 end:0x005D1978
 	.bss        start:0x005E3B88 end:0x005E3B98
 
-src/optimizer/UseDefChains.c:
+src/compiler/optimizer/UseDefChains.c:
 	.text       start:0x0056EB10 end:0x00570020
 
-src/optimizer/CodeMotion.c:
+src/compiler/optimizer/CodeMotion.c:
 	.text       start:0x00570020 end:0x00572240
 	.data       start:0x005D1978 end:0x005D1998
 	.bss        start:0x005E3B98 end:0x005E3B9C
 
-src/optimizer/StrengthReduction.c:
+src/compiler/optimizer/StrengthReduction.c:
 	.text       start:0x00572240 end:0x00573AB0
 	.data       start:0x005D1998 end:0x005D19AC
 
-src/optimizer/LoopOptimization.c:
+src/compiler/optimizer/LoopOptimization.c:
 	.text       start:0x00573AB0 end:0x00576720
 	.data       start:0x005D19B0 end:0x005D19C4
 	.bss        start:0x005E3BA0 end:0x005E3BAC
 
-src/optimizer/ConstantPropagation.c:
+src/compiler/optimizer/ConstantPropagation.c:
 	.text       start:0x00576720 end:0x00577BE0
 	.data       start:0x005D19C4 end:0x005D1AD4 align:4
 	.bss        start:0x005E3BB0 end:0x005E3BC0
 
-src/optimizer/LoadDeletion.c:
+src/compiler/optimizer/LoadDeletion.c:
 	.text       start:0x00577BE0 end:0x00577CF0
 	.data       start:0x005D1AD8 end:0x005D1B1E
 
-src/optimizer/VectorArraysToRegs.c:
+src/compiler/optimizer/VectorArraysToRegs.c:
 	.text       start:0x00577CF0 end:0x00578AE0
 	.data       start:0x005D1B20 end:0x005D1B38
 	.bss        start:0x005E3BC0 end:0x005E3BD8
 
-src/backend/MachineSimulationAltiVec.c:
+src/compiler/backend/MachineSimulationAltiVec.c:
 	.text       start:0x00578AE0 end:0x005792E0
 	.data       start:0x005D1B38 end:0x005D2C84
 	.bss        start:0x005E3BD8 end:0x005E3D5C
 
-src/backend/MachineSimulation7400.c:
+src/compiler/backend/MachineSimulation7400.c:
 	.text       start:0x005792E0 end:0x00579CD0
 	.data       start:0x005D2C88 end:0x005D3983
 	.bss        start:0x005E3D60 end:0x005E3E48
 
-src/backend/MachineSimulation603.c:
+src/compiler/backend/MachineSimulation603.c:
 	.text       start:0x00579CD0 end:0x0057A1F0
 	.data       start:0x005D3988 end:0x005D44AE
 	.bss        start:0x005E3E48 end:0x005E3EC0
 
-src/backend/MachineSimulation603e.c:
+src/compiler/backend/MachineSimulation603e.c:
 	.text       start:0x0057A1F0 end:0x0057A760
 	.data       start:0x005D44B0 end:0x005D5040
 	.bss        start:0x005E3EC0 end:0x005E3F38
 
-src/backend/MachineSimulation604.c:
+src/compiler/backend/MachineSimulation604.c:
 	.text       start:0x0057A760 end:0x0057AD40
 	.data       start:0x005D5040 end:0x005D5B66
 	.bss        start:0x005E3F38 end:0x005E4018
 
-src/backend/MachineSimulation750.c:
+src/compiler/backend/MachineSimulation750.c:
 	.text       start:0x0057AD40 end:0x0057B380
 	.data       start:0x005D5B68 end:0x005D668E
 	.bss        start:0x005E4018 end:0x005E40A8
 
-src/backend/MachineSimulation601.c:
+src/compiler/backend/MachineSimulation601.c:
 	.text       start:0x0057B380 end:0x0057B5F0
 	.data       start:0x005D6690 end:0x005D71B6
 	.bss        start:0x005E40A8 end:0x005E40D8
 
-src/backend/MachineSimulation821.c:
+src/compiler/backend/MachineSimulation821.c:
 	.text       start:0x0057B5F0 end:0x0057B9C0
 	.data       start:0x005D71B8 end:0x005D7CDE
 	.bss        start:0x005E40D8 end:0x005E4148
 
-src/backend/LiveVariables.c:
+src/compiler/backend/LiveVariables.c:
 	.text       start:0x0057B9C0 end:0x0057BFB0
 
-src/backend/InterferenceGraph.c:
+src/compiler/backend/InterferenceGraph.c:
 	.text       start:0x0057BFB0 end:0x0057CE90
 	.data       start:0x005D7CE0 end:0x005D7CF4
 	.bss        start:0x005E4148 end:0x005E4150
 
-src/backend/SpillCode.c:
+src/compiler/backend/SpillCode.c:
 	.text       start:0x0057CE90 end:0x0057DC50
 	.data       start:0x005D7CF8 end:0x005D7D74
 	.bss        start:0x005E4150 end:0x005E4158
 
-src/backend/BitVectors.c:
+src/compiler/backend/BitVectors.c:
 	.text       start:0x0057DC50 end:0x0057E0A0
 	.data       start:0x005D7D78 end:0x005D7E78
 	.bss        start:0x005E4158 end:0x005E4164
 
-src/frontend/CRTTI.c:
+src/compiler/frontend/CRTTI.c:
 	.text       start:0x0057E0A0 end:0x0057F650
 	.data       start:0x005D7E78 end:0x005D7FA0
 	.bss        start:0x005E4168 end:0x005E4170
 
-src/backend/GCCInlineAsm.c:
+src/compiler/backend/GCCInlineAsm.c:
 	.text       start:0x0057F650 end:0x0057FB4C
 	.data       start:0x005D7FA0 end:0x005D7FCC
 

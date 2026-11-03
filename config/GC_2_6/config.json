@@ -74,7 +74,7 @@
   "original": "build/compilers/GC/2.6/mwcceppc.exe",
   "sha1": "1110a7a9924a09a608967efdf79ecf09900344e7",
   "data_at": {
-    "src/backend/DumpIR.c": {
+    "src/compiler/backend/DumpIR.c": {
       ".data": "0x005bc698",
       ".data_end": "0x005bcfc8"
     },
@@ -101,7 +101,7 @@
       ".data": "0x005a8d20",
       ".data_end": "0x005a8eb0"
     },
-    "src/backend/BitVectors.c": {
+    "src/compiler/backend/BitVectors.c": {
       ".data": "0x005d7d60"
     }
   },
@@ -109,6 +109,6 @@
     "src/msl/locale.c": "src/frontend/Unmangle.c",
     "src/msl/float.c": "src/msl/locale.c",
     "src/runtime/throwsbad.cpp": "src/runtime/NewHand.cpp",
-    "src/backend/OpcodeInfo.c": "src/frontend/CDecl.c"
+    "src/compiler/backend/OpcodeInfo.c": "src/compiler/frontend/CDecl.c"
   }
 }
