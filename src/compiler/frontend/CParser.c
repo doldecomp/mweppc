@@ -131,7 +131,7 @@ typedef struct OriginalObject {
 
 #if VERSION < VERSION_GC_2_5
 #define ORIGINAL(object, v2_0, v2_5, v2_6, v2_7) {&(object), sizeof(object), v2_0}
-#elif VERSION == VERSION_GC_2_5
+#elif VERSION <= VERSION_GC_2_5A
 #define ORIGINAL(object, v2_0, v2_5, v2_6, v2_7) {&(object), sizeof(object), v2_5}
 #elif VERSION == VERSION_GC_2_6
 #define ORIGINAL(object, v2_0, v2_5, v2_6, v2_7) {&(object), sizeof(object), v2_6}

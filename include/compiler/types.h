@@ -279,7 +279,7 @@ struct TypeBitfield {
     char offset;
     char bitlength;
     char suppressAlignment;
-#if VERSION == VERSION_GC_2_5
+#if VERSION == VERSION_GC_2_5 || VERSION == VERSION_GC_2_5A
     char declsize;
     char x0e;
 #endif

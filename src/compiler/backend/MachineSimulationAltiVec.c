@@ -576,7 +576,7 @@ static struct {
     0, CFX2,      0,    0,    0,    1,    0,    0,    0,
 #if VERSION < VERSION_GC_2_5
     0, BPU,       0,   80, -114,   87,    0,  112, -115,
-#elif VERSION == VERSION_GC_2_5
+#elif VERSION <= VERSION_GC_2_5A
     0, BPU,       0,   16, -107,   87,    0,   48, -108,
 #elif VERSION == VERSION_GC_2_6
     0, BPU,       0, -128, -111,   87,    0,  -96, -112,
@@ -585,7 +585,7 @@ static struct {
 #endif
 #if VERSION < VERSION_GC_2_5
     87, 96,     -117,   87,    0,  -32, -118,   87,    0,
-#elif VERSION == VERSION_GC_2_5
+#elif VERSION <= VERSION_GC_2_5A
     87, 32,     -110,   87,    0,  -96, -111,   87,    0,
 #elif VERSION == VERSION_GC_2_6
     87, 144,    -114,   87,    0,   16, -114,   87,    0,
@@ -594,7 +594,7 @@ static struct {
 #endif
 #if VERSION < VERSION_GC_2_5
     -31504, 87,        0,  -48, -124,   87,    0,  -80, -124,
-#elif VERSION == VERSION_GC_2_5
+#elif VERSION <= VERSION_GC_2_5A
     -29776, 87,        0, -112, -117,   87,    0,  112, -117,
 #elif VERSION == VERSION_GC_2_6
     -30688, 87,        0,    0, -120,   87,    0,  -32, -121,

@@ -1,0 +1,4 @@
+{
+  "derived_from": "GC_2_5",
+  "description": "FFCC's compiler: 2.5 where a store through a pointer that may be one static object keeps that object's alias; no original, built from the sources alone"
+}

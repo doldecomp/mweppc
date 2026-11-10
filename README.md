@@ -7,6 +7,7 @@ A decompilation of the Metrowerks CodeWarrior toolchain. Currently supported ver
 | GameCube 2.0   | `GC_2_0`   | 2.4.7 build 92   | 4016 / 4065     | 2850 / 4068 (70.1%) | 54.3%        |                               |
 | GameCube 2.0p2 | `GC_2_0p2` | 2.4.7 build 92   | 4019 / 4068     | 2853 / 4071 (70.1%) | 54.3%        | GameCube 2.0 patched for BFBB |
 | GameCube 2.5   | `GC_2_5`   | 2.4.7 build 105  | 4026 / 4076     | 2860 / 4079 (70.1%) | 54.3%        |                               |
+| GameCube 2.5a  | `GC_2_5a`  | 2.4.7 build 105  | 4026 / 4076     | 2860 / 4079 (70.1%) | 54.3%        | GameCube 2.5 patched for FFCC |
 | GameCube 2.6   | `GC_2_6`   | 2.4.7 build 107  | 4027 / 4077     | 2860 / 4080 (70.1%) | 54.4%        |                               |
 | GameCube 2.7   | `GC_2_7`   | 2.4.7 build 108  | 4033 / 4084     | 2848 / 4087 (69.7%) | 54.2%        |                               |
 
@@ -21,6 +22,9 @@ A decompilation of the Metrowerks CodeWarrior toolchain. Currently supported ver
 - 2.0p2 is not an official binary; it models the observed side effects of compiling the [*Battle for Bikini
   Bottom*](https://github.com/bfbbdecomp/bfbb) decompilation against GameCube 2.0 since it seems to have been compiled
   with a unique patched compiler. See [below](#battle-for-bikini-bottom-20p2) for more information.
+- 2.5a is not an official binary either; it models the one difference from 2.5 seen when compiling the PAL and USA game
+  code of the [*Final Fantasy Crystal Chronicles*](https://github.com/zcanann/FFCC-Decomp) decompilation. See
+  [below](#final-fantasy-crystal-chronicles-25a) for more information.
 
 ## Getting started
 
@@ -161,6 +165,57 @@ been:
 - `x--; if (x == 0)` should be `if (--x == 0)` in `xSGShutdown` and ten other functions;
 - `snow_life` should not be `const`;
 - `NPAR_TubeSpiralMagic`'s colours should be `static const` locals.
+
+### Final Fantasy Crystal Chronicles (2.5a)
+
+*Final Fantasy Crystal Chronicles*' PAL and USA game code was built with a 2.5 that no release matches. 2.5, 2.6 and
+2.7 produce byte-identical objects for all of the FFCC decompilation's PAL (269) and USA (268) game units, and 2.0 only
+loses functions. 2.5a is 2.5 with one rule of its own, in alias analysis (`operand_alias`):
+
+- a store through a pointer with several reaching definitions, some with an alias and some without, keeps the alias of
+  the ones that have one when that alias is a single static object (whole or part, not a local), instead of making the
+  store `worst_case`. Loads, and stores into locals, are unchanged.
+
+FFCC's `pppRand*` randomizers pick a buffer and then store each channel through it, reading a scale through another
+pointer each time:
+
+```c
+s32* target = (in->sourceOffset == -1) ? (s32*)gPppDefaultValueBuffer : (s32*)(work + in->sourceOffset);
+target[0] += randint(in->blend[0], *valuePtr);
+target[1] += randint(in->blend[1], *valuePtr);
+```
+
+2.5 reloads `*valuePtr` after each store through `target`; the retail game, and 2.5a, load it once and keep it in a
+register (`pppRandIV`):
+
+```
+2.5                    2.5a, retail
+stw   r0,0(r4)         stw   r0,0(r4)
+lwz   r0,12(r31)       lwz   r0,12(r31)
+lfs   f1,0(r5)         lwz   r3,4(r4)
+xoris r0,r0,32768      xoris r0,r0,32768
+lwz   r3,4(r4)
+```
+
+Functions matching retail, over every FFCC game unit built with 2.5 (3121 functions in PAL, 3116 in USA):
+
+| Compiler | PAL     | PAL, `pppRand*` as above | USA     | USA, `pppRand*` as above |
+| -------- | ------- | ------------------------ | ------- | ------------------------ |
+| 2.5      | 3066    | 3063                     | 3061    | 3058                     |
+| **2.5a** | 3066    | **3075**                 | 3061    | **3070**                 |
+
+FFCC's current source works around 2.5 by reading the scale into a local once, which comes close but leaves nine of
+these functions inexact. On that source, 2.5a's objects are byte-identical to 2.5's. With the `pppRand*` source above,
+which is also the source the Japanese release matches, 2.5a matches nine more functions than 2.5 does on the current
+source, and loses none. Broader forms of the rule lose functions (PAL, current source):
+
+- for loads and stores alike: 18 functions lost and none gained (with the `pppRand*` source above, 15 lost and none
+  gained: the loads of `target` move above the stores);
+- for every store, including into locals: `CMenuPcs::loadData` lost (a store into a local array);
+- for stores to statics only (2.5a): nothing lost.
+
+Only FFCC has been measured. To use 2.5a in FFCC, put `build/GC_2_5a/clang/mwcceppc.exe` in place of the project's
+2.5 compiler for its game code.
 
 ## Contributing
 
