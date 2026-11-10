@@ -54,7 +54,7 @@ extern Alias* make_distinct_virtual_alias(Object* obj);
 #endif
 extern void gather_alias_info(void);
 extern Boolean may_alias(PCode* a, PCode* b);
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
 extern Boolean is_direct_small_data_access(PCode* pcode);
 extern Boolean may_alias_scheduling(PCode* a, PCode* b);
 extern void update_small_data_values(PCode* pcode);

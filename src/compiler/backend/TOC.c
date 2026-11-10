@@ -285,7 +285,7 @@ Object* createfloatconstant(Type* type, Float* data) {
     obj->u.data.info = NULL;
     obj->u.data.linkname = obj->name;
     obj->sclass = TK_STATIC;
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
     obj->qual = Q_INLINE_DATA;
 #else
     obj->qual = Q_CONST | Q_INLINE_DATA;

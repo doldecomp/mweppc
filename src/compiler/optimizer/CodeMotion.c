@@ -985,7 +985,7 @@ static void moveinvariantsfromloop(Loop* loop) {
                 nextInstr = instr->nextPCode;
                 if (!(instr->flags & fIsBranch) && instr->argCount) {
                     if (!(instr->flags & (fIsCall | fIsPtrOp | fIsVolatile | fSideEffects)) &&
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
                         !((instr->flags & fIsRead) && is_direct_small_data_access(instr)) &&
 #endif
                         isloopinvariant(instr, loop, myvec, FALSE, FALSE) &&

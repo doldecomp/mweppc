@@ -6,6 +6,7 @@ A decompilation of the Metrowerks CodeWarrior toolchain. Currently supported ver
 | -------------- | ---------- | ---------------- | --------------- | ------------------- | ------------ | ----------------------------- |
 | GameCube 2.0   | `GC_2_0`   | 2.4.7 build 92   | 4016 / 4065     | 2850 / 4068 (70.1%) | 54.3%        |                               |
 | GameCube 2.0p2 | `GC_2_0p2` | 2.4.7 build 92   | 4019 / 4068     | 2853 / 4071 (70.1%) | 54.3%        | GameCube 2.0 patched for BFBB |
+| GameCube 2.0p3 | `GC_2_0p3` | 2.4.7 build 92   | 4019 / 4068     | 2853 / 4071 (70.1%) | 54.3%        | GameCube 2.0 patched for FFCC |
 | GameCube 2.5   | `GC_2_5`   | 2.4.7 build 105  | 4026 / 4076     | 2860 / 4079 (70.1%) | 54.3%        |                               |
 | GameCube 2.6   | `GC_2_6`   | 2.4.7 build 107  | 4027 / 4077     | 2860 / 4080 (70.1%) | 54.4%        |                               |
 | GameCube 2.7   | `GC_2_7`   | 2.4.7 build 108  | 4033 / 4084     | 2848 / 4087 (69.7%) | 54.2%        |                               |
@@ -21,6 +22,9 @@ A decompilation of the Metrowerks CodeWarrior toolchain. Currently supported ver
 - 2.0p2 is not an official binary; it models the observed side effects of compiling the [*Battle for Bikini
   Bottom*](https://github.com/bfbbdecomp/bfbb) decompilation against GameCube 2.0 since it seems to have been compiled
   with a unique patched compiler. See [below](#battle-for-bikini-bottom-20p2) for more information.
+- 2.0p3 is not an official binary either; it is 2.0p2 plus the rules seen when compiling the Japanese game code of the
+  [*Final Fantasy Crystal Chronicles*](https://github.com/zcanann/FFCC-Decomp) decompilation. See
+  [below](#final-fantasy-crystal-chronicles-japan-20p3) for more information.
 
 ## Getting started
 
@@ -161,6 +165,61 @@ been:
 - `x--; if (x == 0)` should be `if (--x == 0)` in `xSGShutdown` and ten other functions;
 - `snow_life` should not be `const`;
 - `NPAR_TubeSpiralMagic`'s colours should be `static const` locals.
+
+### Final Fantasy Crystal Chronicles Japan (2.0p3)
+
+The Japanese release of *Final Fantasy Crystal Chronicles* (August 2003) was built with a 2.0 that no release
+matches either, and it behaves much like BFBB's: 2.0, 2.5, 2.6 and 2.7 each lose more than 600 of the FFCC
+decompilation's 3081 Japanese game functions, while BFBB's 2.0p2 gains 10 and loses 18 against the compiler FFCC has
+used so far (`2.0p1k`, a chain of binary patches of 2.0p1). 2.0p3 is 2.0p2 with the rules FFCC's Japanese code needs
+on top:
+
+- the alias analysis keeps an access's own alias when other reaching definitions of its base register have none (2.0
+  makes such an access `worst_case`);
+- the scheduler orders a `worst_case` store, such as the prologue's register saves, before a load of a parameter
+  passed on the stack;
+- the scheduler orders loads from small data like loads through a pointer even when the global is `const`;
+- the scheduler orders loads from part of a small literal (a local aggregate's initialiser) like loads of a whole one.
+
+The first two are rules FFCC's binary patches had (`ksa` and `pwcp`). Its other three (`e3ns`, `c3a` and `dsl`) are
+already covered by 2.0p2's rules for floating-point literals and small-data stores: they never change an answer on
+top of 2.0p2. The last two are new.
+
+An example of the first rule, from `pppSRandCV`: after picking `u8* target = (off == -1) ? gPppDefaultValueBuffer :
+work + off`, every byte store through `target` makes 2.0p2 reload the int-to-float bias constant and keeps the loads
+of `target[1..3]` below it; the retail game loads them all up front and the bias once:
+
+```
+2.0p2                  2.0p3, retail
+stb   r0,0(r3)         stb   r0,0(r3)
+lbz   r0,9(r30)        lbz   r0,9(r30)
+lfd   f3,@bias         lfs   f1,4(r31)
+extsb r0,r0            extsb r0,r0
+lfs   f1,4(r31)        xoris r0,r0,32768
+xoris r0,r0,32768
+lbz   r4,1(r3)
+```
+
+Functions matching retail, over every FFCC game unit built for Japan (3081 functions; FFCC's sound library, built
+with the same compiler in all three regions, gives byte-identical objects with 2.0p1g, 2.0p2 and 2.0p3):
+
+| Compiler        | Japan    | vs. 2.0p1k  |
+| --------------- | -------- | ----------- |
+| 2.0             | 2380     | +0 / -622   |
+| 2.0p1           | 2766     | +0 / -236   |
+| 2.0p1g (BFBB)   | 2959     | +0 / -43    |
+| 2.0p1k (FFCC)   | 3002     |             |
+| 2.0p2           | 2994     | +10 / -18   |
+| **2.0p3**       | **3014** | **+12 / -0** |
+
+Each rule, added to 2.0p2 in turn: +13 / -0, +5 / -0, +1 / -0 and +1 / -0. 265 of the 274 Japanese objects are
+byte-identical to 2.0p1k's; the other nine differ only in the functions 2.0p3 matches and 2.0p1k does not, and in
+three that come closer. No 2.0 behaviour switched to 2.5's on top of 2.0p3 (each `#if VERSION` in turn) gains a
+function. The two new rules each rest on one function (`CMenuPcs::SetWorldParam` and `CChara::CModel::DrawFur`) and
+change nothing else.
+
+Only FFCC has been measured, and BFBB has not been rebuilt with 2.0p3. To use 2.0p3 in FFCC, put
+`build/GC_2_0p3/clang/mwcceppc.exe` in place of the project's Japanese game compiler.
 
 ## Contributing
 
