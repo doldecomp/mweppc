@@ -207,7 +207,7 @@ static Boolean IsPropagatable(IROLinear* linear) {
             !is_volatile_object(srcObj) &&
             IRO_TypesEqual(obj->type, linear->rtype)) {
             if (!Inline_IsObjectData(linear->u.diadic.right->u.monadic->u.node->data.objref)) {
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
                 if (obj->datatype == DLOCAL && obj->u.var.info && obj->u.var.info->noregister) {
                     return FALSE;
                 }

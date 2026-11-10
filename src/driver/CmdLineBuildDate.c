@@ -1,7 +1,7 @@
 #include "driver/CmdLineBuildDate.h"
 #include "version.h"
 
-#if VERSION <= VERSION_GC_2_0P2
+#if VERSION <= VERSION_GC_2_0P3
 const char* CMDLINE_BUILD_TIME = "15:14:48";
 const char* CMDLINE_BUILD_DATE = "Sep 16 2002";
 #elif VERSION == VERSION_GC_2_5

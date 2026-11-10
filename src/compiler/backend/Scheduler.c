@@ -246,7 +246,7 @@ static void serialize_load(DGNode* node) {
     DGNodeList* list;
 
     for (list = memory_defs; list; list = list->next) {
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
         if (may_alias_scheduling(node->instr, list->node->instr)) {
 #else
         if (may_alias(node->instr, list->node->instr)) {
@@ -262,7 +262,7 @@ static void serialize_store(DGNode* node) {
     DGNodeList* list;
 
     for (list = memory_uses; list; list = list->next) {
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
         if (may_alias_scheduling(node->instr, list->node->instr)) {
 #else
         if (may_alias(node->instr, list->node->instr)) {
@@ -271,7 +271,7 @@ static void serialize_store(DGNode* node) {
         }
     }
     for (list = memory_defs; list; list = list->next) {
-#if VERSION == VERSION_GC_2_0P2
+#if VERSION == VERSION_GC_2_0P2 || VERSION == VERSION_GC_2_0P3
         if (may_alias_scheduling(node->instr, list->node->instr)) {
 #else
         if (may_alias(node->instr, list->node->instr)) {
