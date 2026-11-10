@@ -4,7 +4,7 @@
 #if VERSION <= VERSION_GC_2_0P2
 const char* CMDLINE_BUILD_TIME = "15:14:48";
 const char* CMDLINE_BUILD_DATE = "Sep 16 2002";
-#elif VERSION == VERSION_GC_2_5
+#elif VERSION <= VERSION_GC_2_5A
 const char* CMDLINE_BUILD_TIME = "14:21:02";
 const char* CMDLINE_BUILD_DATE = "Feb 20 2003";
 #elif VERSION == VERSION_GC_2_6
